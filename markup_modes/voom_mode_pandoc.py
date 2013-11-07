@@ -1,5 +1,5 @@
 # voom_mode_pandoc.py
-# Last Modified: 2013-10-22
+# Last Modified: 2013-11-01
 # VOoM -- Vim two-pane outliner, plugin for Python-enabled Vim 7.x
 # Website: http://www.vim.org/scripts/script.php?script_id=2657
 # Author: Vlad Irnov (vlad DOT irnov AT gmail DOT com)
@@ -7,7 +7,7 @@
 
 """
 VOoM markup mode for Pandoc Markdown headers.
-See |voom_mode_pandoc|,   ../../doc/voom.txt#*voom_mode_pandoc*
+See |voom-mode-pandoc|,   ../../doc/voom.txt#*voom-mode-pandoc*
 """
 
 ### NOTES
@@ -45,8 +45,11 @@ def hook_makeOutline(VO, blines):
     # 0 or 1 -- True, use closing hashes (default); 2 -- False, do not use closing hashes
     useCloseHash = 0
 
-    inFence = '' # keep track of fenced code blocks where headlines are ignored
-    ok = 1 # set True on lines after which a new headline is allowed
+    # Keep track of fenced code blocks where headlines are ignored.
+    inFence = ''
+    # Set True on lines after which a new headline is allowed: blank line,
+    # headline, end-of-fenced-block. Also applies to start-of-fenced-block.
+    ok = 1
     L2 = blines[0].rstrip() # first Body line
     gotHead = False
     for i in xrange(Z):
@@ -60,27 +63,30 @@ def hook_makeOutline(VO, blines):
         if not L1:
             ok = 1
             continue
+
         # ignore headlines inside fenced code block
         if inFence:
             if L1.startswith(inFence) and L1.lstrip(inFence[0])=='':
                 inFence = ''
                 ok = 1
             continue
+
+        # Headline is allowed only after a blank line, another headline,
+        # end-of-fenced block. Same for start-of-fenced-block.
+        if not ok:
+            continue
+
         # new fenced code block
         if L1.startswith('~~~') or L1.startswith('```'):
             ch = L1[0]
             inFence = ch*(len(L1)-len(L1.lstrip(ch)))
             continue
 
-        # headline is not allowed until we get a blank line or end of fenced block
-        if not ok:
-            continue
-
         if L2 and (L2[0] in ADS_LEVELS) and not L2.lstrip(L2[0]):
             gotHead = True
             lev = ADS_LEVELS[L2[0]]
             head = L1.strip()
-            L2 = ''
+            L2 = '' # this will set ok=1 on the next line (underline)
             if not useHash:
                 useHash = 1
         elif L1.startswith('#') and not L1.startswith('#. '):
@@ -111,6 +117,8 @@ def hook_makeOutline(VO, blines):
         VO.useCloseHash = useCloseHash < 2
 
     return (tlines, bnodes, levels)
+
+#------ the rest is identical to voom_mode_markdown.py ------
 
 
 def hook_newHeadline(VO, level, blnum, tlnum):
