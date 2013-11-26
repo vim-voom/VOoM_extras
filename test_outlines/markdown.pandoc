@@ -1,0 +1,140 @@
+  :Voom pandoc
+Test file for VOoM pandoc mode specifics.
+
+
+1) NEED A BLANK LINE BEFORE HEADLINES AFTER TEXT LINES.
+=======================================================
+ quick brown fox
+# not headline
+## not headline
+    code block
+    code block
+    code block
+not headline (but should be)
+----------
+### not headline
+
+
+
+
+2) DON'T NEED BLANK LINES BETWEEN HEADLINES.
+============================================
+## headline 1
+## headline 2
+headline 3
+-------------
+## headline 4
+
+
+
+
+3) DON'T NEED BLANK LINES AFTER FENCED CODE BLOCKS.
+===================================================
+~~~
+ quick brown fox
+
+# not headline
+`````````
+~~~
+## headline 1
+headline 2
+----------
+
+
+
+4) FENCED CODE BLOCKS
+=====================
+http://johnmacfarlane.net/pandoc/README.html#fenced-code-blocks
+
+~~~
+
+# not headline
+
+~~~
+
+~~~quick brown fox
+
+# not headline
+
+~~~
+
+```quick brown fox
+
+# not headline
+
+```
+
+~~~~~~~~~~~~~~
+
+# not headline
+
+~~~
+
+# not headline
+
+~~~
+```
+
+# not headline
+```
+~~~~~~~
+~~~~~~~~~~~~~~
+#headline after fenced code block
+
+
+
+
+# 5) FANCY_LISTS
+http://johnmacfarlane.net/pandoc/README.html#ordered-lists
+(space is required)
+
+ not headings
+
+#. one
+#. two
+#. three
+
+ heading
+
+#. headline one
+---------------
+#. one
+#. two
+#. three
+
+# 6) Fenced code blocks must be preceded by a blank line or a headline or end-of-fenced-block.
+
+~~~python
+This is a fenced code block
+
+# not headline
+
+~~~~~~~~~~~
+```
+
+# not headline
+
+```
+text
+
+# Headline before fenced block.
+~~~python
+This is a fenced code block
+
+# not headline
+
+~~~~~~~~~~~
+text
+
+
+text
+~~~lorem ipsum
+This is NOT a fenced code block
+
+# headline 1
+text
+~~~~~~~~~~~
+text
+
+# headline 2
+
