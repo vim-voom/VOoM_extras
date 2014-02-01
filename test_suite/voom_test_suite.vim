@@ -34,11 +34,13 @@ com! VoomTestRunAllTests call VoomTest_RunAllTests()
 " }}}
 
 " TODO
-" fix mode-specific error messages, at least do summary: passed/failed
-" test for Voomgrep
-" test for Mark/Unmark
-" test for wrong ticks -- autocmd breakage
-" test for special regions, fenced code blocks
+" - Fix mode-specific error messages. At least do summary: passed/failed.
+" - Test for Voomgrep.
+" - Test for Mark/Unmark.
+" - Test for wrong ticks -- autocmd breakage.
+" - Test for special regions, fenced code blocks.
+" - Fix tests for ass-backward markups: dokuwiki, inverseAtx.
+"   Problematic are: Copy/Paste/Cut, Right/Left/Right
 
 
 python import time

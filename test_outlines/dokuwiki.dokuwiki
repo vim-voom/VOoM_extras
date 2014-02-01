@@ -1,0 +1,102 @@
+ vim: ft=dokuwiki list
+
+https://www.dokuwiki.org/manual
+https://www.dokuwiki.org/wiki:syntax#sectioning
+https://www.dokuwiki.org/playground:playground
+
+
+Typical usage:
+ leading and trailing ='s match
+ no leading whitespace
+Whitespace around text is optional.
+====== Headline Level 1 ======
+===== Headline Level 2 =====
+====Headline Level 3====
+===Headline Level 4===
+== Headline Level 5       		    ==
+
+
+
+Need 2 or more trailing ='s, their number does not matter:
+====== NOT HEADLINE
+====== NOT HEADLINE =   
+====== Headline Level 1 ==   
+======Headline Level 1==========   
+=====Headline Level 2===========   
+====Headline Level 3============   
+===Headline Level 4=============   
+==Headline Level 5==============   
+
+
+
+Minimum of 2 leading ='s is required:
+= NOT HEADLINE ==
+= NOT HEADLINE ======
+NOT HEADLINE ======
+
+============== >6 opening ='s means level 1 ===================
+============== NOT HEADLINE =
+
+
+====== LEADING WHITESPACE ============================================
+
+One leading space is allowed. Weird.
+ =====Headline Level 2=====
+
+But a leading tab or >1 spaces make it a code block.
+
+2 or more spaces are not allowed.
+  ===== NOT HEADLINE =====
+            ===== NOT HEADLINE =====
+  	===== NOT HEADLINE =====
+
+1 or more Tabs is not allowed
+	===== NOT HEADLINE =====
+	 ===== NOT HEADLINE =====
+		===== NOT HEADLINE =====
+			===== NOT HEADLINE =====
+
+One space followed by tab is allowed.
+ 	===== Headline Level 2 =====
+Which can be followed by any number of spaces/tabs.
+ 		===== Headline Level 2 =====
+ 	   ===== Headline Level 2 =====
+
+
+----------------------------------------------------------------------
+============== ===DokuWiki source=== ================
+https://github.com/splitbrain/dokuwiki
+
+"inc/parser/parser.php"
+<code>
+class Doku_Parser_Mode_header extends Doku_Parser_Mode {
+
+    function connectTo($mode) {
+        //we're not picky about the closing ones, two are enough
+        $this->Lexer->addSpecialPattern(
+                            '[ \t]*={2,}[^\n]+={2,}[ \t]*(?=\n)',
+                            $mode,
+                            'header'
+                        );
+    }
+
+    function getSort() {
+        return 50;
+    }
+}
+</code>
+
+"inc\parser\handler.php"
+<code>
+    function header($match, $state, $pos) {
+        // get level and title
+        $title = trim($match);
+        $level = 7 - strspn($title,'=');
+        if($level < 1) $level = 1;
+        $title = trim($title,'=');
+        $title = trim($title);
+        ....
+</code>
+
+
+=========== ===THE END=== ====================

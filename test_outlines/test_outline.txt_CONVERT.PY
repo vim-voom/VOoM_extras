@@ -60,6 +60,16 @@ def make_head_vimwiki(line,m): #{{{1
     return ['%s %s %s\n' %(e,head,e)]
 
 
+def make_head_dokuwiki(line,m): #{{{1
+    lev = int(m.group(1))
+    head = line[:m.start()].strip().strip('-=~').strip()
+    if lev >=5:
+        e = '=='
+    else:
+        e = '='*(7-lev)
+    return ['%s %s %s\n' %(e,head,e)]
+
+
 def make_head_txt2tags(line,m): #{{{1
     lev = int(m.group(1))
     head = line[:m.start()].strip().strip('-=~').strip()
@@ -318,3 +328,4 @@ if __name__=='__main__':
     convert(INP, make_head_latex, 'latex', 'latex', 'sections only')
     convert_to_otl(INP, 'otl', 'thevimoutliner')
     convert_to_taskpaper(INP, 'taskpaper', 'taskpaper')
+    convert(INP, make_head_dokuwiki, 'dokuwiki-0', 'dokuwiki', 'not ready for tests, need to be edited')
