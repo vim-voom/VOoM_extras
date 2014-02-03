@@ -1,5 +1,5 @@
 # voom_mode_dokuwiki.py
-# Last Modified: 2014-01-31
+# Last Modified: 2014-02-02
 # VOoM -- Vim two-pane outliner, plugin for Python-enabled Vim 7.x
 # Website: http://www.vim.org/scripts/script.php?script_id=2657
 # Author: Vlad Irnov (vlad DOT irnov AT gmail DOT com)
@@ -121,7 +121,7 @@ def hook_doBodyAfterOop(VO, oop, levDelta, blnum1, tlnum1, blnum2, tlnum2, blnum
         if len(m.group(4)) <= MAX+1:
             Body[bln-1] = '%s=%s%s=%s' %(m.group(1), CHAR * n, m.group(3), CHAR * n)
         else:
-            Body[bln-1] = '%s=%s%s' %(m.group(1), CHAR * n, L[m.end(1):])
+            Body[bln-1] = '%s=%s%s' %(m.group(1), CHAR * n, L[m.end(2):])
 
     ### --- the end ---
     if invalid_levs:
