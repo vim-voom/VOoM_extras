@@ -47,16 +47,26 @@ def func_with_string(a, b, c=False, d="NoName",
 text text text text 
     """
 
+#######################################################
+#======================================================
+#------------------------------------------------------
+
 #---- headline before Class1
 class Class1:
     b = []
     def func2():
+        ################
         ### headline 2
+        ################
         a = 'a'
         def func3():
             pass
+
+        #----------------
         #----- headline 3
-    #----headline 4
+
+    #================
+    #==headline 4
     def func4(): pass
 
 #----- headline 5
@@ -75,8 +85,9 @@ perversely formatted docstring"
         pass
         def func6():
             pass
-        #--- headline 6
-#---- headline 7
+        #==================
+        #== headline 6
+#== headline 7
 # not a headline
 
 

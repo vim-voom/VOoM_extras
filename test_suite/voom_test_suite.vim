@@ -70,7 +70,7 @@ let s:voom_samples_names = [
             \ ['test_outline.otl', 'thevimoutliner'],
             \ ['test_outline.otl', 'vimoutliner'],
             \ ['test_outline.taskpaper', 'taskpaper'],
-            \ ['test_outline_python.py', 'python']
+            \ ['python_test_outline.py', 'python']
             \]
 
 
