@@ -14,7 +14,7 @@ MARKER = '{{{'                         # }}}
 MARKER_RE = re.compile(r'{{{(\d+)')    # }}}
 
 
-def convert(inpFile, make_head, ext, modeName, notesLine = ''): #{{{1
+def convert(inpFile, make_head, ext, modeName, note='', maxLevel=None): #{{{1
     lines = []
     f = open(inpFile)
     for line in f:
@@ -29,8 +29,29 @@ def convert(inpFile, make_head, ext, modeName, notesLine = ''): #{{{1
     # replace first two lines
     lines[0] = '  :Voom %s\n' %modeName
     lines[1] = '  This is VOoM markup mode test file. Converted from **%s**.\n' %inpFile
-    if notesLine:
-        lines[2:2] = ['  NOTE: %s\n' %notesLine]
+    if note:
+        lines[2:2] = ['  NOTE: %s\n' %note]
+
+    # edit line with VO.levels = [...] -- set levels exceeding maxLevel to maxLevel
+    if maxLevel:
+        idx = None
+        for i in xrange(len(lines)):
+            if "ID_LEVELS VO.levels=[1" in lines[i]:
+                idx = i
+                break
+        if idx:
+            line = lines[idx]
+            part1, part2 = line.split('ID_LEVELS VO.levels=')
+            levs = part2.strip().strip('[]').split(',')
+            new_levs = []
+            for i in levs:
+                j = int(i.strip())
+                if j > maxLevel:
+                    new_levs.append('%s' %maxLevel)
+                else:
+                    new_levs.append('%s' %j)
+            lines[idx] = part1 + 'ID_LEVELS VO.levels=[' + ', '.join(new_levs) + ']\n'
+
 
     fOut = open(inpFile[:-3] + ext, 'wb')
     fOut.write(''.join(lines))
@@ -63,11 +84,36 @@ def make_head_vimwiki(line,m): #{{{1
 def make_head_dokuwiki(line,m): #{{{1
     lev = int(m.group(1))
     head = line[:m.start()].strip().strip('-=~').strip()
+    # Max possible level is 5.
     if lev >=5:
         e = '=='
     else:
         e = '='*(7-lev)
     return ['%s %s %s\n' %(e,head,e)]
+
+
+def make_head_dokuwiki3(line,m): #{{{1
+    lev = int(m.group(1))
+    head = line[:m.start()].strip().strip('-=~').strip()
+    # Max possible level is 3 instead of actual 5.
+    if lev >=3:
+        e = '===='
+    else:
+        e = '='*(7-lev)
+    return ['%s %s %s\n' %(e,head,e)]
+
+
+def make_head_inverseAtx(line,m): #{{{1
+    # For testing purposes the max possible level is 10:
+    #   @@@@@@@@@@ Healdine level1
+    #   @ Headline level 10
+    lev = int(m.group(1))
+    head = line[:m.start()].strip().strip('-=~').strip()
+    if lev >=10:
+        e = '@'
+    else:
+        e = '@'*(11-lev)
+    return ['%s %s\n' %(e,head)]
 
 
 def make_head_txt2tags(line,m): #{{{1
@@ -312,7 +358,8 @@ def convert_to_taskpaper(inpFile, ext, modeName): #{{{1
 #--- _main_ --- {{{1
 if __name__=='__main__':
     convert(INP, make_head_fmr2, 'fmr2', 'fmr2')
-    convert(INP, make_head_wiki, 'wiki', 'wiki', 'MediaWiki format, with fold markers')
+    convert(INP, make_head_wiki, 'wiki', 'wiki',
+            note='MediaWiki format, with fold markers')
     convert(INP, make_head_vimwiki, 'vimwiki', 'vimwiki')
     convert(INP, make_head_org, 'org', 'org')
     convert(INP, make_head_hashes, 'hashes', 'hashes')
@@ -324,8 +371,17 @@ if __name__=='__main__':
     convert(INP, make_head_asciidoc, 'asciidoc', 'asciidoc')
     convert(INP, make_head_asciidoc1, 'asciidoc1', 'asciidoc')
     convert(INP, make_head_asciidoc3, 'asciidoc3', 'asciidoc')
-    convert(INP, make_head_rest, 'rst', 'rest', 'no gotchas, suitable for test suite')
-    convert(INP, make_head_latex, 'latex', 'latex', 'sections only')
+    convert(INP, make_head_rest, 'rst', 'rest',
+            note='no gotchas, suitable for test suite')
+    convert(INP, make_head_latex, 'latex', 'latex',
+            note='sections only')
     convert_to_otl(INP, 'otl', 'thevimoutliner')
     convert_to_taskpaper(INP, 'taskpaper', 'taskpaper')
-    convert(INP, make_head_dokuwiki, 'dokuwiki-0', 'dokuwiki', 'not ready for tests, need to be edited')
+    convert(INP, make_head_dokuwiki, 'dokuwiki', 'dokuwiki',
+            note='maxLevel=5, test Right/Left/Right fails',
+            maxLevel=5)
+    convert(INP, make_head_dokuwiki3, 'dokuwiki3', 'dokuwiki',
+            note='maxLevel=3 to make test Right/Left/Right pass',
+            maxLevel=3)
+    convert(INP, make_head_inverseAtx, 'inverseAtx', 'inverseAtx',
+            note="let g:voom_inverseAtx_max = 10 | let g:voom_inverseAtx_char = '@'")

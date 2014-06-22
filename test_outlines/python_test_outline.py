@@ -28,7 +28,7 @@ closing " " " must not be mistaken for start of docstring
 
 ### if 1
 # NEXT LINE IS FOR TEST SUITE -- DO NOT MOVE OR EDIT
-# VO.levels=[1, 1, 2, 3, 3, 1, 1, 1, 2, 3, 3, 3, 2, 2, 1, 1, 1, 2, 3, 3, 1, 1, 2, 2, 2, 3, 3, 3, 1, 1, 1, 1]
+# ID_LEVELS VO.levels=[1, 1, 2, 3, 3, 1, 1, 1, 2, 3, 3, 3, 2, 2, 1, 1, 1, 2, 3, 3, 1, 1, 2, 2, 2, 3, 3, 3, 1, 1, 1, 1]
 if 1:
     ### if 1
     if 1:
