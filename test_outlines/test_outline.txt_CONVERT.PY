@@ -282,16 +282,21 @@ def make_head_rest(line,m): #{{{2
                 '%s\n' %(ad*z)]
 
 
-#--- LaTeX --- {{{1o
+#--- LaTeX, DTX --- {{{1o
 from voom_mode_latex import LEVS_SECTS
 from voom_mode_latex import SECTIONS
-
 
 def make_head_latex(line,m): #{{{2
     lev = int(m.group(1))
     head = line[:m.start()].strip().strip('-=~').strip()
     sect = LEVS_SECTS.get(lev, SECTIONS[-1])
     return ['\n%s{%s}\n' %(sect, head)]
+
+def make_head_dtx(line,m): #{{{2
+    lev = int(m.group(1))
+    head = line[:m.start()].strip().strip('-=~').strip()
+    sect = LEVS_SECTS.get(lev, SECTIONS[-1])
+    return ['\n%% %s{%s}\n' %(sect, head)]
 
 
 def convert_to_otl(inpFile, ext, modeName): #{{{1
@@ -374,6 +379,8 @@ if __name__=='__main__':
     convert(INP, make_head_rest, 'rst', 'rest',
             note='no gotchas, suitable for test suite')
     convert(INP, make_head_latex, 'latex', 'latex',
+            note='sections only')
+    convert(INP, make_head_dtx, 'dtx', 'dtx',
             note='sections only')
     convert_to_otl(INP, 'otl', 'thevimoutliner')
     convert_to_taskpaper(INP, 'taskpaper', 'taskpaper')

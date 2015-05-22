@@ -67,6 +67,7 @@ let s:voom_samples_names = [
             \ ['test_outline.cwiki', 'cwiki'],
             \ ['test_outline.rst', 'rest'],
             \ ['test_outline.latex', 'latex'],
+            \ ['test_outline.dtx', 'dtx'],
             \ ['test_outline.markdown', 'markdown'],
             \ ['test_outline.pandoc', 'pandoc'],
             \ ['test_outline.t2t', 'txt2tags'],
