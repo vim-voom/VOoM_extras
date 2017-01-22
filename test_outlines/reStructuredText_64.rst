@@ -1,5 +1,5 @@
 This is reStructuredText file with all possible adornment styles, all 64 levels.
-Execute the following VimScript code to create it:
+This file can be created by executing the following VimScript code:
 
 tabnew
 Voom rest

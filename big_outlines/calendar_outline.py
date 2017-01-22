@@ -1,3 +1,4 @@
+#!/usr/bin/env python2
 '''writes calendar_outline.txt'''
 # Author: Vlad Irnov  (vlad DOT irnov AT gmail DOT com)
 # License: CC0, see http://creativecommons.org/publicdomain/zero/1.0/

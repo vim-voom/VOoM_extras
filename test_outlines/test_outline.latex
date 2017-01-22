@@ -8,7 +8,7 @@ findme findme2
 \part{1}
    1 body
 NEXT LINE IS FOR TESTS -- DO NOT MOVE OR EDIT
-ID_LEVELS VO.levels=[1, 1, 2, 2, 1, 1, 2, 2, 3, 4, 3, 4, 5, 6, 7, 2, 1, 2, 1, 2, 2, 3, 3, 4, 5, 5, 3, 2, 3, 2, 3, 2, 1, 2, 3, 3, 3, 3, 3, 3, 3, 3, 3, 2, 3, 3, 3, 3, 4, 2, 3, 4, 4, 4, 4, 5, 5, 4, 4, 5, 5, 3, 3, 3, 4, 4, 4, 4, 4, 4, 3, 4, 4, 4, 4, 4, 4, 3, 2, 3, 3]
+ID_LEVELS VO.levels=[1, 1, 2, 2, 1, 1, 2, 2, 3, 4, 3, 4, 5, 6, 7, 2, 1, 2, 1, 2, 2, 3, 3, 4, 5, 5, 3, 2, 3, 2, 3, 2, 1, 2, 3, 3, 3, 3, 3, 3, 3, 3, 3, 2, 3, 3, 3, 3, 4, 2, 3, 4, 4, 5, 5, 5, 6, 4, 4, 3, 4, 4, 5, 5, 6, 5, 4, 4, 3, 4, 4, 4, 5, 6, 5, 5, 4, 3, 4, 4, 5, 6, 5, 5, 4, 4, 3, 4, 4, 4, 5, 5, 5, 6, 4, 3, 4, 4, 5, 5, 5, 6, 4, 4, 3, 3, 3, 2, 3, 3]
 
 
 
@@ -217,102 +217,223 @@ beef
 \chapter{VoomSort tests}
 
 
-\section{node 2}
+\section{{VoomSort}}
 
 
-\subsection{dddd}
-d1
+\subsection{ЭЭЭ}
+Э
 
 
-\subsection{eeee}
+\subsection{ЯЯЯ}
+Я
 
 
-\subsection{dddd}
-d2
-
-
-
-\subsection{bbbb}
+\subsubsection{bbb}
 b
 
 
-\subsubsection{b_yyy}
+\subsubsection{BBB}
+B
 
 
-\subsubsection{b_xxx}
-
-
-\subsection{cccc}
-c
-
-
-\subsection{aaaa}
+\subsubsection{aaa}
 a
 
-\subsubsection{a_nnn}
 
-
-\subsubsection{a_mmm}
-
-
-\section{node 22}
-
-
-
-\section{ñ}
-
-
-\section{Ñ}
-unicode tests
-
-
-\subsection{э}
+\paragraph{111}
 1
 
-\subsection{Я}
-2
 
-\subsection{ю}
-3
-
-\subsection{Э}
-4
-
-\subsection{я}
-5
-
-\subsection{Ю}
-6
+\subsection{эээ}
+э
 
 
-\section{node 1}
+\subsection{яяя}
+я
 
 
-\subsection{bbbb}
+\section{{VoomSort deep}}
+
+
+\subsection{ЭЭЭ}
+Э
+
+
+\subsection{ЯЯЯ}
+Я
+
+
+\subsubsection{BBB}
+B
+
+
+\subsubsection{aaa}
+a
+
+
+\paragraph{111}
+1
+
+
+\subsubsection{bbb}
 b
 
 
-\subsection{dddd}
-d1
+\subsection{эээ}
+э
 
 
-\subsection{DDDD}
-ingorecase test
+\subsection{яяя}
+я
 
 
-\subsection{aaaa}
+\section{{VoomSort deep i}}
+
+
+\subsection{ЭЭЭ}
+Э
+
+
+\subsection{эээ}
+э
+
+
+\subsection{ЯЯЯ}
+Я
+
+
+\subsubsection{aaa}
 a
 
-\subsection{dddd}
-d2
+
+\paragraph{111}
+1
 
 
+\subsubsection{bbb}
+b
 
-\subsection{cccc}
-c
+
+\subsubsection{BBB}
+B
 
 
-\section{z}
+\subsection{яяя}
+я
+
+
+\section{{VoomSort deep i bytes}}
+
+
+\subsection{ЭЭЭ}
+Э
+
+
+\subsection{ЯЯЯ}
+Я
+
+
+\subsubsection{aaa}
+a
+
+
+\paragraph{111}
+1
+
+
+\subsubsection{bbb}
+b
+
+
+\subsubsection{BBB}
+B
+
+
+\subsection{эээ}
+э
+
+
+\subsection{яяя}
+я
+
+
+\section{{VoomSort deep i bytes r}}
+
+
+\subsection{яяя}
+я
+
+
+\subsection{эээ}
+э
+
+
+\subsection{ЯЯЯ}
+Я
+
+
+\subsubsection{BBB}
+B
+
+
+\subsubsection{bbb}
+b
+
+
+\subsubsection{aaa}
+a
+
+
+\paragraph{111}
+1
+
+
+\subsection{ЭЭЭ}
+Э
+
+
+\section{{VoomSort deep i r}}
+
+
+\subsection{яяя}
+я
+
+
+\subsection{ЯЯЯ}
+Я
+
+
+\subsubsection{bbb}
+b
+
+
+\subsubsection{BBB}
+B
+
+
+\subsubsection{aaa}
+a
+
+
+\paragraph{111}
+1
+
+
+\subsection{эээ}
+э
+
+
+\subsection{ЭЭЭ}
+Э
+
+
+\section{ñññ}
+
+
+\section{ÑÑÑ}
+
+
+\section{zzz}
 
 
 \chapter{special chars tests}
@@ -334,4 +455,8 @@ u'\u0427\u0435\u0431\u0443\u0440\u0430\u0448\u043a\u0430'
 utf-8
 '\xd0\xa7\xd0\xb5\xd0\xb1\xd1\x83\xd1\x80\xd0\xb0\xd1\x88\xd0\xba\xd0\xb0'
 
+Strikethrough: U+0336 (COMBINING LONG STROKE OVERLAY)
+Э̶Ю̶Я̶ A̶̶B̶̶C̶̶
 
+IMPORTANT: The last line must be blank (include spaces and tabs to make it more interesting). Otherwise :VoomSort tests fail for rest, asciidoc, etc.
+ 	 	

@@ -10,6 +10,8 @@
 "
 " NOTE: DO NOT place this file in Vim plugin folder or its subfolder.
 "
+" NOTE: Python 3 is needed. To make it work with Python 2, change python3 to python.
+
 
 " Do not load this script if autoload/voom.vim has not been sourced completely.
 if !exists('*voom#Exec')
@@ -24,7 +26,9 @@ if 0
 endif
 
 
-python << EOF
+python3 << EOF
+
+# NOTE: main module "voom_vimplugin2657.voom_vim" is imported in Vim as _VOoM2657
 
 # Replace default headline construction procedure with a custom function:
 # 1. Define a make_head Python function.
@@ -35,8 +39,9 @@ python << EOF
 #             marker regex
 #               - bline[:match.start()] gives part of Body line before the
 #                 matching fold marker. This is what we usually start from.
-# 2. Register function in dictionary _VOoM.MAKE_HEAD for filetypes with which
+# 2. Register function in dictionary _VOoM2657.MAKE_HEAD for filetypes with which
 #    it should be used.
+
 
 import re
 
@@ -50,7 +55,7 @@ if 1:
             return s[:-2].strip()
         else:
             return s
-    _VOoM.MAKE_HEAD['html'] = voom_make_head_html
+    _VOoM2657.MAKE_HEAD['html'] = voom_make_head_html
 
 if 0:
     # Python headline: like default plus remove "def "
@@ -60,8 +65,8 @@ if 0:
             return s[3:].lstrip()
         else:
             return s
-    _VOoM.MAKE_HEAD['python'] = voom_make_head_python
-    #_VOoM.MAKE_HEAD['ruby'] = voom_make_head_python
+    _VOoM2657.MAKE_HEAD['python'] = voom_make_head_python
+    #_VOoM2657.MAKE_HEAD['ruby'] = voom_make_head_python
 
 if 0:
     # Vim headline: like default plus remove leading "fu ", "fun ", ..., "function ".
@@ -70,7 +75,7 @@ if 0:
         s = bline[:match.start()].lstrip().rstrip('" \t').strip('-=~').strip()
         s = vim_func_sub('',s)
         return s
-    _VOoM.MAKE_HEAD['vim'] = voom_make_head_vim
+    _VOoM2657.MAKE_HEAD['vim'] = voom_make_head_vim
 
 EOF
 

@@ -1,0 +1,444 @@
+
+
+
+  TEST FILE: "test_outline.txt", MARKUP MODE: "fmr"
+    TEST: VoomTest_OutlineMetrics()
+    TEST: VoomTest_OutlineTraversal()
+    TEST: VoomTest_Sort()
+VOoM (sort): already sorted
+VOoM (sort): already sorted
+    TEST: VoomTest_DownUp()
+    TEST: VoomTest_CutAllPasteAll()
+    TEST: VoomTest_CutPaste()
+    TEST: VoomTest_CopyPasteCut()
+    TEST: VoomTest_RightLeftRight()
+    TEST: VoomTest_LeftRight()
+    TEST: VoomTest_NewHeadline()
+    TEST: VoomTest_SpecialMarks()
+
+
+  TEST FILE: "test_outline.txt", MARKUP MODE: "fmr1"
+    TEST: VoomTest_OutlineMetrics()
+    TEST: VoomTest_OutlineTraversal()
+    TEST: VoomTest_Sort()
+VOoM (sort): already sorted
+VOoM (sort): already sorted
+    TEST: VoomTest_DownUp()
+    TEST: VoomTest_CutAllPasteAll()
+    TEST: VoomTest_CutPaste()
+    TEST: VoomTest_CopyPasteCut()
+    TEST: VoomTest_RightLeftRight()
+    TEST: VoomTest_LeftRight()
+    TEST: VoomTest_NewHeadline()
+    TEST: VoomTest_SpecialMarks()
+
+
+  TEST FILE: "test_outline.fmr2", MARKUP MODE: "fmr2"
+    TEST: VoomTest_OutlineMetrics()
+    TEST: VoomTest_OutlineTraversal()
+    TEST: VoomTest_Sort()
+VOoM (sort): already sorted
+VOoM (sort): already sorted
+    TEST: VoomTest_DownUp()
+    TEST: VoomTest_CutAllPasteAll()
+    TEST: VoomTest_CutPaste()
+    TEST: VoomTest_CopyPasteCut()
+    TEST: VoomTest_RightLeftRight()
+    TEST: VoomTest_LeftRight()
+    TEST: VoomTest_NewHeadline()
+    TEST: VoomTest_SpecialMarks()
+
+
+  TEST FILE: "test_outline.fmr3", MARKUP MODE: "fmr3"
+    TEST: VoomTest_OutlineMetrics()
+    TEST: VoomTest_OutlineTraversal()
+    TEST: VoomTest_Sort()
+VOoM (sort): already sorted
+VOoM (sort): already sorted
+    TEST: VoomTest_DownUp()
+    TEST: VoomTest_CutAllPasteAll()
+    TEST: VoomTest_CutPaste()
+    TEST: VoomTest_CopyPasteCut()
+    TEST: VoomTest_RightLeftRight()
+    TEST: VoomTest_LeftRight()
+    TEST: VoomTest_NewHeadline()
+    TEST: VoomTest_SpecialMarks()
+
+
+  TEST FILE: "test_outline.wiki", MARKUP MODE: "wiki"
+    TEST: VoomTest_OutlineMetrics()
+    TEST: VoomTest_OutlineTraversal()
+    TEST: VoomTest_Sort()
+VOoM (sort): already sorted
+VOoM (sort): already sorted
+    TEST: VoomTest_DownUp()
+    TEST: VoomTest_CutAllPasteAll()
+    TEST: VoomTest_CutPaste()
+    TEST: VoomTest_CopyPasteCut()
+    TEST: VoomTest_RightLeftRight()
+    TEST: VoomTest_LeftRight()
+    TEST: VoomTest_NewHeadline()
+
+
+  TEST FILE: "test_outline.vimwiki", MARKUP MODE: "vimwiki"
+    TEST: VoomTest_OutlineMetrics()
+    TEST: VoomTest_OutlineTraversal()
+    TEST: VoomTest_Sort()
+VOoM (sort): already sorted
+VOoM (sort): already sorted
+    TEST: VoomTest_DownUp()
+    TEST: VoomTest_CutAllPasteAll()
+    TEST: VoomTest_CutPaste()
+    TEST: VoomTest_CopyPasteCut()
+    TEST: VoomTest_RightLeftRight()
+    TEST: VoomTest_LeftRight()
+    TEST: VoomTest_NewHeadline()
+
+
+  TEST FILE: "test_outline.inverseAtx", MARKUP MODE: "inverseAtx"
+    TEST: VoomTest_OutlineMetrics()
+    TEST: VoomTest_OutlineTraversal()
+    TEST: VoomTest_Sort()
+VOoM (sort): already sorted
+VOoM (sort): already sorted
+    TEST: VoomTest_DownUp()
+    TEST: VoomTest_CutAllPasteAll()
+    TEST: VoomTest_CutPaste()
+    TEST: VoomTest_CopyPasteCut()
+    TEST: VoomTest_RightLeftRight()
+    TEST: VoomTest_LeftRight()
+    TEST: VoomTest_NewHeadline()
+
+
+  TEST FILE: "test_outline.dokuwiki3", MARKUP MODE: "dokuwiki"
+    TEST: VoomTest_OutlineMetrics()
+    TEST: VoomTest_OutlineTraversal()
+    TEST: VoomTest_Sort()
+VOoM (sort): already sorted
+VOoM (sort): already sorted
+    TEST: VoomTest_DownUp()
+    TEST: VoomTest_CutAllPasteAll()
+    TEST: VoomTest_CutPaste()
+    TEST: VoomTest_CopyPasteCut()
+    TEST: VoomTest_RightLeftRight()
+    TEST: VoomTest_LeftRight()
+    TEST: VoomTest_NewHeadline()
+
+
+  TEST FILE: "test_outline.org", MARKUP MODE: "org"
+    TEST: VoomTest_OutlineMetrics()
+    TEST: VoomTest_OutlineTraversal()
+    TEST: VoomTest_Sort()
+VOoM (sort): already sorted
+VOoM (sort): already sorted
+    TEST: VoomTest_DownUp()
+    TEST: VoomTest_CutAllPasteAll()
+    TEST: VoomTest_CutPaste()
+    TEST: VoomTest_CopyPasteCut()
+    TEST: VoomTest_RightLeftRight()
+    TEST: VoomTest_LeftRight()
+    TEST: VoomTest_NewHeadline()
+
+
+  TEST FILE: "test_outline.hashes", MARKUP MODE: "hashes"
+    TEST: VoomTest_OutlineMetrics()
+    TEST: VoomTest_OutlineTraversal()
+    TEST: VoomTest_Sort()
+VOoM (sort): already sorted
+VOoM (sort): already sorted
+    TEST: VoomTest_DownUp()
+    TEST: VoomTest_CutAllPasteAll()
+    TEST: VoomTest_CutPaste()
+    TEST: VoomTest_CopyPasteCut()
+    TEST: VoomTest_RightLeftRight()
+    TEST: VoomTest_LeftRight()
+    TEST: VoomTest_NewHeadline()
+
+
+  TEST FILE: "test_outline.org", MARKUP MODE: "viki"
+    TEST: VoomTest_OutlineMetrics()
+    TEST: VoomTest_OutlineTraversal()
+    TEST: VoomTest_Sort()
+VOoM (sort): already sorted
+VOoM (sort): already sorted
+    TEST: VoomTest_DownUp()
+    TEST: VoomTest_CutAllPasteAll()
+    TEST: VoomTest_CutPaste()
+    TEST: VoomTest_CopyPasteCut()
+    TEST: VoomTest_RightLeftRight()
+    TEST: VoomTest_LeftRight()
+    TEST: VoomTest_NewHeadline()
+
+
+  TEST FILE: "test_outline.cwiki", MARKUP MODE: "cwiki"
+    TEST: VoomTest_OutlineMetrics()
+    TEST: VoomTest_OutlineTraversal()
+    TEST: VoomTest_Sort()
+VOoM (sort): already sorted
+VOoM (sort): already sorted
+    TEST: VoomTest_DownUp()
+    TEST: VoomTest_CutAllPasteAll()
+    TEST: VoomTest_CutPaste()
+    TEST: VoomTest_CopyPasteCut()
+    TEST: VoomTest_RightLeftRight()
+    TEST: VoomTest_LeftRight()
+    TEST: VoomTest_NewHeadline()
+
+
+  TEST FILE: "test_outline.rst", MARKUP MODE: "rest"
+    TEST: VoomTest_OutlineMetrics()
+    TEST: VoomTest_OutlineTraversal()
+    TEST: VoomTest_Sort()
+VOoM (sort): already sorted
+VOoM (sort): already sorted
+    TEST: VoomTest_DownUp()
+    TEST: VoomTest_CutAllPasteAll()
+    TEST: VoomTest_CutPaste()
+    TEST: VoomTest_CopyPasteCut()
+    TEST: VoomTest_RightLeftRight()
+    TEST: VoomTest_LeftRight()
+    TEST: VoomTest_NewHeadline()
+
+
+  TEST FILE: "test_outline.latex", MARKUP MODE: "latex"
+    TEST: VoomTest_OutlineMetrics()
+    TEST: VoomTest_OutlineTraversal()
+    TEST: VoomTest_Sort()
+VOoM (sort): already sorted
+VOoM (sort): already sorted
+    TEST: VoomTest_DownUp()
+    TEST: VoomTest_CutAllPasteAll()
+    TEST: VoomTest_CutPaste()
+    TEST: VoomTest_CopyPasteCut()
+VOoM (latex): Disallowed levels have been corrected after 'paste'
+              level set to maximum for nodes: 16
+    TEST: VoomTest_RightLeftRight()
+VOoM (latex): Disallowed levels have been corrected after 'right'
+              level set to maximum for nodes: 15
+VOoM (latex): Disallowed levels have been corrected after 'right'
+              level set to maximum for nodes: 57, 65, 74, 82, 94, 102
+    TEST: VoomTest_LeftRight()
+VOoM (latex): Disallowed levels have been corrected after 'right'
+              level set to maximum for nodes: 15
+    TEST: VoomTest_NewHeadline()
+
+
+  TEST FILE: "test_outline.dtx", MARKUP MODE: "latexDtx"
+    TEST: VoomTest_OutlineMetrics()
+    TEST: VoomTest_OutlineTraversal()
+    TEST: VoomTest_Sort()
+VOoM (sort): already sorted
+VOoM (sort): already sorted
+    TEST: VoomTest_DownUp()
+    TEST: VoomTest_CutAllPasteAll()
+    TEST: VoomTest_CutPaste()
+    TEST: VoomTest_CopyPasteCut()
+VOoM (latexDtx): Disallowed levels have been corrected after 'paste'
+              level set to maximum for nodes: 16
+    TEST: VoomTest_RightLeftRight()
+VOoM (latexDtx): Disallowed levels have been corrected after 'right'
+              level set to maximum for nodes: 15
+VOoM (latexDtx): Disallowed levels have been corrected after 'right'
+              level set to maximum for nodes: 57, 65, 74, 82, 94, 102
+    TEST: VoomTest_LeftRight()
+VOoM (latexDtx): Disallowed levels have been corrected after 'right'
+              level set to maximum for nodes: 15
+    TEST: VoomTest_NewHeadline()
+
+
+  TEST FILE: "test_outline.markdown", MARKUP MODE: "markdown"
+    TEST: VoomTest_OutlineMetrics()
+    TEST: VoomTest_OutlineTraversal()
+    TEST: VoomTest_Sort()
+VOoM (sort): already sorted
+VOoM (sort): already sorted
+    TEST: VoomTest_DownUp()
+    TEST: VoomTest_CutAllPasteAll()
+    TEST: VoomTest_CutPaste()
+    TEST: VoomTest_CopyPasteCut()
+    TEST: VoomTest_RightLeftRight()
+    TEST: VoomTest_LeftRight()
+    TEST: VoomTest_NewHeadline()
+
+
+  TEST FILE: "test_outline.pandoc", MARKUP MODE: "pandoc"
+    TEST: VoomTest_OutlineMetrics()
+    TEST: VoomTest_OutlineTraversal()
+    TEST: VoomTest_Sort()
+VOoM (sort): already sorted
+VOoM (sort): already sorted
+    TEST: VoomTest_DownUp()
+    TEST: VoomTest_CutAllPasteAll()
+    TEST: VoomTest_CutPaste()
+    TEST: VoomTest_CopyPasteCut()
+    TEST: VoomTest_RightLeftRight()
+    TEST: VoomTest_LeftRight()
+    TEST: VoomTest_NewHeadline()
+
+
+  TEST FILE: "test_outline.t2t", MARKUP MODE: "txt2tags"
+    TEST: VoomTest_OutlineMetrics()
+    TEST: VoomTest_OutlineTraversal()
+    TEST: VoomTest_Sort()
+VOoM (sort): already sorted
+VOoM (sort): already sorted
+    TEST: VoomTest_DownUp()
+    TEST: VoomTest_CutAllPasteAll()
+    TEST: VoomTest_CutPaste()
+    TEST: VoomTest_CopyPasteCut()
+    TEST: VoomTest_RightLeftRight()
+    TEST: VoomTest_LeftRight()
+    TEST: VoomTest_NewHeadline()
+
+
+  TEST FILE: "test_outline.asciidoc", MARKUP MODE: "asciidoc"
+    TEST: VoomTest_OutlineMetrics()
+    TEST: VoomTest_OutlineTraversal()
+    TEST: VoomTest_Sort()
+VOoM (sort): already sorted
+VOoM (sort): already sorted
+    TEST: VoomTest_DownUp()
+    TEST: VoomTest_CutAllPasteAll()
+    TEST: VoomTest_CutPaste()
+    TEST: VoomTest_CopyPasteCut()
+    TEST: VoomTest_RightLeftRight()
+    TEST: VoomTest_LeftRight()
+    TEST: VoomTest_NewHeadline()
+
+
+  TEST FILE: "test_outline.asciidoc1", MARKUP MODE: "asciidoc"
+    TEST: VoomTest_OutlineMetrics()
+    TEST: VoomTest_OutlineTraversal()
+    TEST: VoomTest_Sort()
+VOoM (sort): already sorted
+VOoM (sort): already sorted
+    TEST: VoomTest_DownUp()
+    TEST: VoomTest_CutAllPasteAll()
+    TEST: VoomTest_CutPaste()
+    TEST: VoomTest_CopyPasteCut()
+    TEST: VoomTest_RightLeftRight()
+    TEST: VoomTest_LeftRight()
+    TEST: VoomTest_NewHeadline()
+
+
+  TEST FILE: "test_outline.html", MARKUP MODE: "html"
+    TEST: VoomTest_OutlineMetrics()
+    TEST: VoomTest_OutlineTraversal()
+    TEST: VoomTest_Sort()
+VOoM (sort): already sorted
+VOoM (sort): already sorted
+    TEST: VoomTest_DownUp()
+    TEST: VoomTest_CutAllPasteAll()
+    TEST: VoomTest_CutPaste()
+    TEST: VoomTest_CopyPasteCut()
+    TEST: VoomTest_RightLeftRight()
+    TEST: VoomTest_LeftRight()
+    TEST: VoomTest_NewHeadline()
+
+
+  TEST FILE: "test_outline.otl", MARKUP MODE: "thevimoutliner"
+    TEST: VoomTest_OutlineMetrics()
+    TEST: VoomTest_OutlineTraversal()
+    TEST: VoomTest_Sort()
+VOoM (sort): already sorted
+VOoM (sort): already sorted
+    TEST: VoomTest_DownUp()
+    TEST: VoomTest_CutAllPasteAll()
+    TEST: VoomTest_CutPaste()
+    TEST: VoomTest_CopyPasteCut()
+    TEST: VoomTest_RightLeftRight()
+    TEST: VoomTest_LeftRight()
+    TEST: VoomTest_NewHeadline()
+
+
+  TEST FILE: "test_outline.otl", MARKUP MODE: "vimoutliner"
+    TEST: VoomTest_OutlineMetrics()
+    TEST: VoomTest_OutlineTraversal()
+    TEST: VoomTest_Sort()
+VOoM (sort): already sorted
+VOoM (sort): already sorted
+    TEST: VoomTest_DownUp()
+    TEST: VoomTest_CutAllPasteAll()
+    TEST: VoomTest_CutPaste()
+    TEST: VoomTest_CopyPasteCut()
+    TEST: VoomTest_RightLeftRight()
+    TEST: VoomTest_LeftRight()
+    TEST: VoomTest_NewHeadline()
+
+
+  TEST FILE: "test_outline.taskpaper", MARKUP MODE: "taskpaper"
+    TEST: VoomTest_OutlineMetrics()
+    TEST: VoomTest_OutlineTraversal()
+    TEST: VoomTest_Sort()
+VOoM (sort): already sorted
+VOoM (sort): already sorted
+    TEST: VoomTest_DownUp()
+    TEST: VoomTest_CutAllPasteAll()
+    TEST: VoomTest_CutPaste()
+    TEST: VoomTest_CopyPasteCut()
+    TEST: VoomTest_RightLeftRight()
+    TEST: VoomTest_LeftRight()
+    TEST: VoomTest_NewHeadline()
+
+
+  TEST FILE: "paragraphBlank.txt", MARKUP MODE: "paragraphBlank"
+    TEST: VoomTest_OutlineMetrics()
+    TEST: VoomTest_OutlineTraversal()
+    TEST: VoomTest_Sort()
+VOoM (sort): already sorted
+VOoM (sort): already sorted
+    TEST: VoomTest_DownUp()
+    TEST: VoomTest_CutAllPasteAll()
+    TEST: VoomTest_CutPaste()
+    TEST: VoomTest_CopyPasteCut()
+    TEST: VoomTest_NewHeadline()
+VOoM: headlines with level >1 are not possible in this markup mode
+VOoM: headlines with level >1 are not possible in this markup mode
+VOoM: headlines with level >1 are not possible in this markup mode
+
+
+  TEST FILE: "paragraphIndent.txt", MARKUP MODE: "paragraphIndent"
+    TEST: VoomTest_OutlineMetrics()
+    TEST: VoomTest_OutlineTraversal()
+    TEST: VoomTest_Sort()
+VOoM (sort): already sorted
+VOoM (sort): already sorted
+    TEST: VoomTest_DownUp()
+    TEST: VoomTest_CutAllPasteAll()
+    TEST: VoomTest_CutPaste()
+    TEST: VoomTest_CopyPasteCut()
+    TEST: VoomTest_NewHeadline()
+VOoM: headlines with level >1 are not possible in this markup mode
+VOoM: headlines with level >1 are not possible in this markup mode
+VOoM: headlines with level >1 are not possible in this markup mode
+
+
+  TEST FILE: "paragraphNoIndent.txt", MARKUP MODE: "paragraphNoIndent"
+    TEST: VoomTest_OutlineMetrics()
+    TEST: VoomTest_OutlineTraversal()
+    TEST: VoomTest_Sort()
+VOoM (sort): already sorted
+VOoM (sort): already sorted
+    TEST: VoomTest_DownUp()
+    TEST: VoomTest_CutAllPasteAll()
+    TEST: VoomTest_CutPaste()
+    TEST: VoomTest_CopyPasteCut()
+    TEST: VoomTest_NewHeadline()
+VOoM: headlines with level >1 are not possible in this markup mode
+VOoM: headlines with level >1 are not possible in this markup mode
+VOoM: headlines with level >1 are not possible in this markup mode
+
+
+  TEST FILE: "python_test_outline.py", MARKUP MODE: "python"
+    TEST: VoomTest_OutlineMetrics()
+    TEST: VoomTest_OutlineTraversal()
+    TEST: VoomTest_Sort()
+VOoM (sort): already sorted
+VOoM (sort): already sorted
+    TEST: VoomTest_DownUp()
+    TEST: VoomTest_CutAllPasteAll()
+    TEST: VoomTest_CutPaste()
+    TEST: VoomTest_CopyPasteCut()
+    TEST: VoomTest_RightLeftRight()
+    TEST: VoomTest_LeftRight()
+    TEST: VoomTest_NewHeadline()

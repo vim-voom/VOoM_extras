@@ -1,11 +1,11 @@
 " VOoM test suite.
 " WARNING: ALWAYS RUN THIS IN A SEPARATE, DISPOSABLE INSTANCE OF VIM.
 " Enable PyLog (:Voomlog) to retain progress and error messages.
-" Use small test outlines:
-"       ../voom_samples/test_outline.txt
+" Use small test outlines:   ../voom_samples/test_outline.txt
 " Each VoomTest_{action} function can be run separately.
 " Must be run in a Tree buffer.
 " NOTE: 'encoding' should be utf-8 or other Unicode. Otherwise tests for some modes will fail.
+
 
 " Test all modes. This can be executed in blank Vim.
 " For each test outline in ../test_outlines/:
@@ -15,48 +15,48 @@
 "   - wipe out Tree buffer
 com! VoomTestTestAllModes call VoomTest_TestAllModes()
 
-" Run all tests for the current outline. The current buffer must be Tree.
+
+" Run all tests for the current outline. The current buffer must be VOoM Tree.
 com! VoomTestRunAllTests call VoomTest_RunAllTests()
 
-" About test files. {{{
-"
-" First line must be not headline: Cut/Paste test adds blank line on top
-"
-" Node 2 (Tree lnum 2) contains string VO.levels=[1, ...] with expected VO.levels.
-"
-" rest, markdown, asciidoc:
-" Last file line must be blank. Copy/Paste/Cut test adds blank line if there is none.
-"
-" asciidoc:
-" No problems when all heads are 2-style because it's default.
-" 1-style changes to 2-style after Cut/Paste All.
-"
-" latex, inverseAtx, docuwiki:
-" tests may fail when max possible level is exceeded.
-"
-" docuwiki, inverseAtx:
-" Tests may fail because max possible lelel is exceeded.
-" dokuwiki problematic tests: Copy/Paste/Cut, Right/Left/Right
-"
-" }}}
-
-" TODO
-" - Fix mode-specific error messages. At least do summary: passed/failed.
-" - Test for Voomgrep.
-" - Test for wrong ticks -- autocmd breakage.
-" - Test for special regions, fenced code blocks.
 
 
-python import time
+"----- s:PYCMD, ENDPYTHON ----
+" To make this script work with both Python 2 and 3, Python code regions are written as follows:
+"       exe s:PYCMD . ' << ENDPYTHON'
+"       python-code-here
+"       ENDPYTHON
+" Instead of usual 'python << EOF ... EOF'.
+" To get Python syntax hi for such regions, add to after/syntax/vim.vim:
+" :syntax region vimPythonRegion matchgroup=vimScriptDelim start=/^\s*exe.\+ << ENDPYTHON/ end=/^ENDPYTHON/ contains=@vimPythonScript
+"
+let s:PYCMD = voom#GetVar('s:PYCMD')
+"let s:PYCMD = 'python'
+"let s:PYCMD = 'python3'
+let s:STARTPYTHON = s:PYCMD . ' << ENDPYTHON'
+
+" globals, used to capture Vim redir
+let s:VOOM_REDIR = ''
+let s:temp_redir = ''
+
+exe s:PYCMD . ' << ENDPYTHON'
+import time
+import sys
+if sys.version_info[0] > 2:
+    xrange = range
+ENDPYTHON
+
+
 let s:cpo_ = &cpo | set cpo&vim
 let [s:vb_ , s:t_vb_] = [&vb, &t_vb]
 
 let s:script_dir = expand("<sfile>:p:h")
 let s:voom_samples_dir = fnamemodify(s:script_dir.'/../test_outlines', ':p')
 let s:voom_samples_names = [
-            \ ['test_outline.txt', ''],
+            \ ['test_outline.txt', 'fmr'],
             \ ['test_outline.txt', 'fmr1'],
             \ ['test_outline.fmr2', 'fmr2'],
+            \ ['test_outline.fmr3', 'fmr3'],
             \ ['test_outline.wiki', 'wiki'],
             \ ['test_outline.vimwiki', 'vimwiki'],
             \ ['test_outline.inverseAtx', 'inverseAtx'],
@@ -67,7 +67,7 @@ let s:voom_samples_names = [
             \ ['test_outline.cwiki', 'cwiki'],
             \ ['test_outline.rst', 'rest'],
             \ ['test_outline.latex', 'latex'],
-            \ ['test_outline.dtx', 'dtx'],
+            \ ['test_outline.dtx', 'latexDtx'],
             \ ['test_outline.markdown', 'markdown'],
             \ ['test_outline.pandoc', 'pandoc'],
             \ ['test_outline.t2t', 'txt2tags'],
@@ -77,11 +77,154 @@ let s:voom_samples_names = [
             \ ['test_outline.otl', 'thevimoutliner'],
             \ ['test_outline.otl', 'vimoutliner'],
             \ ['test_outline.taskpaper', 'taskpaper'],
+            \ ['paragraphBlank.txt', 'paragraphBlank'],
+            \ ['paragraphIndent.txt', 'paragraphIndent'],
+            \ ['paragraphNoIndent.txt', 'paragraphNoIndent'],
             \ ['python_test_outline.py', 'python']
             \]
 
 
-func! VoomTest_RunAllTests() "{{{1
+func! VoomTest_TestAllModes(...) "{{{1
+" For each mode: load test file, create outline, run all tests.
+" The test file is loaded in the current window.
+" Vim register v will contain Vim output.
+" Vim register p will contain Python output (PyLog buffer lines) with comments stripped.
+
+    " PyLog must be displayed
+    Voomlog
+    " delete all outlines
+    VoomQuitAll
+
+exe s:PYCMD . ' << ENDPYTHON'
+if not vim.eval('&enc') == 'utf-8':
+    print("# WARNING: Vim 'encoding' is not utf-8")
+if not int(vim.eval('g:voom_verify_oop')):
+    print('# WARNING: outline verification is disabled (g:voom_verify_oop)')
+ENDPYTHON
+
+    " go to PyLog, get last line number, go back
+    let logBnr = voom#GetVar('s:voom_logbnr')
+    exe bufwinnr(logBnr).'wincmd w'
+    let logLnum = line('$')
+    exe winnr('#').'wincmd w'
+
+exe s:PYCMD . ' << ENDPYTHON'
+TestAllModes_time_start = time.clock()
+print('++++++++++ STARTED: VoomTest_TestAllModes() ++++++++++')
+print('# s:PYCMD = %s' % repr(vim.eval('s:PYCMD')))
+ENDPYTHON
+
+    " this is to avoid exceeding max possible level after Move Right
+    let g:voom_inverseAtx_max = 10
+    let g:voom_inverseAtx_char = '@'
+
+    " messages may affect comparison
+    let shm_ = &shm
+    set shm=atI
+    " too many echo messages, screen fills
+    let more_ = &more
+    set nomore
+    " there is too much bleeping, suppress it
+    let [vb_ , t_vb_] = [&vb, &t_vb]
+    set vb t_vb=
+    " modeline must be on when testing python markup mode (ts=4).
+    " Debian default config is nomodeline, ts=8.
+    let modeline_ = &modeline
+    set modeline
+
+    " edit file names, so that only file names will appear in redir var
+    exec 'cd' s:voom_samples_dir
+
+    " FIXME: silent has no effect on what is being redir-ed.
+    " When we don't want something redir-ed, the current solution is to stop redir.
+    " This is not good because error messages may be missed.
+    let s:VOOM_REDIR = ''
+    let kwargs = {'skipRedir': 1, 'skipRedirUnl': 1}
+    redir =>> s:VOOM_REDIR
+
+    for it in s:voom_samples_names
+        let path = s:voom_samples_dir . it[0]
+        if !filereadable(path)
+            call voom#ErrorMsg('TEST FILE NOT READABLE: '.path)
+            continue
+        endif
+        echo "\n"
+        echo '  TEST FILE: "'. it[0] .'", MARKUP MODE: "'. it[1] .'"'
+        redir END
+        "silent exec 'edit ' . path
+        silent exec 'edit ' . it[0]
+        redir =>> s:VOOM_REDIR
+        exec 'Voom ' . it[1]
+        let tree = bufnr('')
+        if voom#BufNotTree(tree)
+            call voom#ErrorMsg('FAILED TO CREATE OUTLINE FOR: '.it[0])
+            return
+        endif
+        """ run all tests for this outline
+        call VoomTest_RunAllTests(kwargs)
+        """ delete outline
+        if bufnr('')==tree
+            bw
+        else
+            call voom#ErrorMsg('WRONG BUFFER AFTER FINISHING TESTS FOR: '.it[0])
+            return
+        endif
+    endfor
+    unlet! it
+
+    redir END
+
+    " save Vim output in register v
+    let @v = s:VOOM_REDIR
+
+    " restore some setings
+    let [&vb, &t_vb, &shm, &more]=[vb_, t_vb_, shm_, more_]
+    let &modeline = modeline_
+    unlet! g:voom_inverseAtx_max  g:voom_inverseAtx_char
+
+exe s:PYCMD . ' << ENDPYTHON'
+print('++++++++++ FINISHED: VoomTest_TestAllModes() ++++++++++ # %s sec' %(time.clock()-TestAllModes_time_start))
+ENDPYTHON
+
+    exec 'cd' s:script_dir
+
+    " Compare Python output to reference file. Comments after # must be stripped.
+    let py_out = getbufline(logBnr, logLnum+1, '$')
+    let py_out_nocomments = []
+    for it in py_out
+        call add(py_out_nocomments, substitute(it, '#.*', '#', ''))
+    endfor
+    unlet! it
+    exe s:PYCMD "print('')"
+    exe s:PYCMD "print('comparing Python output to TestAllModes_python.ok.txt ...')"
+    let py_out_ok = readfile('TestAllModes_python.ok.txt')
+    let py_out_ok_nocomments = []
+    for it in py_out_ok
+        call add(py_out_ok_nocomments, substitute(it, '#.*', '#', ''))
+    endfor
+    if py_out_ok_nocomments ==# py_out_nocomments
+        exe s:PYCMD "print('OK')"
+    else
+        exe s:PYCMD "print('ERROR: PYTHON OUTPUT IS DIFFERENT !!!')"
+    endif
+    " save Python output in register p
+    let @p = join(py_out_nocomments, "\n")
+
+    " Compare Vim output to reference file.
+    exe s:PYCMD "print('comparing Vim output to TestAllModes_vim.ok.txt ...')"
+    let vim_out_ok = readfile('TestAllModes_vim.ok.txt')
+    let vim_out = split(s:VOOM_REDIR, '\n', 1)
+    if vim_out_ok ==# vim_out
+        exe s:PYCMD "print('OK')"
+    else
+        exe s:PYCMD "print('ERROR: VIM OUTPUT IS DIFFERENT !!!')"
+    endif
+    exe s:PYCMD "print('')"
+
+endfunc
+
+
+func! VoomTest_RunAllTests(...) "{{{1
     let [bufType,body,tree] = voom#GetTypeBodyTree()
     if bufType=='None' | return | endif
     let [voom_bodies, voom_trees] = voom#GetBodiesTrees()
@@ -89,92 +232,78 @@ func! VoomTest_RunAllTests() "{{{1
         call voom#ErrorMsg("VOoM: must be in Tree buffer")
         return
     endif
+    let [mmode, MTYPE, body, tree] = voom#GetModeBodyTree(bufnr(''))
 
-    py print '\n\n=======', _VOoM.VOOMS[int(vim.eval("l:body"))].bname, '======='
-    py print '-----STARTING ALL TESTS-----------------------------------'
+    let kwargs = (a:0 > 0 && !empty(a:1)) ? a:1 : 0
+    let l:bodyfilename = bufname(body)
+
+exe s:PYCMD . ' << ENDPYTHON'
+#print('\n\n======= %s =======' % (_VOoM2657.VOOMS[int(vim.eval('l:body'))].bname))
+print('')
+print('======================================================================')
+print('  TEST FILE: "%s", MARKUP MODE: "%s"' % ( vim.eval('l:bodyfilename'),
+        _VOoM2657.VOOMS[int(vim.eval('l:body'))].mmode) )
+print('-----STARTING ALL TESTS-----------------------------------')
+ENDPYTHON
+
+    echo '    TEST: VoomTest_OutlineMetrics()'
     call VoomTest_OutlineMetrics()
-    call VoomTest_OutlineTraversal()
-    call VoomTest_Sort()
-    call VoomTest_DiscardChanges(body,tree)
+    call VoomTest_DiscardChanges(body, tree, kwargs)
+
+    echo '    TEST: VoomTest_OutlineTraversal()'
+    call VoomTest_OutlineTraversal(kwargs)
+    call VoomTest_DiscardChanges(body, tree, kwargs)
+
+    echo '    TEST: VoomTest_Sort()'
+    call VoomTest_Sort(kwargs)
+    call VoomTest_DiscardChanges(body, tree, kwargs)
+
+    echo '    TEST: VoomTest_DownUp()'
     call VoomTest_DownUp()
-    call VoomTest_DiscardChanges(body,tree)
+    call VoomTest_DiscardChanges(body, tree, kwargs)
+
+    echo '    TEST: VoomTest_CutAllPasteAll()'
     call VoomTest_CutAllPasteAll()
-    call VoomTest_DiscardChanges(body,tree)
+    call VoomTest_DiscardChanges(body, tree, kwargs)
+
+    echo '    TEST: VoomTest_CutPaste()'
     call VoomTest_CutPaste()
-    call VoomTest_DiscardChanges(body,tree)
-    "return
+    call VoomTest_DiscardChanges(body, tree, kwargs)
+
+    echo '    TEST: VoomTest_CopyPasteCut()'
     call VoomTest_CopyPasteCut()
-    call VoomTest_DiscardChanges(body,tree)
-    call VoomTest_RightLeftRight()
-    call VoomTest_LeftRight()
-    call VoomTest_DiscardChanges(body,tree)
+    call VoomTest_DiscardChanges(body, tree, kwargs)
+
+    if MTYPE < 2
+        echo '    TEST: VoomTest_RightLeftRight()'
+        call VoomTest_RightLeftRight()
+        call VoomTest_DiscardChanges(body, tree, kwargs)
+
+        echo '    TEST: VoomTest_LeftRight()'
+        call VoomTest_LeftRight()
+        call VoomTest_DiscardChanges(body, tree, kwargs)
+    endif
+
+    echo '    TEST: VoomTest_NewHeadline()'
     call VoomTest_NewHeadline()
-    call VoomTest_DiscardChanges(body,tree)
-    call VoomTest_SpecialMarks()
-    call VoomTest_DiscardChanges(body,tree)
-    py print '-----FINISHED ALL TESTS-----------------------------------'
-endfunc
+    call VoomTest_DiscardChanges(body, tree, kwargs)
 
-
-func! VoomTest_TestAllModes() "{{{1
-" For each mode: load test file, create outline, run all tests.
-" The test file is loaded in the current window.
-    " make sure PyLog is displayed
-    Voomlog
-    " delete all outlines
-    VoomQuitAll
-
-    if &enc!=#'utf-8'
-        py print "WARNING: Vim 'encoding' is not utf-8"
-    endif
-    if g:voom_verify_oop != 1
-        py print "WARNING: outline verification is disabled (g:voom_verify_oop)"
+    if MTYPE == 0
+        echo '    TEST: VoomTest_SpecialMarks()'
+        call VoomTest_SpecialMarks()
+        call VoomTest_DiscardChanges(body, tree, kwargs)
     endif
 
-    " this is to avoid exceeding max possible level after Move Right
-    let g:voom_inverseAtx_max = 10 | let g:voom_inverseAtx_char = '@'
-
-    for i in s:voom_samples_names
-        let path = s:voom_samples_dir . i[0]
-        if !filereadable(path)
-            call voom#ErrorMsg('TEST FILE NOT READABLE: '.path)
-            continue
-        endif
-        exec 'edit ' . path
-        exec 'Voom ' . i[1]
-        let tree = bufnr('')
-        if voom#BufNotTree(tree)
-            call voom#ErrorMsg('FAILED TO CREATE OUTLINE FOR: '.i[0])
-            return
-        endif
-        """ run all tests for this outline
-        " there is too much bleeping, suppress it
-        let [vb_ , t_vb_] = [&vb, &t_vb]
-        set vb t_vb=
-        try
-            call VoomTest_RunAllTests()
-        finally
-            let [&vb, &t_vb]=[vb_, t_vb_]
-        endtry
-        """ delete outline
-        if bufnr('')==tree
-            bw
-        else
-            call voom#ErrorMsg('WRONG BUFFER AFTER FINISHING TESTS FOR: '.i[0])
-            return
-        endif
-    endfor
-
-    unlet! g:voom_inverseAtx_max  g:voom_inverseAtx_char
+    exe s:PYCMD "print('-----FINISHED ALL TESTS-----------------------------------')"
 endfunc
 
 
 "--- individual tests --- {{{1
 
-func! VoomTest_OutlineMetrics() abort "{{{1
-" Compare VO.levels to the refrenence list in the first node (Tree lnum 2).
-    py print '<<< VoomTest_OutlineMetrics() >>>'
-    py time_start = time.clock()
+func! VoomTest_OutlineMetrics(...) abort "{{{1
+" Compare VO.levels to the reference list in the first node (Tree lnum 2).
+    exe s:PYCMD "print('    TEST: VoomTest_OutlineMetrics()')"
+    exe s:PYCMD "time_start = time.clock()"
     let [bufType,body,tree] = voom#GetTypeBodyTree()
     if bufType=='None' | return | endif
     if bufType!='Tree'
@@ -191,32 +320,33 @@ func! VoomTest_OutlineMetrics() abort "{{{1
         endif
     endfor
 
-python << EOF
+exe s:PYCMD . ' << ENDPYTHON'
 body = int(vim.eval("l:body"))
-VO = _VOoM.VOOMS[body]
+VO = _VOoM2657.VOOMS[body]
 Z = int(vim.eval("l:Z"))
 #assert len(VO.bnodes)==Z
 if not len(VO.bnodes)==Z:
-    print 'ERROR: not len(VO.bnodes)==Z'
+    print('ERROR: not len(VO.bnodes)==Z')
 #assert len(VO.bnodes)==len(VO.levels)
 if not len(VO.bnodes)==len(VO.levels):
-    print 'ERROR: not len(VO.bnodes)==len(VO.levels)'
+    print('ERROR: not len(VO.bnodes)==len(VO.levels)')
 if vim.eval("exists('l:levels')")=='1':
-    exec 'levels = %s' %(vim.eval('l:levels'))
+    exec('levels = %s' %(vim.eval('l:levels')))
     #assert levels == VO.levels
     if not levels == VO.levels:
-        print 'ERROR: not levels == VO.levels'
+        print('ERROR: not levels == VO.levels')
 else:
-    print 'ERROR: did not find line with levels'
-EOF
-    py print '             DONE', time.clock()-time_start, 'sec'
+    print('ERROR: did not find line with levels')
+ENDPYTHON
+
+    exe s:PYCMD "print('             DONE # %s sec' % (time.clock()-time_start))"
 endfunc
 
 
-func! VoomTest_OutlineTraversal() abort "{{{1
+func! VoomTest_OutlineTraversal(...) abort "{{{1
 " Test voom_vim.py outline traversal functions.
-    py print '<<< VoomTest_OutlineTraversal() >>>'
-    py time_start = time.clock()
+    exe s:PYCMD "print('    TEST: VoomTest_OutlineTraversal()')"
+    exe s:PYCMD "time_start = time.clock()"
     let [bufType,body,tree] = voom#GetTypeBodyTree()
     if bufType=='None' | return | endif
     if bufType!='Tree'
@@ -225,38 +355,50 @@ func! VoomTest_OutlineTraversal() abort "{{{1
     endif
     let Z = line('$')
 
-python << EOF
+exe s:PYCMD . ' << ENDPYTHON'
 body = int(vim.eval("l:body"))
-VO = _VOoM.VOOMS[body]
+VO = _VOoM2657.VOOMS[body]
 Z = int(vim.eval("l:Z"))
-#print Z
+#print(Z)
 
 for ln in xrange(1,Z+1):
-    siblings = _VOoM.nodeSiblings(VO,ln)
+    siblings = _VOoM2657.nodeSiblings(VO,ln)
     continue
-    siblings_groups = _VOoM.getSiblingsGroups(VO,siblings)
+    siblings_groups = _VOoM2657.getSiblingsGroups(VO,siblings)
     lnum1, lnum2 = siblings[0], siblings[-1]
-    lnum2 = lnum2 + _VOoM.nodeSubnodes(VO,lnum2)
+    lnum2 = lnum2 + _VOoM2657.nodeSubnodes(VO,lnum2)
     L = []
     for l in siblings_groups: L.extend(l)
     L.sort()
-    #print L
-    #print range(lnum1,lnum2+1)
+    #print(L)
+    #print(range(lnum1,lnum2+1))
     assert L==range(lnum1,lnum2+1)
-EOF
+ENDPYTHON
 
-    " test Voomunl
+    " :Voomunl is good for testing traversal functions
+    " Problem: Unl's go to Vim redir, despite silent, suppress because too many
+    " TODO: capture redir if Vim errors
+    let skipRedirUnl = (a:0 > 0 && !empty(a:1)) ? get(a:1, 'skipRedirUnl', 0) : 0
+    if skipRedirUnl
+        redir END
+    endif
+
     for ln in range(1,Z)
         exe 'normal! '.ln.'G'
         silent Voomunl
     endfor
-    py print '             DONE', time.clock()-time_start, 'sec'
+
+    if skipRedirUnl
+        redir =>> s:VOOM_REDIR
+    endif
+
+    exe s:PYCMD "print('             DONE # %s sec' % (time.clock()-time_start))"
 endfunc
 
 
-func! VoomTest_Sort() abort "{{{1
-    py print '<<< VoomTest_Sort() >>>'
-    py time_start = time.clock()
+func! VoomTest_Sort(...) abort "{{{1
+    exe s:PYCMD "print('    TEST: VoomTest_Sort()')"
+    exe s:PYCMD "time_start = time.clock()"
     let [bufType,body,tree] = voom#GetTypeBodyTree()
     if bufType=='None' | return | endif
     if bufType!='Tree'
@@ -264,92 +406,132 @@ func! VoomTest_Sort() abort "{{{1
         return
     endif
     let Z = line('$')
-python << EOF
+
+exe s:PYCMD . ' << ENDPYTHON'
 body,tree = int(vim.eval("l:body")), int(vim.eval("l:tree"))
-VO = _VOoM.VOOMS[body]
+VO = _VOoM2657.VOOMS[body]
 Z = int(vim.eval("l:Z"))
 # these must not change
 nodes_count = nodesCount(body) # number of nodes, also Z
 parents_count = parentsCount(body) # number of parents
 body_len = len(VO.Body) # number of Body lines
-EOF
+ENDPYTHON
+
+    " Use :silent to supress 'already sorted' messages. This is to ensure that
+    " Vim output will not change by chance.
+    " Initial outline is assumed to be:
+    "   not deep-sorted
+    "   has headline 'VoomSort tests'
 
     " outline should not change after two flips
     normal! zM2Gzv
-    py blines_ = VO.Body[:]
-    VoomSort deep flip i u
-    py if blines_ == VO.Body[:]: print 'ERROR: 1'
+    exe s:PYCMD "blines_ = VO.Body[:]"
+    VoomSort deep flip i
+    exe s:PYCMD "if blines_ == VO.Body[:]: print('ERROR: 1')"
     " doesn't work
     "normal! 2GVG
     "echom line("'<") line("'>")
-    "'<,'>VoomSort deep flip i u
+    "'<,'>VoomSort deep flip i
     "echom line("'<") line("'>")
-    2,$VoomSort deep flip i u
+    2,$VoomSort deep flip i
     " end of selection is wrong, some kind of Vim problem
     "echom line("'<") line("'>")
     exec "normal! \<Esc>"
-    py if blines_ != VO.Body[:]: print 'ERROR: 2'
+    exe s:PYCMD "if blines_ != VO.Body[:]: print('ERROR: 2')"
 
-    " already sorted
-    silent VoomSort i u
-python << EOF
-if not nodesCount(body) == nodes_count: print 'ERROR: 3'
-if not parentsCount(body) == parents_count: print 'ERROR: 4'
-if not len(VO.Body) == body_len: print 'ERROR: 5'
-EOF
-    VoomSort deep i u
-python << EOF
-if not nodesCount(body) == nodes_count: print 'ERROR: 7'
-if not parentsCount(body) == parents_count: print 'ERROR: 8'
-if not len(VO.Body) == body_len: print 'ERROR: 9'
-EOF
-    VoomSort deep i u r
-python << EOF
-if not nodesCount(body) == nodes_count: print 'ERROR: 10'
-if not parentsCount(body) == parents_count: print 'ERROR: 11'
-if not len(VO.Body) == body_len: print 'ERROR: 12'
-EOF
-    VoomSort deep shuffle
-    VoomSort deep shuffle
-    VoomSort deep shuffle
-python << EOF
-if not nodesCount(body) == nodes_count: print 'ERROR: 13'
-if not parentsCount(body) == parents_count: print 'ERROR: 14'
-if not len(VO.Body) == body_len: print 'ERROR: 15'
-EOF
+    VoomSort deep i
+
+exe s:PYCMD . ' << ENDPYTHON'
+if not nodesCount(body) == nodes_count: print('ERROR: 3')
+if not parentsCount(body) == parents_count: print('ERROR: 4')
+if not len(VO.Body) == body_len: print('ERROR: 5')
+ENDPYTHON
+
+    VoomSort deep i r
+
+exe s:PYCMD . ' << ENDPYTHON'
+if not nodesCount(body) == nodes_count: print('ERROR: 6')
+if not parentsCount(body) == parents_count: print('ERROR: 7')
+if not len(VO.Body) == body_len: print('ERROR: 8')
+ENDPYTHON
 
     " go to node 'VoomSort tests'
     call search('VoomSort tests', 'w')
     if getline('.') !~ 'VoomSort tests'
-        py print "ERROR: 16, current line (Tree) is not 'VoomSort tests'"
+        exe s:PYCMD "print('''ERROR: 9, current line (Tree) is not 'VoomSort tests' ''')"
     endif
     normal! zv
     VoomSort deep
-    py if blines_ == VO.Body[:]: print 'ERROR: 17'
-    py blines_ = VO.Body[:]
+    " this assertion assumes that intial outline is not deep-sorted
+    exe s:PYCMD "if blines_ == VO.Body[:]: print('ERROR: 10 (ignore if intial outline is deep-sorted)')"
+    exe s:PYCMD "blines_ = VO.Body[:]"
+    " already sorted
     silent VoomSort deep
-    py if blines_ != VO.Body[:]: print 'ERROR: 18'
+    exe s:PYCMD "if blines_ != VO.Body[:]: print('ERROR: 11')"
     VoomSort deep r
-    py if blines_ == VO.Body[:]: print 'ERROR: 19'
-    py blines_ = VO.Body[:]
+    exe s:PYCMD "if blines_ == VO.Body[:]: print('ERROR: 12')"
+    exe s:PYCMD "blines_ = VO.Body[:]"
+    " already sorted
     silent VoomSort deep r
-    py if blines_ != VO.Body[:]: print 'ERROR: 20'
+    exe s:PYCMD "if blines_ != VO.Body[:]: print('ERROR: 13')"
 
-python << EOF
-if not nodesCount(body) == nodes_count: print 'ERROR: 21'
-if not parentsCount(body) == parents_count: print 'ERROR: 22'
-if not len(VO.Body) == body_len: print 'ERROR: 23'
-EOF
+exe s:PYCMD . ' << ENDPYTHON'
+if not nodesCount(body) == nodes_count: print('ERROR: 14')
+if not parentsCount(body) == parents_count: print('ERROR: 15')
+if not len(VO.Body) == body_len: print('ERROR: 16')
+ENDPYTHON
+
+    " Problem: shuffle will sometimes give 'already sorted' message,
+    " which breaks comparison. Thus redir must be suspended.
+    normal! zM2Gzv
+    let skipRedir = (a:0 > 0 && !empty(a:1)) ? get(a:1, 'skipRedir', 0) : 0
+    if skipRedir
+        redir END
+        " posssible Vim errors need to be captured
+        let s:temp_redir = ''
+        redir => s:temp_redir
+    endif
+
+    "" test that 'already sorted' messages are ignored
+    "silent VoomSort deep r
+    silent VoomSort shuffle
+    silent VoomSort deep shuffle
+    silent VoomSort shuffle deep bytes i
+
+    if skipRedir
+        redir END
+        " check s:temp_redir for errors
+        let temp_redir_is_bad = 0
+        let temp_redir_lines = split(s:temp_redir, '\n')
+        for it in temp_redir_lines
+            if it !~ '\m^\s*$' && it !~#'\m^\s*VOoM (sort): already sorted\s*$'
+                let temp_redir_is_bad = 1
+                break
+            endif
+        endfor
+        unlet! it
+        if temp_redir_is_bad
+            let s:VOOM_REDIR = s:VOOM_REDIR . s:temp_redir
+        endif
+        redir =>> s:VOOM_REDIR
+    endif
+
+exe s:PYCMD . ' << ENDPYTHON'
+if not nodesCount(body) == nodes_count: print('ERROR: 17')
+if not parentsCount(body) == parents_count: print('ERROR: 18')
+if not len(VO.Body) == body_len: print('ERROR: 19')
+ENDPYTHON
+
     if Z!=line('$') | echoerr 'VoomSort error' | endif
-    py print '             DONE', time.clock()-time_start, 'sec'
+    exe s:PYCMD "print('             DONE # %s sec' % (time.clock()-time_start))"
 endfunc
 
 
-func! VoomTest_DownUp() abort "{{{1
+func! VoomTest_DownUp(...) abort "{{{1
 " Move first node all the way Down. Then move it all the way Up. Check that
 " Body has not changed.
-    py print '<<< VoomTest_DownUp() >>>'
-    py time_start = time.clock()
+    exe s:PYCMD "print('    TEST: VoomTest_DownUp()')"
+    exe s:PYCMD "time_start = time.clock()"
     let [bufType,body,tree] = voom#GetTypeBodyTree()
     if bufType=='None' | return | endif
     if bufType!='Tree'
@@ -364,9 +546,9 @@ func! VoomTest_DownUp() abort "{{{1
     setl fdl=1
     call voom#TreeSelect(1)
 
-python << EOF
+exe s:PYCMD . ' << ENDPYTHON'
 body,tree = int(vim.eval("l:body")), int(vim.eval("l:tree"))
-VO = _VOoM.VOOMS[body]
+VO = _VOoM2657.VOOMS[body]
 Z = int(vim.eval("l:Z"))
 
 tlines_ = VO.Tree[:]
@@ -374,7 +556,7 @@ blines_ = VO.Body[:]
 # these must never change
 nodes_count = nodesCount(body) # number of nodes, also Z
 body_len = len(VO.Body) # number of Body lines
-EOF
+ENDPYTHON
 
     """ move first node all the way DOWN
     let lnum = 1
@@ -382,12 +564,13 @@ EOF
         let lnum = line('.')
         call voom#Oop('down', 'n')
     endwhile
-python << EOF
+
+exe s:PYCMD . ' << ENDPYTHON'
 lnum = int(vim.eval('l:lnum'))
-if not nodesCount(body) == nodes_count: print 'ERROR: nodes_count', lnum
-if not len(VO.Body) == body_len: print 'ERROR: body_len', lnum
-if not Z == lnum + _VOoM.nodeSubnodes(VO,lnum): print 'ERROR: Z', lnum
-EOF
+if not nodesCount(body) == nodes_count: print('ERROR: nodes_count %s' %lnum)
+if not len(VO.Body) == body_len: print('ERROR: body_len %s' %lnum)
+if not Z == lnum + _VOoM2657.nodeSubnodes(VO,lnum): print('ERROR: Z %s' %lnum)
+ENDPYTHON
 
     """ move first node back all the way UP
     """ Body must revert to original state
@@ -396,19 +579,21 @@ EOF
         let lnum = line('.')
         call voom#Oop('up', 'n')
     endwhile
-python << EOF
+
+exe s:PYCMD . ' << ENDPYTHON'
 lnum = int(vim.eval("line('.')"))
-if not lnum==2: print "ERROR: line('.') is not 2"
-if VO.Body[:] != blines_: print 'ERROR: blines_', lnum
-if VO.Tree[:] != tlines_: print 'ERROR: tlines_', lnum
-EOF
-    py print '             DONE', time.clock()-time_start, 'sec'
+if not lnum==2: print("ERROR: line('.') is not 2")
+if VO.Body[:] != blines_: print('ERROR: blines_ %s' %lnum)
+if VO.Tree[:] != tlines_: print('ERROR: tlines_ %s' %lnum)
+ENDPYTHON
+
+    exe s:PYCMD "print('             DONE # %s sec' % (time.clock()-time_start))"
 endfunc
 
 
-func! VoomTest_CutAllPasteAll() abort "{{{1
-    py print '<<< VoomTest_CutAllPasteAll() >>>'
-    py time_start = time.clock()
+func! VoomTest_CutAllPasteAll(...) abort "{{{1
+    exe s:PYCMD "print('    TEST: VoomTest_CutAllPasteAll()')"
+    exe s:PYCMD "time_start = time.clock()"
     let [bufType,body,tree] = voom#GetTypeBodyTree()
     if bufType=='None' | return | endif
     if bufType!='Tree'
@@ -417,9 +602,9 @@ func! VoomTest_CutAllPasteAll() abort "{{{1
     endif
     let Z = line('$')
 
-python << EOF
+exe s:PYCMD . ' << ENDPYTHON'
 body,tree = int(vim.eval("l:body")), int(vim.eval("l:tree"))
-VO = _VOoM.VOOMS[body]
+VO = _VOoM2657.VOOMS[body]
 Z = int(vim.eval("l:Z"))
 # number of Body lines before first headline
 header_len = VO.bnodes[1]-1
@@ -429,7 +614,7 @@ blines_ = VO.Body[:]
 # these must not change
 nodes_count = nodesCount(body) # number of nodes, also Z
 body_len = len(VO.Body) # number of Body lines
-EOF
+ENDPYTHON
 
     """ Do Cut/Paste for the entire outline.
        "This tests Paste into empty outline (reST, makrdown issues.)
@@ -437,18 +622,18 @@ EOF
     normal dd
     "call voom#Oop('cut', 'v')
     if 1!=line('$') | echoerr 'Cut All error, Tree size not 1' | endif
-    py if len(VO.Body)!=header_len: print 'ERROR: wrong Body size after CutAll'
+    exe s:PYCMD "if len(VO.Body)!=header_len: print('ERROR: wrong Body size after CutAll')"
     "call voom#OopPaste()
     normal pp
     exec "normal! \<Esc>"
-    py if VO.Body[:] != blines_: print 'ERROR: Body changed after CutAll/PasteAll'
-    py print '             DONE', time.clock()-time_start, 'sec'
+    exe s:PYCMD "if VO.Body[:] != blines_: print('ERROR: Body changed after CutAll/PasteAll')"
+    exe s:PYCMD "print('             DONE # %s sec' % (time.clock()-time_start))"
 endfunc
 
 
-func! VoomTest_CutPaste() abort "{{{1
-    py print '<<< VoomTest_CutPaste() >>>'
-    py time_start = time.clock()
+func! VoomTest_CutPaste(...) abort "{{{1
+    exe s:PYCMD "print('    TEST: VoomTest_CutPaste()')"
+    exe s:PYCMD "time_start = time.clock()"
     let [bufType,body,tree] = voom#GetTypeBodyTree()
     if bufType=='None' | return | endif
     if bufType!='Tree'
@@ -457,9 +642,9 @@ func! VoomTest_CutPaste() abort "{{{1
     endif
     let Z = line('$')
 
-python << EOF
+exe s:PYCMD . ' << ENDPYTHON'
 body,tree = int(vim.eval("l:body")), int(vim.eval("l:tree"))
-VO = _VOoM.VOOMS[body]
+VO = _VOoM2657.VOOMS[body]
 Z = int(vim.eval("l:Z"))
 # number of Body lines before first headline
 header_len = VO.bnodes[1]-1
@@ -469,7 +654,7 @@ blines_ = VO.Body[:]
 # these must not change
 nodes_count = nodesCount(body) # number of nodes, also Z
 body_len = len(VO.Body) # number of Body lines
-EOF
+ENDPYTHON
 
     """ Do Cut/Paste for all top level nodes. Body must not change
     " select first outline node (lnum 2)
@@ -488,18 +673,18 @@ EOF
         normal pp
         " exit Visual after Paste
         exec "normal! \<Esc>"
-        py if VO.Body[:] != blines_: print 'ERROR: Body changed (lnum %s)' %vim.eval('l:lnum')
+        exe s:PYCMD "if VO.Body[:] != blines_: print('ERROR: Body changed (lnum %s)' %vim.eval('l:lnum'))"
         if line('$') != Z | echoerr 'Paste error' | endif
         normal! j
     endwhile
     exec "normal! \<Esc>"
-    py print '             DONE', time.clock()-time_start, 'sec'
+    exe s:PYCMD "print('             DONE # %s sec' % (time.clock()-time_start))"
 endfunc
 
 
-func! VoomTest_CopyPasteCut() abort "{{{1
-    py print '<<< VoomTest_CopyPasteCut() >>>'
-    py time_start = time.clock()
+func! VoomTest_CopyPasteCut(...) abort "{{{1
+    exe s:PYCMD "print('    TEST: VoomTest_CopyPasteCut()')"
+    exe s:PYCMD "time_start = time.clock()"
     let [bufType,body,tree] = voom#GetTypeBodyTree()
     if bufType=='None' | return | endif
     if bufType!='Tree'
@@ -508,9 +693,9 @@ func! VoomTest_CopyPasteCut() abort "{{{1
     endif
     let Z = line('$')
 
-python << EOF
+exe s:PYCMD . ' << ENDPYTHON'
 body,tree = int(vim.eval("l:body")), int(vim.eval("l:tree"))
-VO = _VOoM.VOOMS[body]
+VO = _VOoM2657.VOOMS[body]
 Z = int(vim.eval("l:Z"))
 
 tlines_ = VO.Tree[:]
@@ -518,7 +703,7 @@ blines_ = VO.Body[:]
 # these must not change
 nodes_count = nodesCount(body) # number of nodes, also Z
 body_len = len(VO.Body) # number of Body lines
-EOF
+ENDPYTHON
 
     """ Do Copy/Paste/Cut for all visible nodes. Body must not change.
     " select first outline node (lnum 2)
@@ -534,24 +719,24 @@ EOF
         call voom#OopPaste()
         if Z==line('$') | echoerr 'Copy/Paste error' | endif
         call voom#Oop('cut', 'n')
-        py if VO.Body[:] != blines_: print 'ERROR: at lnum %s' %vim.eval('l:lnum')
+        exe s:PYCMD "if VO.Body[:] != blines_: print('ERROR: at lnum %s' %vim.eval('l:lnum'))"
         if Z!=line('$') | echoerr 'Copy/Paste/Cut error' | endif
         normal! j
     endwhile
 
-    py print '             DONE', time.clock()-time_start, 'sec'
+    exe s:PYCMD "print('             DONE # %s sec' % (time.clock()-time_start))"
 endfunc
 
 
-func! VoomTest_RightLeftRight() abort "{{{1
+func! VoomTest_RightLeftRight(...) abort "{{{1
 " Move right all the way.
 " Move left all the way.
 " Move right to restore indent. Ouline must not change.
-" g:voom_always_allow_move_left (_VOoM.AAMLEFT) is set to False, otherwise the test fails.
+" g:voom_always_allow_move_left (_VOoM2657.AAMLEFT) is set to False, otherwise the test fails.
 " NOTE: The test cannot handle markups that have a maximum possible level and
 " it is exceeded after Move Right: ass-backward formats (dokuwiki, inverseAtx), latex.
-    py print '<<< VoomTest_RightLeftRight() >>>'
-    py time_start = time.clock()
+    exe s:PYCMD "print('    TEST: VoomTest_RightLeftRight()')"
+    exe s:PYCMD "time_start = time.clock()"
     let [bufType,body,tree] = voom#GetTypeBodyTree()
     if bufType=='None' | return | endif
     if bufType!='Tree'
@@ -569,9 +754,9 @@ func! VoomTest_RightLeftRight() abort "{{{1
     " open folds if max level > 1
     normal! zv
 
-python << EOF
+exe s:PYCMD . ' << ENDPYTHON'
 body,tree = int(vim.eval("l:body")), int(vim.eval("l:tree"))
-VO = _VOoM.VOOMS[body]
+VO = _VOoM2657.VOOMS[body]
 Z = int(vim.eval("l:Z"))
 tlines_ = VO.Tree[:]
 blines_ = VO.Body[:]
@@ -580,10 +765,10 @@ didRight, didLeft = False,False
 # these must not change
 nodes_count = nodesCount(body) # number of nodes, also Z
 body_len = len(VO.Body) # number of Body lines
-EOF
+ENDPYTHON
 
-    py AAMLEFT_ = _VOoM.AAMLEFT
-    py _VOoM.AAMLEFT = False
+    exe s:PYCMD "AAMLEFT_ = _VOoM2657.AAMLEFT"
+    exe s:PYCMD "_VOoM2657.AAMLEFT = False"
     let fdm_ = getbufvar(body, '&fdm')
     let tlnums_tested = []
     let lnum = 0
@@ -592,20 +777,20 @@ EOF
         call add(tlnums_tested, lnum)
         let ind_ = s:Ind()
         """ Move Right until no longer possible
-        py blines = VO.Body[:]
+        exe s:PYCMD "blines = VO.Body[:]"
         let ind = -99
         while ind != s:Ind()
             let ind = s:Ind()
             call voom#Oop('right', 'n')
-            py if not didRight and VO.Body[:] != blines: didRight = True
+            exe s:PYCMD "if not didRight and VO.Body[:] != blines: didRight = True"
         endwhile
         """ Move Left until no longer possible, result depends on g:voom_always_allow_move_left
-        py blines = VO.Body[:]
+        exe s:PYCMD "blines = VO.Body[:]"
         let ind = -99
         while ind != s:Ind()
             let ind = s:Ind()
             call voom#Oop('left', 'n')
-            py if not didLeft and VO.Body[:] != blines: didLeft = True
+            exe s:PYCMD "if not didLeft and VO.Body[:] != blines: didLeft = True"
         endwhile
         """ Move Right until Tree line indent is restored
         while ind_ != s:Ind()
@@ -615,28 +800,28 @@ EOF
             if ind == s:Ind() | break | endif
         endwhile
         """ Body must not change
-        py if VO.Body[:] != blines_: print 'ERROR: Body changed (lnum %s)' %vim.eval('l:lnum')
+        exe s:PYCMD "if VO.Body[:] != blines_: print('ERROR: Body changed (lnum %s)' %vim.eval('l:lnum'))"
         if Z!=line('$') | echoerr 'Right/Left error' | endif
         if fdm_!=getbufvar(body,'&fdm') | echoerr 'Right/Left fdm error' | endif
         normal! j
     endwhile
-    py _VOoM.AAMLEFT = AAMLEFT_
+    exe s:PYCMD "_VOoM2657.AAMLEFT = AAMLEFT_"
 
-    py if not didRight: print 'ERROR: Move Right was not tested'
-    py if not didLeft:  print 'ERROR: Move Left was not tested'
-    py print '             DONE', time.clock()-time_start, 'sec'
-    py print '             ', vim.eval('l:tlnums_tested')
+    exe s:PYCMD "if not didRight: print('ERROR: Move Right was not tested')"
+    exe s:PYCMD "if not didLeft:  print('ERROR: Move Left was not tested')"
+    exe s:PYCMD "print('             DONE # %s sec' % (time.clock()-time_start))"
+    exe s:PYCMD "print('              %s' %vim.eval('l:tlnums_tested'))"
 endfunc
 
 
-func! VoomTest_LeftRight() abort "{{{1
-" g:voom_always_allow_move_left (_VOoM.AAMLEFT) is set to True
+func! VoomTest_LeftRight(...) abort "{{{1
+" g:voom_always_allow_move_left (_VOoM2657.AAMLEFT) is set to True
 " For each top level node: go to first child, move left and move right.
 " If Body changed: assume it is because siblings below became children afer the
 " first move left. Correct by restoring siblings by moving them left.
 " This also tests o J D U c.
-    py print '<<< VoomTest_LeftRight() >>>'
-    py time_start = time.clock()
+    exe s:PYCMD "print('    TEST: VoomTest_LeftRight()')"
+    exe s:PYCMD "time_start = time.clock()"
     let [bufType,body,tree] = voom#GetTypeBodyTree()
     if bufType=='None' | return | endif
     if bufType!='Tree'
@@ -655,9 +840,9 @@ func! VoomTest_LeftRight() abort "{{{1
     normal C
     call voom#TreeZV()
 
-python << EOF
+exe s:PYCMD . ' << ENDPYTHON'
 body,tree = int(vim.eval("l:body")), int(vim.eval("l:tree"))
-VO = _VOoM.VOOMS[body]
+VO = _VOoM2657.VOOMS[body]
 Z = int(vim.eval("l:Z"))
 tlines_ = VO.Tree[:]
 blines_ = VO.Body[:]
@@ -666,10 +851,10 @@ didRight, didLeft = False,False
 # these must not change
 nodes_count = nodesCount(body) # number of nodes, also Z
 body_len = len(VO.Body) # number of Body lines
-EOF
+ENDPYTHON
 
-    py AAMLEFT_ = _VOoM.AAMLEFT
-    py _VOoM.AAMLEFT = True
+    exe s:PYCMD "AAMLEFT_ = _VOoM2657.AAMLEFT"
+    exe s:PYCMD "_VOoM2657.AAMLEFT = True"
     let fdm_ = getbufvar(body, '&fdm')
     let tlnums_tested = []
     let lnum = 0
@@ -690,70 +875,71 @@ EOF
         let ln_D = line('.')
         normal U
         if line('.') != ln_o
-            py print 'ERROR: wrong line after oJDU (lnum %s)' %vim.eval('l:lnum')
+            exe s:PYCMD "print('ERROR: wrong line after oJDU (lnum %s)' %vim.eval('l:lnum'))"
         endif
         """ Move Left
-        py blines = VO.Body[:]
+        exe s:PYCMD "blines = VO.Body[:]"
         call voom#Oop('left', 'n')
         exec "normal! \<Esc>"
-        py if not didLeft and VO.Body[:] != blines: didLeft = True
+        exe s:PYCMD "if not didLeft and VO.Body[:] != blines: didLeft = True"
         """ Move Right
-        py blines = VO.Body[:]
+        exe s:PYCMD "blines = VO.Body[:]"
         call voom#Oop('right', 'n')
         exec "normal! \<Esc>"
         " Body must not change if there were no siblings that become children on Move Left
         if ln_D==ln_o
-            py if VO.Body[:] != blines_: print 'ERROR: Body changed 1 (lnum %s)' %vim.eval('l:ln_o')
+            exe s:PYCMD "if VO.Body[:] != blines_: print('ERROR: Body changed 1 (lnum %s)' %vim.eval('l:ln_o'))"
             if Z!=line('$') | echoerr 'Left/Right error' | endif
         else
-            py if not didRight: didRight = True
-            py if VO.Body[:] == blines_: print 'ERROR: Body did not change (lnum %s)' %vim.eval('l:ln_o')
+            exe s:PYCMD "if not didRight: didRight = True"
+            exe s:PYCMD "if VO.Body[:] == blines_: print('ERROR: Body did not change (lnum %s)' %vim.eval('l:ln_o'))"
             " restore original siblings of ln_o: select them, Move Left
             exe 'normal! '.ln_D.'GzvV'.ln_J.'Gzv'
             exec "normal! \<Esc>"
             call voom#Oop('left', 'v')
             exec "normal! \<Esc>"
             " Body must not change
-            py if VO.Body[:] != blines_: print 'ERROR: Body changed 2 (lnum %s)' %vim.eval('l:ln_o')
+            exe s:PYCMD "if VO.Body[:] != blines_: print('ERROR: Body changed 2 (lnum %s)' %vim.eval('l:ln_o'))"
             if Z!=line('$') | echoerr 'Left/Right error' | endif
             if fdm_!=getbufvar(body,'&fdm') | echoerr 'Left/Right fdm error' | endif
         endif
         normal c
         if line('.') != lnum
-            py print 'ERROR: wrong line after c (lnum %s)' %vim.eval('l:ln_o')
+            exe s:PYCMD "print('ERROR: wrong line after c (lnum %s)' %vim.eval('l:ln_o'))"
         endif
         normal! j
     endwhile
-    py _VOoM.AAMLEFT = AAMLEFT_
+    exe s:PYCMD "_VOoM2657.AAMLEFT = AAMLEFT_"
 
-    py if not didRight: print 'ERROR: Move Right was not tested'
-    py if not didLeft:  print 'ERROR: Move Left was not tested'
-    py print '             DONE', time.clock()-time_start, 'sec'
-    py print '             ', vim.eval('l:tlnums_tested')
+    exe s:PYCMD "if not didRight: print('ERROR: Move Right was not tested')"
+    exe s:PYCMD "if not didLeft:  print('ERROR: Move Left was not tested')"
+    exe s:PYCMD "print('             DONE # %s sec' % (time.clock()-time_start))"
+    exe s:PYCMD "print('              %s' %vim.eval('l:tlnums_tested'))"
 endfunc
 
 
-func! VoomTest_NewHeadline() abort "{{{1
-    py print '<<< VoomTest_NewHeadline() >>>'
-    py time_start = time.clock()
+func! VoomTest_NewHeadline(...) abort "{{{1
+    exe s:PYCMD "print('    TEST: VoomTest_NewHeadline()')"
+    exe s:PYCMD "time_start = time.clock()"
     let [bufType,body,tree] = voom#GetTypeBodyTree()
     if bufType=='None' | return | endif
     if bufType!='Tree'
         echoerr "not a Tree buffer"
         return
     endif
+    let [mmode, MTYPE, body, tree] = voom#GetModeBodyTree(bufnr(''))
     let Z = line('$')
 
-python << EOF
+exe s:PYCMD . ' << ENDPYTHON'
 body,tree = int(vim.eval("l:body")), int(vim.eval("l:tree"))
-VO = _VOoM.VOOMS[body]
+VO = _VOoM2657.VOOMS[body]
 Z = int(vim.eval("l:Z"))
 
 tlines_ = VO.Tree[:]
 blines_ = VO.Body[:]
 nodes_count = nodesCount(body) # number of nodes, also Z
 body_len = len(VO.Body) # number of Body lines
-EOF
+ENDPYTHON
 
     " After inserting NewHeadline cursor is in Body.
     " bnodes and levels are wrong, but Tree lines should be correct.
@@ -761,42 +947,49 @@ EOF
     " Insert after line 1
     normal! ggzM
     call voom#OopInsert('')
-    py voomTest_NewHeadline(VO)
+    exe s:PYCMD "voomTest_NewHeadline(VO)"
     call voom#ToTree(tree)
     call voom#OopInsert('as_child')
-    py voomTest_NewHeadline(VO)
+    exe s:PYCMD "voomTest_NewHeadline(VO)"
     " insert after first fold
     call voom#ToTree(tree)
     normal! j
     call voom#OopInsert('')
-    py voomTest_NewHeadline(VO)
+    exe s:PYCMD "voomTest_NewHeadline(VO)"
     call voom#ToTree(tree)
     call voom#OopInsert('as_child')
-    py voomTest_NewHeadline(VO)
+    exe s:PYCMD "voomTest_NewHeadline(VO)"
     " insert after last node
     call voom#ToTree(tree)
     normal! Gzv
     call voom#OopInsert('')
-    py voomTest_NewHeadline(VO)
+    exe s:PYCMD "voomTest_NewHeadline(VO)"
     call voom#ToTree(tree)
     call voom#OopInsert('as_child')
-    py voomTest_NewHeadline(VO)
-    " total 5 nodes have been inserted
+    exe s:PYCMD "voomTest_NewHeadline(VO)"
     call voom#ToTree(tree)
-    py assert nodes_count + 6 == nodesCount(body)
+    
+    " total 6 nodes have been inserted
+    " check that number of nodes is correct after all inserts
+    if MTYPE < 2
+        exe s:PYCMD "assert nodes_count + 6 == nodesCount(body)"
+    " insert as child is not allowed (paragraph modes)
+    else
+        exe s:PYCMD "assert nodes_count + 3 == nodesCount(body)"
+    endif
 
-    py print '             DONE', time.clock()-time_start, 'sec'
+    exe s:PYCMD "print('             DONE # %s sec' % (time.clock()-time_start))"
 endfunc
 
 
-func! VoomTest_SpecialMarks() abort "{{{1x
+func! VoomTest_SpecialMarks(...) abort "{{{1
 " Tests for adding/removing special node marks: xo= after fold markers.
-    let [mmode, MTYPE, body, tree] = voom#GetModeBodyTree(bufnr(''))
-    " return if special nodes marks are not supported
-    if MTYPE != 0 | return | endif
+    "let [mmode, MTYPE, body, tree] = voom#GetModeBodyTree(bufnr(''))
+    "" return if special nodes marks are not supported
+    "if MTYPE != 0 | return | endif
 
-    py print '<<< VoomTest_SpecialMarks() >>>'
-    py time_start = time.clock()
+    exe s:PYCMD "print('    TEST: VoomTest_SpecialMarks()')"
+    exe s:PYCMD "time_start = time.clock()"
     let [bufType,body,tree] = voom#GetTypeBodyTree()
     if bufType=='None' | return | endif
     if bufType!='Tree'
@@ -805,13 +998,14 @@ func! VoomTest_SpecialMarks() abort "{{{1x
     endif
     let Z = line('$')
 
-python << EOF
+exe s:PYCMD . ' << ENDPYTHON'
 body,tree = int(vim.eval("l:body")), int(vim.eval("l:tree"))
-VO = _VOoM.VOOMS[body]
+VO = _VOoM2657.VOOMS[body]
 Z = int(vim.eval("l:Z"))
 tlines_ = VO.Tree[:]
 blines_ = VO.Body[:]
-EOF
+ENDPYTHON
+
     """ Mark all nodes, Unmark all nodes, restore original marks.
     """ This does not change selected node, startup node, open fold marks.
     " save lnums of marked nodes
@@ -834,7 +1028,7 @@ EOF
     " check there are no unmarked nodes
     normal! gg
     if search('\m\C^. ', 'W') > 0
-        py print 'ERROR: failed to mark all nodes'
+        exe s:PYCMD "print('ERROR: failed to mark all nodes')"
     endif
     " unmark all nodes
     normal! ggVG
@@ -842,7 +1036,7 @@ EOF
     " check there are no marked nodes
     normal! gg
     if search('\m\C^.x', 'W') > 0
-        py print 'ERROR: failed to unmark all nodes'
+        exe s:PYCMD "print('ERROR: failed to unmark all nodes')"
     endif
     " restore original marks
     "echo markedNodes
@@ -850,10 +1044,11 @@ EOF
         exe 'normal! '.i.'Gzv'
         exe 'normal '.locLeader.'m'
     endfor
-python << EOF
-if VO.Body[:] != blines_: print 'ERROR: Body changed after Mark/Unmark all'
-if VO.Tree[:] != tlines_: print 'ERROR: Tree changed after Mark/Unmark all'
-EOF
+
+exe s:PYCMD . ' << ENDPYTHON'
+if VO.Body[:] != blines_: print('ERROR: Body changed after Mark/Unmark all')
+if VO.Tree[:] != tlines_: print('ERROR: Tree changed after Mark/Unmark all')
+ENDPYTHON
 
     """ Test adding/removing xo= marks on the last node.
     normal! gg0zM
@@ -870,7 +1065,7 @@ EOF
     normal AA
     call voom#BodySelect()
     if bufnr('') != tree
-        py print 'ERROR: wrong buffer (Error 1)'
+        exe s:PYCMD "print('ERROR: wrong buffer (Error 1)')"
         return
     endif
     " go to original last node (now with child), apply xo= marks
@@ -883,24 +1078,24 @@ EOF
     call voom#TreeSelect(0)
     call voom#TreeSelect(0)
     if bufnr('') != body 
-        py print 'ERROR: wrong buffer (Error 2)'
+        exe s:PYCMD "print('ERROR: wrong buffer (Error 2)')"
         return
     endif
     normal! 0
     if search(split(&fmr, ',')[0] .levZ.'xo=' , 'cnW') != line('.')
-        py print 'ERROR: failed to apply xo= marks'
+        exe s:PYCMD "print('ERROR: failed to apply xo= marks')"
     endif
     " go back to Tree
     call voom#BodySelect()
     if bufnr('') != tree
-        py print 'ERROR: wrong buffer (Error 3)'
+        exe s:PYCMD "print('ERROR: wrong buffer (Error 3)')"
         return
     endif
     normal! zc
     VoomFoldingRestore
     normal! j
     if line('.') != lnumZ+1
-        py print 'ERROR: VoomFoldingRestore failed'
+        exe s:PYCMD "print('ERROR: VoomFoldingRestore failed')"
         return
     endif
     " delete child node, restore marks
@@ -914,21 +1109,29 @@ EOF
     exe 'normal '.locLeader.'='
     exe 'normal! '.selectedNode.'Gzv'
     call voom#TreeSelect(1)
-python << EOF
-if VO.Body[:] != blines_: print 'ERROR: Body changed after Mark/Unmark all'
-if VO.Tree[:] != tlines_: print 'ERROR: Tree changed after Mark/Unmark all'
-EOF
 
-    py print '             DONE', time.clock()-time_start, 'sec'
+exe s:PYCMD . ' << ENDPYTHON'
+if VO.Body[:] != blines_: print('ERROR: Body changed after Mark/Unmark all')
+if VO.Tree[:] != tlines_: print('ERROR: Tree changed after Mark/Unmark all')
+ENDPYTHON
+
+    exe s:PYCMD "print('             DONE # %s sec' % (time.clock()-time_start))"
 endfunc
 
 
 "--- helpers --- {{{1
 
-func! VoomTest_DiscardChanges(body,tree) "{{{1
+func! VoomTest_DiscardChanges(body, tree, ...) "{{{1
     " discard all changes in Body buffer body
+    let skipRedir = (a:0 > 0 && !empty(a:1)) ? get(a:1, 'skipRedir', 0) : 0
     call voom#ToBody(a:body)
+    if skipRedir
+        redir END
+    endif
     silent edit!
+    if skipRedir
+        redir =>> s:VOOM_REDIR
+    endif
     normal! ggzM
     call voom#ToTree(a:tree)
     normal! ggzM
@@ -940,17 +1143,20 @@ func! s:Ind() "{{{1
 endfunc
 
 
-" Python << EOF {{{1o
-python << EOF
+" Python functions {{{1o
+" exe s:PYCMD . ' << ENDPYTHON' {{{2
+
+exe s:PYCMD . ' << ENDPYTHON'
+
 
 def nodesCount(body): #{{{2
-    levels = _VOoM.VOOMS[body].levels
+    levels = _VOoM2657.VOOMS[body].levels
     return len(levels)
 
 
 def parentsCount(body): #{{{2
     """return number of parents--nodes with children"""
-    levels = _VOoM.VOOMS[body].levels
+    levels = _VOoM2657.VOOMS[body].levels
     parents_count = len([i for i in xrange(1,len(levels)) if levels[i-1]<levels[i]])
     return parents_count
 
@@ -958,22 +1164,22 @@ def parentsCount(body): #{{{2
 def voomTest_NewHeadline(VO): #{{{2
     tlines, bnodes, levels  = VO.makeOutline(VO, VO.Body)
     if not len(VO.Tree)==len(tlines)+1:
-        print 'ERROR: wrong Tree size'
+        print('ERROR: wrong Tree size')
         return
     tlines[0:0], bnodes[0:0], levels[0:0] = [VO.bname], [1], [1]
     snLn = VO.snLn
     tlines[snLn-1] = '=%s' %tlines[snLn-1][1:]
     if not tlines==VO.Tree[:]:
-        print 'ERROR: DIFFERENT Tree lines'
-        print 'snLn line expected:', tlines[snLn-1]
-        print 'snLn line actual  :', VO.Tree[snLn-1]
+        print('ERROR: DIFFERENT Tree lines')
+        print('snLn line expected: %s' % tlines[snLn-1])
+        print('snLn line actual  : %s' % VO.Tree[snLn-1])
         return
 
 
-# EOF {{{2
-EOF
+# ENDPYTHON {{{2
+ENDPYTHON
 
-"--- Timing tests --- {{{1
+"--- Timing commands and functions --- {{{1
 
 " Time outline update on Tree BufEnter.
 com! VoomTimeTreeBufEnter call VoomTime_TreeBufEnter()

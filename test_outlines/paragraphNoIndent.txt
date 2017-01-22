@@ -1,0 +1,13 @@
+
+AAA
+	a a a a a
+	a a a a a
+	NEXT LINE IS FOR TESTS -- DO NOT MOVE OR EDIT
+	ID_LEVELS VO.levels=[1, 1, 1, 1, 1]
+CCC
+ 	c c c c c
+ 	c c c c c
+BBB
+ b b b b b
+ b b b b b
+VoomSort tests

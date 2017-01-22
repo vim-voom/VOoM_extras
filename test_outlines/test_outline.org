@@ -6,7 +6,7 @@ findme findme2
 * 1
    1 body
 NEXT LINE IS FOR TESTS -- DO NOT MOVE OR EDIT
-ID_LEVELS VO.levels=[1, 1, 2, 2, 1, 1, 2, 2, 3, 4, 3, 4, 5, 6, 7, 2, 1, 2, 1, 2, 2, 3, 3, 4, 5, 5, 3, 2, 3, 2, 3, 2, 1, 2, 3, 3, 3, 3, 3, 3, 3, 3, 3, 2, 3, 3, 3, 3, 4, 2, 3, 4, 4, 4, 4, 5, 5, 4, 4, 5, 5, 3, 3, 3, 4, 4, 4, 4, 4, 4, 3, 4, 4, 4, 4, 4, 4, 3, 2, 3, 3]
+ID_LEVELS VO.levels=[1, 1, 2, 2, 1, 1, 2, 2, 3, 4, 3, 4, 5, 6, 7, 2, 1, 2, 1, 2, 2, 3, 3, 4, 5, 5, 3, 2, 3, 2, 3, 2, 1, 2, 3, 3, 3, 3, 3, 3, 3, 3, 3, 2, 3, 3, 3, 3, 4, 2, 3, 4, 4, 5, 5, 5, 6, 4, 4, 3, 4, 4, 5, 5, 6, 5, 4, 4, 3, 4, 4, 4, 5, 6, 5, 5, 4, 3, 4, 4, 5, 6, 5, 5, 4, 4, 3, 4, 4, 4, 5, 5, 5, 6, 4, 3, 4, 4, 5, 5, 5, 6, 4, 4, 3, 3, 3, 2, 3, 3]
 
 
 ** 1.1
@@ -166,75 +166,167 @@ beef
 
 ** VoomSort tests
 
-*** node 2
+*** {VoomSort}
 
-**** dddd
-d1
+**** ЭЭЭ
+Э
 
-**** eeee
+**** ЯЯЯ
+Я
 
-**** dddd
-d2
-
-
-**** bbbb
+***** bbb
 b
 
-***** b_yyy
+***** BBB
+B
 
-***** b_xxx
-
-**** cccc
-c
-
-**** aaaa
+***** aaa
 a
-***** a_nnn
 
-***** a_mmm
-
-*** node 22
-
-
-*** ñ
-
-*** Ñ
-unicode tests
-
-**** э
+****** 111
 1
-**** Я
-2
-**** ю
-3
-**** Э
-4
-**** я
-5
-**** Ю
-6
 
-*** node 1
+**** эээ
+э
 
-**** bbbb
+**** яяя
+я
+
+*** {VoomSort deep}
+
+**** ЭЭЭ
+Э
+
+**** ЯЯЯ
+Я
+
+***** BBB
+B
+
+***** aaa
+a
+
+****** 111
+1
+
+***** bbb
 b
 
-**** dddd
-d1
+**** эээ
+э
 
-**** DDDD
-ingorecase test
+**** яяя
+я
 
-**** aaaa
+*** {VoomSort deep i}
+
+**** ЭЭЭ
+Э
+
+**** эээ
+э
+
+**** ЯЯЯ
+Я
+
+***** aaa
 a
-**** dddd
-d2
 
+****** 111
+1
 
-**** cccc
-c
+***** bbb
+b
 
-*** z
+***** BBB
+B
+
+**** яяя
+я
+
+*** {VoomSort deep i bytes}
+
+**** ЭЭЭ
+Э
+
+**** ЯЯЯ
+Я
+
+***** aaa
+a
+
+****** 111
+1
+
+***** bbb
+b
+
+***** BBB
+B
+
+**** эээ
+э
+
+**** яяя
+я
+
+*** {VoomSort deep i bytes r}
+
+**** яяя
+я
+
+**** эээ
+э
+
+**** ЯЯЯ
+Я
+
+***** BBB
+B
+
+***** bbb
+b
+
+***** aaa
+a
+
+****** 111
+1
+
+**** ЭЭЭ
+Э
+
+*** {VoomSort deep i r}
+
+**** яяя
+я
+
+**** ЯЯЯ
+Я
+
+***** bbb
+b
+
+***** BBB
+B
+
+***** aaa
+a
+
+****** 111
+1
+
+**** эээ
+э
+
+**** ЭЭЭ
+Э
+
+*** ñññ
+
+*** ÑÑÑ
+
+*** zzz
 
 ** special chars tests
 
@@ -253,4 +345,8 @@ u'\u0427\u0435\u0431\u0443\u0440\u0430\u0448\u043a\u0430'
 utf-8
 '\xd0\xa7\xd0\xb5\xd0\xb1\xd1\x83\xd1\x80\xd0\xb0\xd1\x88\xd0\xba\xd0\xb0'
 
+Strikethrough: U+0336 (COMBINING LONG STROKE OVERLAY)
+Э̶Ю̶Я̶ A̶̶B̶̶C̶̶
 
+IMPORTANT: The last line must be blank (include spaces and tabs to make it more interesting). Otherwise :VoomSort tests fail for rest, asciidoc, etc.
+ 	 	

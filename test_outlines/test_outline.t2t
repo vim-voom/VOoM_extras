@@ -6,7 +6,7 @@ findme findme2
  = 1 =[ref]
    1 body
 NEXT LINE IS FOR TESTS -- DO NOT MOVE OR EDIT
-ID_LEVELS VO.levels=[1, 1, 2, 2, 1, 1, 2, 2, 3, 4, 3, 4, 5, 6, 7, 2, 1, 2, 1, 2, 2, 3, 3, 4, 5, 5, 3, 2, 3, 2, 3, 2, 1, 2, 3, 3, 3, 3, 3, 3, 3, 3, 3, 2, 3, 3, 3, 3, 4, 2, 3, 4, 4, 4, 4, 5, 5, 4, 4, 5, 5, 3, 3, 3, 4, 4, 4, 4, 4, 4, 3, 4, 4, 4, 4, 4, 4, 3, 2, 3, 3]
+ID_LEVELS VO.levels=[1, 1, 2, 2, 1, 1, 2, 2, 3, 4, 3, 4, 5, 6, 7, 2, 1, 2, 1, 2, 2, 3, 3, 4, 5, 5, 3, 2, 3, 2, 3, 2, 1, 2, 3, 3, 3, 3, 3, 3, 3, 3, 3, 2, 3, 3, 3, 3, 4, 2, 3, 4, 4, 5, 5, 5, 6, 4, 4, 3, 4, 4, 5, 5, 6, 5, 4, 4, 3, 4, 4, 4, 5, 6, 5, 5, 4, 3, 4, 4, 5, 6, 5, 5, 4, 4, 3, 4, 4, 4, 5, 5, 5, 6, 4, 3, 4, 4, 5, 5, 5, 6, 4, 4, 3, 3, 3, 2, 3, 3]
 
 
  == 1.1 ==[ref]
@@ -166,75 +166,167 @@ beef
 
  == VoomSort tests ==[ref]
 
- +++ node 2 +++[ref]
+ +++ {VoomSort} +++[ref]
 
- ++++ dddd ++++[ref]
-d1
+ ++++ ЭЭЭ ++++[ref]
+Э
 
- ++++ eeee ++++[ref]
+ ++++ ЯЯЯ ++++[ref]
+Я
 
- ++++ dddd ++++[ref]
-d2
-
-
- ++++ bbbb ++++[ref]
+ +++++ bbb +++++[ref]
 b
 
- +++++ b_yyy +++++[ref]
+ +++++ BBB +++++[ref]
+B
 
- +++++ b_xxx +++++[ref]
-
- ++++ cccc ++++[ref]
-c
-
- ++++ aaaa ++++[ref]
+ +++++ aaa +++++[ref]
 a
- +++++ a_nnn +++++[ref]
 
- +++++ a_mmm +++++[ref]
-
- +++ node 22 +++[ref]
-
-
- +++ ñ +++[ref]
-
- +++ Ñ +++[ref]
-unicode tests
-
- ++++ э ++++[ref]
+ ++++++ 111 ++++++[ref]
 1
- ++++ Я ++++[ref]
-2
- ++++ ю ++++[ref]
-3
- ++++ Э ++++[ref]
-4
- ++++ я ++++[ref]
-5
- ++++ Ю ++++[ref]
-6
 
- +++ node 1 +++[ref]
+ ++++ эээ ++++[ref]
+э
 
- ++++ bbbb ++++[ref]
+ ++++ яяя ++++[ref]
+я
+
+ +++ {VoomSort deep} +++[ref]
+
+ ++++ ЭЭЭ ++++[ref]
+Э
+
+ ++++ ЯЯЯ ++++[ref]
+Я
+
+ +++++ BBB +++++[ref]
+B
+
+ +++++ aaa +++++[ref]
+a
+
+ ++++++ 111 ++++++[ref]
+1
+
+ +++++ bbb +++++[ref]
 b
 
- ++++ dddd ++++[ref]
-d1
+ ++++ эээ ++++[ref]
+э
 
- ++++ DDDD ++++[ref]
-ingorecase test
+ ++++ яяя ++++[ref]
+я
 
- ++++ aaaa ++++[ref]
+ +++ {VoomSort deep i} +++[ref]
+
+ ++++ ЭЭЭ ++++[ref]
+Э
+
+ ++++ эээ ++++[ref]
+э
+
+ ++++ ЯЯЯ ++++[ref]
+Я
+
+ +++++ aaa +++++[ref]
 a
- ++++ dddd ++++[ref]
-d2
 
+ ++++++ 111 ++++++[ref]
+1
 
- ++++ cccc ++++[ref]
-c
+ +++++ bbb +++++[ref]
+b
 
- +++ z +++[ref]
+ +++++ BBB +++++[ref]
+B
+
+ ++++ яяя ++++[ref]
+я
+
+ +++ {VoomSort deep i bytes} +++[ref]
+
+ ++++ ЭЭЭ ++++[ref]
+Э
+
+ ++++ ЯЯЯ ++++[ref]
+Я
+
+ +++++ aaa +++++[ref]
+a
+
+ ++++++ 111 ++++++[ref]
+1
+
+ +++++ bbb +++++[ref]
+b
+
+ +++++ BBB +++++[ref]
+B
+
+ ++++ эээ ++++[ref]
+э
+
+ ++++ яяя ++++[ref]
+я
+
+ +++ {VoomSort deep i bytes r} +++[ref]
+
+ ++++ яяя ++++[ref]
+я
+
+ ++++ эээ ++++[ref]
+э
+
+ ++++ ЯЯЯ ++++[ref]
+Я
+
+ +++++ BBB +++++[ref]
+B
+
+ +++++ bbb +++++[ref]
+b
+
+ +++++ aaa +++++[ref]
+a
+
+ ++++++ 111 ++++++[ref]
+1
+
+ ++++ ЭЭЭ ++++[ref]
+Э
+
+ +++ {VoomSort deep i r} +++[ref]
+
+ ++++ яяя ++++[ref]
+я
+
+ ++++ ЯЯЯ ++++[ref]
+Я
+
+ +++++ bbb +++++[ref]
+b
+
+ +++++ BBB +++++[ref]
+B
+
+ +++++ aaa +++++[ref]
+a
+
+ ++++++ 111 ++++++[ref]
+1
+
+ ++++ эээ ++++[ref]
+э
+
+ ++++ ЭЭЭ ++++[ref]
+Э
+
+ +++ ñññ +++[ref]
+
+ +++ ÑÑÑ +++[ref]
+
+ +++ zzz +++[ref]
 
  == special chars tests ==[ref]
 
@@ -253,4 +345,8 @@ u'\u0427\u0435\u0431\u0443\u0440\u0430\u0448\u043a\u0430'
 utf-8
 '\xd0\xa7\xd0\xb5\xd0\xb1\xd1\x83\xd1\x80\xd0\xb0\xd1\x88\xd0\xba\xd0\xb0'
 
+Strikethrough: U+0336 (COMBINING LONG STROKE OVERLAY)
+Э̶Ю̶Я̶ A̶̶B̶̶C̶̶
 
+IMPORTANT: The last line must be blank (include spaces and tabs to make it more interesting). Otherwise :VoomSort tests fail for rest, asciidoc, etc.
+ 	 	

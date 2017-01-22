@@ -1,0 +1,352 @@
+  :Voom fmr3
+  This is VOoM markup mode test file. Converted from **test_outline.txt**.
+
+findme findme2
+
+1   {{{1 ZZZZZ
+   1 body
+NEXT LINE IS FOR TESTS -- DO NOT MOVE OR EDIT
+ID_LEVELS VO.levels=[1, 1, 2, 2, 1, 1, 2, 2, 3, 4, 3, 4, 5, 6, 7, 2, 1, 2, 1, 2, 2, 3, 3, 4, 5, 5, 3, 2, 3, 2, 3, 2, 1, 2, 3, 3, 3, 3, 3, 3, 3, 3, 3, 2, 3, 3, 3, 3, 4, 2, 3, 4, 4, 5, 5, 5, 6, 4, 4, 3, 4, 4, 5, 5, 6, 5, 4, 4, 3, 4, 4, 4, 5, 6, 5, 5, 4, 3, 4, 4, 5, 6, 5, 5, 4, 4, 3, 4, 4, 4, 5, 5, 5, 6, 4, 3, 4, 4, 5, 5, 5, 6, 4, 4, 3, 3, 3, 2, 3, 3]
+
+
+1.1   {{{2 ZZZZZ
+   1.1 body
+
+1.2   {{{2 ZZZZZ
+   1.2 body
+
+2   {{{1 ZZZZZ
+   2 body
+
+3   {{{1o= ZZZZZ
+   3 body
+
+3.1   {{{2x ZZZZZ
+   3.1 body
+
+3.2   {{{2x ZZZZZ
+   3.2 body
+
+3.2.1   {{{3 ZZZZZ
+   3.2.1 body
+
+3.2.1.1   {{{4 ZZZZZ
+   3.2.1.1 body
+  xxxx findme findme
+
+3.2.2   {{{3 ZZZZZ
+   3.2.2 body
+
+3.2.2.1   {{{4x ZZZZZ
+   3.2.2.1 body
+
+3.2.2.1.1   {{{5x ZZZZZ
+   3.2.2.1.1 body
+
+3.2.2.1.2.1   {{{6 ZZZZZ
+   3.2.2.1.2.1 body
+
+3.2.2.1.2.1.1   {{{7x ZZZZZ
+   3.2.2.1.2.1.1 body
+
+3.3   {{{2 ZZZZZ
+   3.3 body
+
+4   {{{1 ZZZZZ
+   4 body
+
+4.1   {{{2 ZZZZZ
+   4.1 body findme
+
+5   {{{1o ZZZZZ
+   5 body
+
+5.1   {{{2 ZZZZZ
+   5.1 body
+
+5.2   {{{2o ZZZZZ
+   5.2 body
+
+5.2.1   {{{3 ZZZZZ
+   5.2.1 body
+
+5.2.2   {{{3 ZZZZZ
+   5.2.2 body
+
+5.2.2.1   {{{4o ZZZZZ
+   5.2.2.1 body
+
+5.2.2.1.1   {{{5 ZZZZZ
+   5.2.2.1.1 body
+
+5.2.2.1.2   {{{5 ZZZZZ
+   5.2.2.1.2 body
+
+
+5.2.3   {{{3 ZZZZZ
+   5.2.3 body
+
+AA   {{{2 ZZZZZ
+a a a a
+
+AA.1   {{{3 ZZZZZ
+a1 a1 a1 a1
+
+BB   {{{2 ZZZZZ
+b b b b
+
+BB.1   {{{3 ZZZZZ
+b1 b1 b1 b1 b1
+
+5.3   {{{2 ZZZZZ
+   5.3 body
+findme
+
+tests   {{{1o ZZZZZ
+
+syntax tests   {{{2 ZZZZZ
+Since v2.1 comment chars before foldmarker are stripped according to filetype.
+Some Body filetypes have their own Tree syntax hi.
+
+
+//---TODO comment--- //   {{{3 ZZZZZ
+
+"---comment--- "   {{{3 ZZZZZ
+echo 'vim ok'
+
+#---comment--- #   {{{3 ZZZZZ
+print 'py ok'
+
+%---comment--- %   {{{3 ZZZZZ
+
+/*---comment--- /*   {{{3*/ ZZZZZ
+
+<!-- Comment   {{{3 --> ZZZZZ
+ft=html,xml
+
+html head <!   {{{3--> ZZZZZ
+
+/organizer node/   {{{3 ZZZZZ
+
+!warning mark   {{{3 ZZZZZ
+
+Voomgrep tests   {{{2 ZZZZZ
+:Voomg Spam and ham not bacon
+:Voomg Spam and\ ham not\ bacon
+:Voomg Spam and\\ ham not\\ bacon
+\Spam// ' "
+
+1 match
+:Voomg Spam and ham and findme
+:Voomg Spam and h\vam and \Vfin\.me
+
+
+n45 breakfast   {{{3 ZZZZZ
+eggs
+bacon
+
+n46 lunch   {{{3 ZZZZZ
+Spam Spam Spam Spam Spam Spam Spam Spam Spam 
+Spam Spam Spam Spam Spam Spam Spam Spam Spam 
+Spam Spam Spam Spam Spam Spam Spam Spam Spam 
+ham
+
+n47 dinner   {{{3 ZZZZZ
+eggs
+Spam
+ham
+
+n48 snack   {{{3 ZZZZZ
+bacon
+spam
+HAM
+beef
+
+empty   {{{4 ZZZZZ
+
+VoomSort tests   {{{2 ZZZZZ
+
+{VoomSort}   {{{3 ZZZZZ
+
+ЭЭЭ   {{{4 ZZZZZ
+Э
+
+ЯЯЯ   {{{4 ZZZZZ
+Я
+
+bbb   {{{5 ZZZZZ
+b
+
+BBB   {{{5 ZZZZZ
+B
+
+aaa   {{{5 ZZZZZ
+a
+
+111   {{{6 ZZZZZ
+1
+
+эээ   {{{4 ZZZZZ
+э
+
+яяя   {{{4 ZZZZZ
+я
+
+{VoomSort deep}   {{{3 ZZZZZ
+
+ЭЭЭ   {{{4 ZZZZZ
+Э
+
+ЯЯЯ   {{{4 ZZZZZ
+Я
+
+BBB   {{{5 ZZZZZ
+B
+
+aaa   {{{5 ZZZZZ
+a
+
+111   {{{6 ZZZZZ
+1
+
+bbb   {{{5 ZZZZZ
+b
+
+эээ   {{{4 ZZZZZ
+э
+
+яяя   {{{4 ZZZZZ
+я
+
+{VoomSort deep i}   {{{3 ZZZZZ
+
+ЭЭЭ   {{{4 ZZZZZ
+Э
+
+эээ   {{{4 ZZZZZ
+э
+
+ЯЯЯ   {{{4 ZZZZZ
+Я
+
+aaa   {{{5 ZZZZZ
+a
+
+111   {{{6 ZZZZZ
+1
+
+bbb   {{{5 ZZZZZ
+b
+
+BBB   {{{5 ZZZZZ
+B
+
+яяя   {{{4 ZZZZZ
+я
+
+{VoomSort deep i bytes}   {{{3 ZZZZZ
+
+ЭЭЭ   {{{4 ZZZZZ
+Э
+
+ЯЯЯ   {{{4 ZZZZZ
+Я
+
+aaa   {{{5 ZZZZZ
+a
+
+111   {{{6 ZZZZZ
+1
+
+bbb   {{{5 ZZZZZ
+b
+
+BBB   {{{5 ZZZZZ
+B
+
+эээ   {{{4 ZZZZZ
+э
+
+яяя   {{{4 ZZZZZ
+я
+
+{VoomSort deep i bytes r}   {{{3 ZZZZZ
+
+яяя   {{{4 ZZZZZ
+я
+
+эээ   {{{4 ZZZZZ
+э
+
+ЯЯЯ   {{{4 ZZZZZ
+Я
+
+BBB   {{{5 ZZZZZ
+B
+
+bbb   {{{5 ZZZZZ
+b
+
+aaa   {{{5 ZZZZZ
+a
+
+111   {{{6 ZZZZZ
+1
+
+ЭЭЭ   {{{4 ZZZZZ
+Э
+
+{VoomSort deep i r}   {{{3 ZZZZZ
+
+яяя   {{{4 ZZZZZ
+я
+
+ЯЯЯ   {{{4 ZZZZZ
+Я
+
+bbb   {{{5 ZZZZZ
+b
+
+BBB   {{{5 ZZZZZ
+B
+
+aaa   {{{5 ZZZZZ
+a
+
+111   {{{6 ZZZZZ
+1
+
+эээ   {{{4 ZZZZZ
+э
+
+ЭЭЭ   {{{4 ZZZZZ
+Э
+
+ñññ   {{{3 ZZZZZ
+
+ÑÑÑ   {{{3 ZZZZZ
+
+zzz   {{{3 ZZZZZ
+
+special chars tests   {{{2 ZZZZZ
+
+'" /\\/   {{{3 '" /\\/ ZZZZZ
+" "" """
+' '' """
+\ \\ \\\
+/ // ///
+\//\
+
+Брожу ли я   {{{3 вдоль улиц шумных? (utf-8) ZZZZZ
+    Брожу. Чего ж не побродить.
+
+Чебурашка CHeburashka
+u'\u0427\u0435\u0431\u0443\u0440\u0430\u0448\u043a\u0430'
+utf-8
+'\xd0\xa7\xd0\xb5\xd0\xb1\xd1\x83\xd1\x80\xd0\xb0\xd1\x88\xd0\xba\xd0\xb0'
+
+Strikethrough: U+0336 (COMBINING LONG STROKE OVERLAY)
+Э̶Ю̶Я̶ A̶̶B̶̶C̶̶
+
+IMPORTANT: The last line must be blank (include spaces and tabs to make it more interesting). Otherwise :VoomSort tests fail for rest, asciidoc, etc.
+ 	 	

@@ -6,7 +6,7 @@ findme findme2
 {{{1   1
    1 body
 NEXT LINE IS FOR TESTS -- DO NOT MOVE OR EDIT
-ID_LEVELS VO.levels=[1, 1, 2, 2, 1, 1, 2, 2, 3, 4, 3, 4, 5, 6, 7, 2, 1, 2, 1, 2, 2, 3, 3, 4, 5, 5, 3, 2, 3, 2, 3, 2, 1, 2, 3, 3, 3, 3, 3, 3, 3, 3, 3, 2, 3, 3, 3, 3, 4, 2, 3, 4, 4, 4, 4, 5, 5, 4, 4, 5, 5, 3, 3, 3, 4, 4, 4, 4, 4, 4, 3, 4, 4, 4, 4, 4, 4, 3, 2, 3, 3]
+ID_LEVELS VO.levels=[1, 1, 2, 2, 1, 1, 2, 2, 3, 4, 3, 4, 5, 6, 7, 2, 1, 2, 1, 2, 2, 3, 3, 4, 5, 5, 3, 2, 3, 2, 3, 2, 1, 2, 3, 3, 3, 3, 3, 3, 3, 3, 3, 2, 3, 3, 3, 3, 4, 2, 3, 4, 4, 5, 5, 5, 6, 4, 4, 3, 4, 4, 5, 5, 6, 5, 4, 4, 3, 4, 4, 4, 5, 6, 5, 5, 4, 3, 4, 4, 5, 6, 5, 5, 4, 4, 3, 4, 4, 4, 5, 5, 5, 6, 4, 3, 4, 4, 5, 5, 5, 6, 4, 4, 3, 3, 3, 2, 3, 3]
 
 
 {{{2   1.1
@@ -166,75 +166,167 @@ beef
 
 {{{2   VoomSort tests
 
-{{{3   node 2
+{{{3   {VoomSort}
 
-{{{4x   dddd
-d1
+{{{4   ЭЭЭ
+Э
 
-{{{4   eeee
+{{{4   ЯЯЯ
+Я
 
-{{{4   dddd
-d2
-
-
-{{{4o   bbbb
+{{{5   bbb
 b
 
-{{{5   b_yyy
+{{{5   BBB
+B
 
-{{{5   b_xxx
-
-{{{4   cccc
-c
-
-{{{4   aaaa
+{{{5   aaa
 a
-{{{5   a_nnn
 
-{{{5   a_mmm
-
-{{{3   node 22
-
-
-{{{3   ñ
-
-{{{3   Ñ
-unicode tests
-
-{{{4   э
+{{{6   111
 1
-{{{4   Я
-2
-{{{4   ю
-3
-{{{4   Э
-4
-{{{4   я
-5
-{{{4   Ю
-6
 
-{{{3   node 1
+{{{4   эээ
+э
 
-{{{4   bbbb
+{{{4   яяя
+я
+
+{{{3   {VoomSort deep}
+
+{{{4   ЭЭЭ
+Э
+
+{{{4   ЯЯЯ
+Я
+
+{{{5   BBB
+B
+
+{{{5   aaa
+a
+
+{{{6   111
+1
+
+{{{5   bbb
 b
 
-{{{4   dddd
-d1
+{{{4   эээ
+э
 
-{{{4   DDDD
-ingorecase test
+{{{4   яяя
+я
 
-{{{4   aaaa
+{{{3   {VoomSort deep i}
+
+{{{4   ЭЭЭ
+Э
+
+{{{4   эээ
+э
+
+{{{4   ЯЯЯ
+Я
+
+{{{5   aaa
 a
-{{{4   dddd
-d2
 
+{{{6   111
+1
 
-{{{4   cccc
-c
+{{{5   bbb
+b
 
-{{{3   z
+{{{5   BBB
+B
+
+{{{4   яяя
+я
+
+{{{3   {VoomSort deep i bytes}
+
+{{{4   ЭЭЭ
+Э
+
+{{{4   ЯЯЯ
+Я
+
+{{{5   aaa
+a
+
+{{{6   111
+1
+
+{{{5   bbb
+b
+
+{{{5   BBB
+B
+
+{{{4   эээ
+э
+
+{{{4   яяя
+я
+
+{{{3   {VoomSort deep i bytes r}
+
+{{{4   яяя
+я
+
+{{{4   эээ
+э
+
+{{{4   ЯЯЯ
+Я
+
+{{{5   BBB
+B
+
+{{{5   bbb
+b
+
+{{{5   aaa
+a
+
+{{{6   111
+1
+
+{{{4   ЭЭЭ
+Э
+
+{{{3   {VoomSort deep i r}
+
+{{{4   яяя
+я
+
+{{{4   ЯЯЯ
+Я
+
+{{{5   bbb
+b
+
+{{{5   BBB
+B
+
+{{{5   aaa
+a
+
+{{{6   111
+1
+
+{{{4   эээ
+э
+
+{{{4   ЭЭЭ
+Э
+
+{{{3   ñññ
+
+{{{3   ÑÑÑ
+
+{{{3   zzz
 
 {{{2   special chars tests
 
@@ -253,4 +345,8 @@ u'\u0427\u0435\u0431\u0443\u0440\u0430\u0448\u043a\u0430'
 utf-8
 '\xd0\xa7\xd0\xb5\xd0\xb1\xd1\x83\xd1\x80\xd0\xb0\xd1\x88\xd0\xba\xd0\xb0'
 
+Strikethrough: U+0336 (COMBINING LONG STROKE OVERLAY)
+Э̶Ю̶Я̶ A̶̶B̶̶C̶̶
 
+IMPORTANT: The last line must be blank (include spaces and tabs to make it more interesting). Otherwise :VoomSort tests fail for rest, asciidoc, etc.
+ 	 	

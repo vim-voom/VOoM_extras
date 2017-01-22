@@ -1,0 +1,775 @@
+++++++++++ STARTED: VoomTest_TestAllModes() ++++++++++
+# s:PYCMD = 'python'
+
+======================================================================
+  TEST FILE: "test_outline.txt", MARKUP MODE: "fmr"
+-----STARTING ALL TESTS-----------------------------------
+    TEST: VoomTest_OutlineMetrics()
+             DONE # 0.00075742585232 sec
+    TEST: VoomTest_OutlineTraversal()
+             DONE # 0.0273527206983 sec
+    TEST: VoomTest_Sort()
+             DONE # 0.103140464111 sec
+    TEST: VoomTest_DownUp()
+             DONE # 0.259122568335 sec
+    TEST: VoomTest_CutAllPasteAll()
+             DONE # 0.0142888694937 sec
+    TEST: VoomTest_CutPaste()
+             DONE # 0.0665631586423 sec
+    TEST: VoomTest_CopyPasteCut()
+             DONE # 0.296825954623 sec
+    TEST: VoomTest_RightLeftRight()
+             DONE # 0.212951612599 sec
+              ['2', '3', '4', '5', '6', '17', '19', '33']
+    TEST: VoomTest_LeftRight()
+             DONE # 0.124847180611 sec
+              ['3', '7', '18', '20', '34']
+    TEST: VoomTest_NewHeadline()
+             DONE # 0.0423238892524 sec
+    TEST: VoomTest_SpecialMarks()
+             DONE # 0.108845173945 sec
+-----FINISHED ALL TESTS-----------------------------------
+
+======================================================================
+  TEST FILE: "test_outline.txt", MARKUP MODE: "fmr1"
+-----STARTING ALL TESTS-----------------------------------
+    TEST: VoomTest_OutlineMetrics()
+             DONE # 0.000792731339203 sec
+    TEST: VoomTest_OutlineTraversal()
+             DONE # 0.0267258430417 sec
+    TEST: VoomTest_Sort()
+             DONE # 0.0955891952073 sec
+    TEST: VoomTest_DownUp()
+             DONE # 0.251121770266 sec
+    TEST: VoomTest_CutAllPasteAll()
+             DONE # 0.0139489515502 sec
+    TEST: VoomTest_CutPaste()
+             DONE # 0.0654826465321 sec
+    TEST: VoomTest_CopyPasteCut()
+             DONE # 0.289582992936 sec
+    TEST: VoomTest_RightLeftRight()
+             DONE # 0.209320073797 sec
+              ['2', '3', '4', '5', '6', '17', '19', '33']
+    TEST: VoomTest_LeftRight()
+             DONE # 0.122467344477 sec
+              ['3', '7', '18', '20', '34']
+    TEST: VoomTest_NewHeadline()
+             DONE # 0.0411957557878 sec
+    TEST: VoomTest_SpecialMarks()
+             DONE # 0.103319454719 sec
+-----FINISHED ALL TESTS-----------------------------------
+
+======================================================================
+  TEST FILE: "test_outline.fmr2", MARKUP MODE: "fmr2"
+-----STARTING ALL TESTS-----------------------------------
+    TEST: VoomTest_OutlineMetrics()
+             DONE # 0.000766868017416 sec
+    TEST: VoomTest_OutlineTraversal()
+             DONE # 0.0260956811537 sec
+    TEST: VoomTest_Sort()
+             DONE # 0.146959910209 sec
+    TEST: VoomTest_DownUp()
+             DONE # 0.395459632281 sec
+    TEST: VoomTest_CutAllPasteAll()
+             DONE # 0.0136090336067 sec
+    TEST: VoomTest_CutPaste()
+             DONE # 0.110279561982 sec
+    TEST: VoomTest_CopyPasteCut()
+             DONE # 0.463497000265 sec
+    TEST: VoomTest_RightLeftRight()
+             DONE # 0.353948590285 sec
+              ['2', '3', '4', '5', '6', '17', '19', '33']
+    TEST: VoomTest_LeftRight()
+             DONE # 0.183025696647 sec
+              ['3', '7', '18', '20', '34']
+    TEST: VoomTest_NewHeadline()
+             DONE # 0.0410664391789 sec
+    TEST: VoomTest_SpecialMarks()
+             DONE # 0.106006777011 sec
+-----FINISHED ALL TESTS-----------------------------------
+
+======================================================================
+  TEST FILE: "test_outline.fmr3", MARKUP MODE: "fmr3"
+-----STARTING ALL TESTS-----------------------------------
+    TEST: VoomTest_OutlineMetrics()
+             DONE # 0.000761531141492 sec
+    TEST: VoomTest_OutlineTraversal()
+             DONE # 0.0262964297942 sec
+    TEST: VoomTest_Sort()
+             DONE # 0.0975613761258 sec
+    TEST: VoomTest_DownUp()
+             DONE # 0.257058839468 sec
+    TEST: VoomTest_CutAllPasteAll()
+             DONE # 0.0140589733 sec
+    TEST: VoomTest_CutPaste()
+             DONE # 0.0671157305649 sec
+    TEST: VoomTest_CopyPasteCut()
+             DONE # 0.29664901666 sec
+    TEST: VoomTest_RightLeftRight()
+             DONE # 0.215698461584 sec
+              ['2', '3', '4', '5', '6', '17', '19', '33']
+    TEST: VoomTest_LeftRight()
+             DONE # 0.12474495891 sec
+              ['3', '7', '18', '20', '34']
+    TEST: VoomTest_NewHeadline()
+             DONE # 0.0428115976061 sec
+    TEST: VoomTest_SpecialMarks()
+             DONE # 0.106820445325 sec
+-----FINISHED ALL TESTS-----------------------------------
+
+======================================================================
+  TEST FILE: "test_outline.wiki", MARKUP MODE: "wiki"
+-----STARTING ALL TESTS-----------------------------------
+    TEST: VoomTest_OutlineMetrics()
+             DONE # 0.000759889025823 sec
+    TEST: VoomTest_OutlineTraversal()
+             DONE # 0.026585442152 sec
+    TEST: VoomTest_Sort()
+             DONE # 0.0976061237778 sec
+    TEST: VoomTest_DownUp()
+             DONE # 0.264014841441 sec
+    TEST: VoomTest_CutAllPasteAll()
+             DONE # 0.0142818905021 sec
+    TEST: VoomTest_CutPaste()
+             DONE # 0.0687241828627 sec
+    TEST: VoomTest_CopyPasteCut()
+             DONE # 0.301457131339 sec
+    TEST: VoomTest_RightLeftRight()
+             DONE # 0.216065063907 sec
+              ['2', '3', '4', '5', '6', '17', '19', '33']
+    TEST: VoomTest_LeftRight()
+             DONE # 0.125506490052 sec
+              ['3', '7', '18', '20', '34']
+    TEST: VoomTest_NewHeadline()
+             DONE # 0.0436441502503 sec
+-----FINISHED ALL TESTS-----------------------------------
+
+======================================================================
+  TEST FILE: "test_outline.vimwiki", MARKUP MODE: "vimwiki"
+-----STARTING ALL TESTS-----------------------------------
+    TEST: VoomTest_OutlineMetrics()
+             DONE # 0.00087647923832 sec
+    TEST: VoomTest_OutlineTraversal()
+             DONE # 0.0258629112576 sec
+    TEST: VoomTest_Sort()
+             DONE # 0.0936436986685 sec
+    TEST: VoomTest_DownUp()
+             DONE # 0.256786248267 sec
+    TEST: VoomTest_CutAllPasteAll()
+             DONE # 0.0137728346447 sec
+    TEST: VoomTest_CutPaste()
+             DONE # 0.0652392028842 sec
+    TEST: VoomTest_CopyPasteCut()
+             DONE # 0.292957540636 sec
+    TEST: VoomTest_RightLeftRight()
+             DONE # 0.211619446262 sec
+              ['2', '3', '4', '5', '6', '17', '19', '33']
+    TEST: VoomTest_LeftRight()
+             DONE # 0.12132114774 sec
+              ['3', '7', '18', '20', '34']
+    TEST: VoomTest_NewHeadline()
+             DONE # 0.042053350696 sec
+-----FINISHED ALL TESTS-----------------------------------
+
+======================================================================
+  TEST FILE: "test_outline.inverseAtx", MARKUP MODE: "inverseAtx"
+-----STARTING ALL TESTS-----------------------------------
+    TEST: VoomTest_OutlineMetrics()
+             DONE # 0.000745109984802 sec
+    TEST: VoomTest_OutlineTraversal()
+             DONE # 0.0267016218355 sec
+    TEST: VoomTest_Sort()
+             DONE # 0.0924449542301 sec
+    TEST: VoomTest_DownUp()
+             DONE # 0.251486730474 sec
+    TEST: VoomTest_CutAllPasteAll()
+             DONE # 0.0136234021188 sec
+    TEST: VoomTest_CutPaste()
+             DONE # 0.0654502147477 sec
+    TEST: VoomTest_CopyPasteCut()
+             DONE # 0.290335081913 sec
+    TEST: VoomTest_RightLeftRight()
+             DONE # 0.210160837019 sec
+              ['2', '3', '4', '5', '6', '17', '19', '33']
+    TEST: VoomTest_LeftRight()
+             DONE # 0.121376979673 sec
+              ['3', '7', '18', '20', '34']
+    TEST: VoomTest_NewHeadline()
+             DONE # 0.0409498489664 sec
+-----FINISHED ALL TESTS-----------------------------------
+
+======================================================================
+  TEST FILE: "test_outline.dokuwiki3", MARKUP MODE: "dokuwiki"
+-----STARTING ALL TESTS-----------------------------------
+    TEST: VoomTest_OutlineMetrics()
+             DONE # 0.000747162629388 sec
+    TEST: VoomTest_OutlineTraversal()
+             DONE # 0.0257142997896 sec
+    TEST: VoomTest_Sort()
+             DONE # 0.0914178108792 sec
+    TEST: VoomTest_DownUp()
+             DONE # 0.258862293001 sec
+    TEST: VoomTest_CutAllPasteAll()
+             DONE # 0.0140622575314 sec
+    TEST: VoomTest_CutPaste()
+             DONE # 0.0669084134617 sec
+    TEST: VoomTest_CopyPasteCut()
+             DONE # 0.300377029758 sec
+    TEST: VoomTest_RightLeftRight()
+             DONE # 0.212964749524 sec
+              ['2', '3', '4', '5', '6', '17', '19', '33']
+    TEST: VoomTest_LeftRight()
+             DONE # 0.122735009331 sec
+              ['3', '7', '18', '20', '34']
+    TEST: VoomTest_NewHeadline()
+             DONE # 0.042608796321 sec
+-----FINISHED ALL TESTS-----------------------------------
+
+======================================================================
+  TEST FILE: "test_outline.org", MARKUP MODE: "org"
+-----STARTING ALL TESTS-----------------------------------
+    TEST: VoomTest_OutlineMetrics()
+             DONE # 0.000966795600116 sec
+    TEST: VoomTest_OutlineTraversal()
+             DONE # 0.026094039038 sec
+    TEST: VoomTest_Sort()
+             DONE # 0.0928940728656 sec
+    TEST: VoomTest_DownUp()
+             DONE # 0.249274800668 sec
+    TEST: VoomTest_CutAllPasteAll()
+             DONE # 0.0132465365728 sec
+    TEST: VoomTest_CutPaste()
+             DONE # 0.0638245202354 sec
+    TEST: VoomTest_CopyPasteCut()
+             DONE # 0.287404315973 sec
+    TEST: VoomTest_RightLeftRight()
+             DONE # 0.208065497426 sec
+              ['2', '3', '4', '5', '6', '17', '19', '33']
+    TEST: VoomTest_LeftRight()
+             DONE # 0.121430348432 sec
+              ['3', '7', '18', '20', '34']
+    TEST: VoomTest_NewHeadline()
+             DONE # 0.0396065983492 sec
+-----FINISHED ALL TESTS-----------------------------------
+
+======================================================================
+  TEST FILE: "test_outline.hashes", MARKUP MODE: "hashes"
+-----STARTING ALL TESTS-----------------------------------
+    TEST: VoomTest_OutlineMetrics()
+             DONE # 0.000793962925956 sec
+    TEST: VoomTest_OutlineTraversal()
+             DONE # 0.0267775696852 sec
+    TEST: VoomTest_Sort()
+             DONE # 0.0920204673297 sec
+    TEST: VoomTest_DownUp()
+             DONE # 0.25062749345 sec
+    TEST: VoomTest_CutAllPasteAll()
+             DONE # 0.0132177995486 sec
+    TEST: VoomTest_CutPaste()
+             DONE # 0.0643397340265 sec
+    TEST: VoomTest_CopyPasteCut()
+             DONE # 0.289440949931 sec
+    TEST: VoomTest_RightLeftRight()
+             DONE # 0.207624589368 sec
+              ['2', '3', '4', '5', '6', '17', '19', '33']
+    TEST: VoomTest_LeftRight()
+             DONE # 0.121002577301 sec
+              ['3', '7', '18', '20', '34']
+    TEST: VoomTest_NewHeadline()
+             DONE # 0.0401562965694 sec
+-----FINISHED ALL TESTS-----------------------------------
+
+======================================================================
+  TEST FILE: "test_outline.org", MARKUP MODE: "viki"
+-----STARTING ALL TESTS-----------------------------------
+    TEST: VoomTest_OutlineMetrics()
+             DONE # 0.000757425852319 sec
+    TEST: VoomTest_OutlineTraversal()
+             DONE # 0.0258021529779 sec
+    TEST: VoomTest_Sort()
+             DONE # 0.0939171109274 sec
+    TEST: VoomTest_DownUp()
+             DONE # 0.257260409166 sec
+    TEST: VoomTest_CutAllPasteAll()
+             DONE # 0.0135187172449 sec
+    TEST: VoomTest_CutPaste()
+             DONE # 0.0659366915146 sec
+    TEST: VoomTest_CopyPasteCut()
+             DONE # 0.295245418292 sec
+    TEST: VoomTest_RightLeftRight()
+             DONE # 0.212828864452 sec
+              ['2', '3', '4', '5', '6', '17', '19', '33']
+    TEST: VoomTest_LeftRight()
+             DONE # 0.12273541986 sec
+              ['3', '7', '18', '20', '34']
+    TEST: VoomTest_NewHeadline()
+             DONE # 0.0423238892524 sec
+-----FINISHED ALL TESTS-----------------------------------
+
+======================================================================
+  TEST FILE: "test_outline.cwiki", MARKUP MODE: "cwiki"
+-----STARTING ALL TESTS-----------------------------------
+    TEST: VoomTest_OutlineMetrics()
+             DONE # 0.000745109984802 sec
+    TEST: VoomTest_OutlineTraversal()
+             DONE # 0.0259758067098 sec
+    TEST: VoomTest_Sort()
+             DONE # 0.0921013415264 sec
+    TEST: VoomTest_DownUp()
+             DONE # 0.250111458601 sec
+    TEST: VoomTest_CutAllPasteAll()
+             DONE # 0.0135950756235 sec
+    TEST: VoomTest_CutPaste()
+             DONE # 0.064530629973 sec
+    TEST: VoomTest_CopyPasteCut()
+             DONE # 0.287869855765 sec
+    TEST: VoomTest_RightLeftRight()
+             DONE # 0.210081604938 sec
+              ['2', '3', '4', '5', '6', '17', '19', '33']
+    TEST: VoomTest_LeftRight()
+             DONE # 0.121124504389 sec
+              ['3', '7', '18', '20', '34']
+    TEST: VoomTest_NewHeadline()
+             DONE # 0.0403463714581 sec
+-----FINISHED ALL TESTS-----------------------------------
+
+======================================================================
+  TEST FILE: "test_outline.rst", MARKUP MODE: "rest"
+-----STARTING ALL TESTS-----------------------------------
+    TEST: VoomTest_OutlineMetrics()
+             DONE # 0.000790678694614 sec
+    TEST: VoomTest_OutlineTraversal()
+             DONE # 0.0287801297436 sec
+    TEST: VoomTest_Sort()
+             DONE # 0.0983032018792 sec
+    TEST: VoomTest_DownUp()
+ERROR: body_len 108
+             DONE # 0.265143795964 sec
+    TEST: VoomTest_CutAllPasteAll()
+             DONE # 0.0148024411692 sec
+    TEST: VoomTest_CutPaste()
+             DONE # 0.0694204399064 sec
+    TEST: VoomTest_CopyPasteCut()
+             DONE # 0.30472124676 sec
+    TEST: VoomTest_RightLeftRight()
+             DONE # 0.218574216649 sec
+              ['2', '3', '4', '5', '6', '17', '19', '33']
+    TEST: VoomTest_LeftRight()
+             DONE # 0.127837473244 sec
+              ['3', '7', '18', '20', '34']
+    TEST: VoomTest_NewHeadline()
+             DONE # 0.0430579149565 sec
+-----FINISHED ALL TESTS-----------------------------------
+
+======================================================================
+  TEST FILE: "test_outline.latex", MARKUP MODE: "latex"
+-----STARTING ALL TESTS-----------------------------------
+    TEST: VoomTest_OutlineMetrics()
+             DONE # 0.000777131240348 sec
+    TEST: VoomTest_OutlineTraversal()
+             DONE # 0.0287468769013 sec
+    TEST: VoomTest_Sort()
+             DONE # 0.100121023925 sec
+    TEST: VoomTest_DownUp()
+             DONE # 0.276467004559 sec
+    TEST: VoomTest_CutAllPasteAll()
+             DONE # 0.0151776645995 sec
+    TEST: VoomTest_CutPaste()
+             DONE # 0.0726742921045 sec
+    TEST: VoomTest_CopyPasteCut()
+             DONE # 0.337365274673 sec
+    TEST: VoomTest_RightLeftRight()
+ERROR: Body changed (lnum 6)
+ERROR: Body changed (lnum 17)
+ERROR: Body changed (lnum 19)
+ERROR: Body changed (lnum 33)
+             DONE # 0.249794530277 sec
+              ['2', '3', '4', '5', '6', '17', '19', '33']
+    TEST: VoomTest_LeftRight()
+ERROR: Body changed 2 (lnum 7)
+ERROR: Body changed 1 (lnum 18)
+ERROR: Body changed 2 (lnum 20)
+ERROR: Body changed 2 (lnum 34)
+             DONE # 0.1586337105 sec
+              ['3', '7', '18', '20', '34']
+    TEST: VoomTest_NewHeadline()
+             DONE # 0.0483414221214 sec
+-----FINISHED ALL TESTS-----------------------------------
+
+======================================================================
+  TEST FILE: "test_outline.dtx", MARKUP MODE: "latexDtx"
+-----STARTING ALL TESTS-----------------------------------
+    TEST: VoomTest_OutlineMetrics()
+             DONE # 0.00075249950531 sec
+    TEST: VoomTest_OutlineTraversal()
+             DONE # 0.0292731749732 sec
+    TEST: VoomTest_Sort()
+             DONE # 0.100933460652 sec
+    TEST: VoomTest_DownUp()
+             DONE # 0.282544885179 sec
+    TEST: VoomTest_CutAllPasteAll()
+             DONE # 0.0156005093843 sec
+    TEST: VoomTest_CutPaste()
+             DONE # 0.0742018702055 sec
+    TEST: VoomTest_CopyPasteCut()
+             DONE # 0.340939339426 sec
+    TEST: VoomTest_RightLeftRight()
+ERROR: Body changed (lnum 6)
+ERROR: Body changed (lnum 17)
+ERROR: Body changed (lnum 19)
+ERROR: Body changed (lnum 33)
+             DONE # 0.253085330078 sec
+              ['2', '3', '4', '5', '6', '17', '19', '33']
+    TEST: VoomTest_LeftRight()
+ERROR: Body changed 2 (lnum 7)
+ERROR: Body changed 1 (lnum 18)
+ERROR: Body changed 2 (lnum 20)
+ERROR: Body changed 2 (lnum 34)
+             DONE # 0.159352957163 sec
+              ['3', '7', '18', '20', '34']
+    TEST: VoomTest_NewHeadline()
+             DONE # 0.0495828615672 sec
+-----FINISHED ALL TESTS-----------------------------------
+
+======================================================================
+  TEST FILE: "test_outline.markdown", MARKUP MODE: "markdown"
+-----STARTING ALL TESTS-----------------------------------
+    TEST: VoomTest_OutlineMetrics()
+             DONE # 0.000761120612573 sec
+    TEST: VoomTest_OutlineTraversal()
+             DONE # 0.0289472150129 sec
+    TEST: VoomTest_Sort()
+             DONE # 0.318723977598 sec
+    TEST: VoomTest_DownUp()
+ERROR: body_len 108
+             DONE # 0.292104051017 sec
+    TEST: VoomTest_CutAllPasteAll()
+             DONE # 0.0232412735921 sec
+    TEST: VoomTest_CutPaste()
+             DONE # 0.0778962199318 sec
+    TEST: VoomTest_CopyPasteCut()
+             DONE # 0.41278354206 sec
+    TEST: VoomTest_RightLeftRight()
+             DONE # 0.411764609287 sec
+              ['2', '3', '4', '5', '6', '17', '19', '33']
+    TEST: VoomTest_LeftRight()
+             DONE # 0.250537177088 sec
+              ['3', '7', '18', '20', '34']
+    TEST: VoomTest_NewHeadline()
+             DONE # 0.0430718729397 sec
+-----FINISHED ALL TESTS-----------------------------------
+
+======================================================================
+  TEST FILE: "test_outline.pandoc", MARKUP MODE: "pandoc"
+-----STARTING ALL TESTS-----------------------------------
+    TEST: VoomTest_OutlineMetrics()
+             DONE # 0.000761531141492 sec
+    TEST: VoomTest_OutlineTraversal()
+             DONE # 0.0291709532728 sec
+    TEST: VoomTest_Sort()
+             DONE # 0.0984407290665 sec
+    TEST: VoomTest_DownUp()
+ERROR: body_len 108
+             DONE # 0.267662390871 sec
+    TEST: VoomTest_CutAllPasteAll()
+             DONE # 0.0147675462112 sec
+    TEST: VoomTest_CutPaste()
+             DONE # 0.0687545620026 sec
+    TEST: VoomTest_CopyPasteCut()
+             DONE # 0.306778817693 sec
+    TEST: VoomTest_RightLeftRight()
+             DONE # 0.221005779426 sec
+              ['2', '3', '4', '5', '6', '17', '19', '33']
+    TEST: VoomTest_LeftRight()
+             DONE # 0.128321897366 sec
+              ['3', '7', '18', '20', '34']
+    TEST: VoomTest_NewHeadline()
+             DONE # 0.0440448264735 sec
+-----FINISHED ALL TESTS-----------------------------------
+
+======================================================================
+  TEST FILE: "test_outline.t2t", MARKUP MODE: "txt2tags"
+-----STARTING ALL TESTS-----------------------------------
+    TEST: VoomTest_OutlineMetrics()
+             DONE # 0.000750446860728 sec
+    TEST: VoomTest_OutlineTraversal()
+             DONE # 0.0292703012708 sec
+    TEST: VoomTest_Sort()
+             DONE # 0.0980523687108 sec
+    TEST: VoomTest_DownUp()
+             DONE # 0.272745970453 sec
+    TEST: VoomTest_CutAllPasteAll()
+             DONE # 0.0142223638091 sec
+    TEST: VoomTest_CutPaste()
+             DONE # 0.0712411356544 sec
+    TEST: VoomTest_CopyPasteCut()
+             DONE # 0.311257277651 sec
+    TEST: VoomTest_RightLeftRight()
+             DONE # 0.224854488025 sec
+              ['2', '3', '4', '5', '6', '17', '19', '33']
+    TEST: VoomTest_LeftRight()
+             DONE # 0.130535058759 sec
+              ['3', '7', '18', '20', '34']
+    TEST: VoomTest_NewHeadline()
+ERROR: DIFFERENT Tree lines
+snLn line expected: =+. . |NewHeadline
+snLn line actual  : = . . |NewHeadline
+ERROR: DIFFERENT Tree lines
+snLn line expected: =+. . . |NewHeadline
+snLn line actual  : = . . . |NewHeadline
+             DONE # 0.0543006598842 sec
+-----FINISHED ALL TESTS-----------------------------------
+
+======================================================================
+  TEST FILE: "test_outline.asciidoc", MARKUP MODE: "asciidoc"
+-----STARTING ALL TESTS-----------------------------------
+    TEST: VoomTest_OutlineMetrics()
+             DONE # 0.00076768907525 sec
+    TEST: VoomTest_OutlineTraversal()
+             DONE # 0.0296664616759 sec
+    TEST: VoomTest_Sort()
+             DONE # 0.107313490555 sec
+    TEST: VoomTest_DownUp()
+             DONE # 0.279933510737 sec
+    TEST: VoomTest_CutAllPasteAll()
+             DONE # 0.0156181621277 sec
+    TEST: VoomTest_CutPaste()
+             DONE # 0.0742314282876 sec
+    TEST: VoomTest_CopyPasteCut()
+             DONE # 0.408747632274 sec
+    TEST: VoomTest_RightLeftRight()
+             DONE # 0.252371009762 sec
+              ['2', '3', '4', '5', '6', '17', '19', '33']
+    TEST: VoomTest_LeftRight()
+             DONE # 0.167948611632 sec
+              ['3', '7', '18', '20', '34']
+    TEST: VoomTest_NewHeadline()
+             DONE # 0.0491427745679 sec
+-----FINISHED ALL TESTS-----------------------------------
+
+======================================================================
+  TEST FILE: "test_outline.asciidoc1", MARKUP MODE: "asciidoc"
+-----STARTING ALL TESTS-----------------------------------
+    TEST: VoomTest_OutlineMetrics()
+             DONE # 0.00075291003423 sec
+    TEST: VoomTest_OutlineTraversal()
+             DONE # 0.0295818927189 sec
+    TEST: VoomTest_Sort()
+             DONE # 0.103089969054 sec
+    TEST: VoomTest_DownUp()
+             DONE # 0.277428873812 sec
+    TEST: VoomTest_CutAllPasteAll()
+ERROR: Body changed after CutAll/PasteAll
+             DONE # 0.0205243932177 sec
+    TEST: VoomTest_CutPaste()
+             DONE # 0.074398103028 sec
+    TEST: VoomTest_CopyPasteCut()
+             DONE # 0.333799009968 sec
+    TEST: VoomTest_RightLeftRight()
+             DONE # 0.233247751738 sec
+              ['2', '3', '4', '5', '6', '17', '19', '33']
+    TEST: VoomTest_LeftRight()
+             DONE # 0.137793620545 sec
+              ['3', '7', '18', '20', '34']
+    TEST: VoomTest_NewHeadline()
+             DONE # 0.0477223445142 sec
+-----FINISHED ALL TESTS-----------------------------------
+
+======================================================================
+  TEST FILE: "test_outline.html", MARKUP MODE: "html"
+-----STARTING ALL TESTS-----------------------------------
+    TEST: VoomTest_OutlineMetrics()
+             DONE # 0.000763173257162 sec
+    TEST: VoomTest_OutlineTraversal()
+             DONE # 0.0302173914828 sec
+    TEST: VoomTest_Sort()
+             DONE # 0.102361690755 sec
+    TEST: VoomTest_DownUp()
+             DONE # 0.289812068072 sec
+    TEST: VoomTest_CutAllPasteAll()
+             DONE # 0.0140285941601 sec
+    TEST: VoomTest_CutPaste()
+             DONE # 0.0753160456869 sec
+    TEST: VoomTest_CopyPasteCut()
+             DONE # 0.334893890591 sec
+    TEST: VoomTest_RightLeftRight()
+             DONE # 0.240610998398 sec
+              ['2', '3', '4', '5', '6', '17', '19', '33']
+    TEST: VoomTest_LeftRight()
+             DONE # 0.136868698894 sec
+              ['3', '7', '18', '20', '34']
+    TEST: VoomTest_NewHeadline()
+             DONE # 0.044017731565 sec
+-----FINISHED ALL TESTS-----------------------------------
+
+======================================================================
+  TEST FILE: "test_outline.otl", MARKUP MODE: "thevimoutliner"
+-----STARTING ALL TESTS-----------------------------------
+    TEST: VoomTest_OutlineMetrics()
+             DONE # 0.000744699455879 sec
+    TEST: VoomTest_OutlineTraversal()
+             DONE # 0.0299595793228 sec
+    TEST: VoomTest_Sort()
+             DONE # 0.0930073788468 sec
+    TEST: VoomTest_DownUp()
+             DONE # 0.250393491967 sec
+    TEST: VoomTest_CutAllPasteAll()
+             DONE # 0.0134362009326 sec
+    TEST: VoomTest_CutPaste()
+             DONE # 0.0644493452474 sec
+    TEST: VoomTest_CopyPasteCut()
+             DONE # 0.288146962784 sec
+    TEST: VoomTest_RightLeftRight()
+             DONE # 0.211836616059 sec
+              ['2', '3', '4', '5', '6', '17', '19', '33']
+    TEST: VoomTest_LeftRight()
+             DONE # 0.121896709282 sec
+              ['3', '7', '18', '20', '34']
+    TEST: VoomTest_NewHeadline()
+             DONE # 0.0393824495604 sec
+-----FINISHED ALL TESTS-----------------------------------
+
+======================================================================
+  TEST FILE: "test_outline.otl", MARKUP MODE: "vimoutliner"
+-----STARTING ALL TESTS-----------------------------------
+    TEST: VoomTest_OutlineMetrics()
+             DONE # 0.00078287864519 sec
+    TEST: VoomTest_OutlineTraversal()
+             DONE # 0.0298667997875 sec
+    TEST: VoomTest_Sort()
+             DONE # 0.0921116047493 sec
+    TEST: VoomTest_DownUp()
+             DONE # 0.251279002842 sec
+    TEST: VoomTest_CutAllPasteAll()
+             DONE # 0.013563054368 sec
+    TEST: VoomTest_CutPaste()
+             DONE # 0.0640806902797 sec
+    TEST: VoomTest_CopyPasteCut()
+             DONE # 0.287829213402 sec
+    TEST: VoomTest_RightLeftRight()
+             DONE # 0.211357939342 sec
+              ['2', '3', '4', '5', '6', '17', '19', '33']
+    TEST: VoomTest_LeftRight()
+             DONE # 0.122214458664 sec
+              ['3', '7', '18', '20', '34']
+    TEST: VoomTest_NewHeadline()
+             DONE # 0.0394074918243 sec
+-----FINISHED ALL TESTS-----------------------------------
+
+======================================================================
+  TEST FILE: "test_outline.taskpaper", MARKUP MODE: "taskpaper"
+-----STARTING ALL TESTS-----------------------------------
+    TEST: VoomTest_OutlineMetrics()
+             DONE # 0.000749215273977 sec
+    TEST: VoomTest_OutlineTraversal()
+             DONE # 0.0300737063618 sec
+    TEST: VoomTest_Sort()
+             DONE # 0.0961507987661 sec
+    TEST: VoomTest_DownUp()
+             DONE # 0.258141814751 sec
+    TEST: VoomTest_CutAllPasteAll()
+             DONE # 0.0140905840266 sec
+    TEST: VoomTest_CutPaste()
+             DONE # 0.067363690031 sec
+    TEST: VoomTest_CopyPasteCut()
+             DONE # 0.299195117005 sec
+    TEST: VoomTest_RightLeftRight()
+             DONE # 0.217670642502 sec
+              ['2', '3', '4', '5', '6', '17', '19', '33']
+    TEST: VoomTest_LeftRight()
+             DONE # 0.125803712988 sec
+              ['3', '7', '18', '20', '34']
+    TEST: VoomTest_NewHeadline()
+             DONE # 0.0425213536616 sec
+-----FINISHED ALL TESTS-----------------------------------
+
+======================================================================
+  TEST FILE: "paragraphBlank.txt", MARKUP MODE: "paragraphBlank"
+-----STARTING ALL TESTS-----------------------------------
+    TEST: VoomTest_OutlineMetrics()
+             DONE # 0.000566529905804 sec
+    TEST: VoomTest_OutlineTraversal()
+             DONE # 0.00239379411646 sec
+    TEST: VoomTest_Sort()
+             DONE # 0.0643229023409 sec
+    TEST: VoomTest_DownUp()
+             DONE # 0.0447180938978 sec
+    TEST: VoomTest_CutAllPasteAll()
+             DONE # 0.0102993494759 sec
+    TEST: VoomTest_CutPaste()
+             DONE # 0.0397970837668 sec
+    TEST: VoomTest_CopyPasteCut()
+             DONE # 0.0548901794093 sec
+    TEST: VoomTest_NewHeadline()
+             DONE # 0.0267894750238 sec
+-----FINISHED ALL TESTS-----------------------------------
+
+======================================================================
+  TEST FILE: "paragraphIndent.txt", MARKUP MODE: "paragraphIndent"
+-----STARTING ALL TESTS-----------------------------------
+    TEST: VoomTest_OutlineMetrics()
+             DONE # 0.000629751359057 sec
+    TEST: VoomTest_OutlineTraversal()
+             DONE # 0.00296525036927 sec
+    TEST: VoomTest_Sort()
+             DONE # 0.06540382498 sec
+    TEST: VoomTest_DownUp()
+             DONE # 0.0445083136211 sec
+    TEST: VoomTest_CutAllPasteAll()
+             DONE # 0.00944462827017 sec
+    TEST: VoomTest_CutPaste()
+             DONE # 0.0401714861393 sec
+    TEST: VoomTest_CopyPasteCut()
+             DONE # 0.0541717538042 sec
+    TEST: VoomTest_NewHeadline()
+             DONE # 0.0264507886671 sec
+-----FINISHED ALL TESTS-----------------------------------
+
+======================================================================
+  TEST FILE: "paragraphNoIndent.txt", MARKUP MODE: "paragraphNoIndent"
+-----STARTING ALL TESTS-----------------------------------
+    TEST: VoomTest_OutlineMetrics()
+             DONE # 0.000564477261214 sec
+    TEST: VoomTest_OutlineTraversal()
+             DONE # 0.00243443647927 sec
+    TEST: VoomTest_Sort()
+             DONE # 0.0638544888463 sec
+    TEST: VoomTest_DownUp()
+             DONE # 0.0440715108532 sec
+    TEST: VoomTest_CutAllPasteAll()
+             DONE # 0.0101495064211 sec
+    TEST: VoomTest_CutPaste()
+             DONE # 0.0393680810483 sec
+    TEST: VoomTest_CopyPasteCut()
+             DONE # 0.0548191579067 sec
+    TEST: VoomTest_NewHeadline()
+             DONE # 0.0263731987017 sec
+-----FINISHED ALL TESTS-----------------------------------
+
+======================================================================
+  TEST FILE: "python_test_outline.py", MARKUP MODE: "python"
+-----STARTING ALL TESTS-----------------------------------
+    TEST: VoomTest_OutlineMetrics()
+             DONE # 0.000614151260201 sec
+    TEST: VoomTest_OutlineTraversal()
+             DONE # 0.00868186554192 sec
+    TEST: VoomTest_Sort()
+             DONE # 0.0960448823055 sec
+    TEST: VoomTest_DownUp()
+             DONE # 0.335768727713 sec
+    TEST: VoomTest_CutAllPasteAll()
+             DONE # 0.0151320958897 sec
+    TEST: VoomTest_CutPaste()
+             DONE # 0.174921445292 sec
+    TEST: VoomTest_CopyPasteCut()
+             DONE # 0.363246249203 sec
+    TEST: VoomTest_RightLeftRight()
+             DONE # 0.440373959001 sec
+              ['2', '3', '6', '7', '8', '15', '16', '17', '21', '22', '29', '30', '31', '32']
+    TEST: VoomTest_LeftRight()
+             DONE # 0.107163236971 sec
+              ['3', '9', '18', '23']
+    TEST: VoomTest_NewHeadline()
+             DONE # 0.0629459883525 sec
+-----FINISHED ALL TESTS-----------------------------------
+++++++++++ FINISHED: VoomTest_TestAllModes() ++++++++++ # 41.195168321 sec

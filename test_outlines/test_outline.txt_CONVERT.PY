@@ -1,10 +1,18 @@
+#!/usr/bin/env python2
 """Convert test_outline.txt to other markups."""
-import sys
+
+import os, sys
+
 # Path to directory with voom_mode_*.py files. Convertion to some
 # markups requires importing stuff from corresponding voom_mode_* files.
-VOOM_DIR = 'D:/HOME/vimfiles/autoload/voom'
+if os.name == 'nt':
+    VOOM_DIR = os.path.join(os.path.expanduser('~'), 'vimfiles', 'autoload', 'voom')
+else:
+    VOOM_DIR = os.path.join(os.path.expanduser('~'),     '.vim', 'autoload', 'voom')
 if not VOOM_DIR in sys.path:
     sys.path.append(VOOM_DIR)
+#print(VOOM_DIR)
+
 # Path to input file to convert.
 INP = 'test_outline.txt'
 
@@ -63,6 +71,13 @@ def make_head_fmr2(line,m): #{{{1
     head = line[:m.start()].strip().strip('-=~').strip()
     e = line[m.start():].strip()
     return ['%s   %s\n' %(e,head)]
+
+
+def make_head_fmr3(line,m): #{{{1
+    lev = int(m.group(1))
+    head = line[:m.start()].strip().strip('-=~').strip()
+    e = line[m.start():].strip()
+    return ['%s   %s ZZZZZ\n' %(head,e)]
 
 
 def make_head_wiki(line,m): #{{{1
@@ -258,7 +273,7 @@ def make_head_asciidoc3(line,m): #{{{1
 #--- reST --- {{{1o
 ### reST adornment styles
 # make sure they are in same order as in the voom_mode_rest.py
-from voom_mode_rest import AD_STYLES
+from voom_vimplugin2657.voom_mode_rest import AD_STYLES
 lev = 1
 level_ads = {}
 for ad in AD_STYLES:
@@ -283,8 +298,8 @@ def make_head_rest(line,m): #{{{2
 
 
 #--- LaTeX, DTX --- {{{1o
-from voom_mode_latex import LEVS_SECTS
-from voom_mode_latex import SECTIONS
+from voom_vimplugin2657.voom_mode_latex import LEVS_SECTS
+from voom_vimplugin2657.voom_mode_latex import SECTIONS
 
 def make_head_latex(line,m): #{{{2
     lev = int(m.group(1))
@@ -292,7 +307,7 @@ def make_head_latex(line,m): #{{{2
     sect = LEVS_SECTS.get(lev, SECTIONS[-1])
     return ['\n%s{%s}\n' %(sect, head)]
 
-def make_head_dtx(line,m): #{{{2
+def make_head_latexDtx(line,m): #{{{2
     lev = int(m.group(1))
     head = line[:m.start()].strip().strip('-=~').strip()
     sect = LEVS_SECTS.get(lev, SECTIONS[-1])
@@ -363,6 +378,7 @@ def convert_to_taskpaper(inpFile, ext, modeName): #{{{1
 #--- _main_ --- {{{1
 if __name__=='__main__':
     convert(INP, make_head_fmr2, 'fmr2', 'fmr2')
+    convert(INP, make_head_fmr3, 'fmr3', 'fmr3')
     convert(INP, make_head_wiki, 'wiki', 'wiki',
             note='MediaWiki format, with fold markers')
     convert(INP, make_head_vimwiki, 'vimwiki', 'vimwiki')
@@ -380,7 +396,7 @@ if __name__=='__main__':
             note='no gotchas, suitable for test suite')
     convert(INP, make_head_latex, 'latex', 'latex',
             note='sections only')
-    convert(INP, make_head_dtx, 'dtx', 'dtx',
+    convert(INP, make_head_latexDtx, 'dtx', 'latexDtx',
             note='sections only')
     convert_to_otl(INP, 'otl', 'thevimoutliner')
     convert_to_taskpaper(INP, 'taskpaper', 'taskpaper')
