@@ -1,7 +1,9 @@
-#!/usr/bin/env python2
+#!/usr/bin/env python3
 """Convert test_outline.txt to other markups."""
 
-import os, sys
+import sys
+assert sys.version_info[0] > 2
+import os
 
 # Path to directory with voom_mode_*.py files. Convertion to some
 # markups requires importing stuff from corresponding voom_mode_* files.
@@ -9,6 +11,7 @@ if os.name == 'nt':
     VOOM_DIR = os.path.join(os.path.expanduser('~'), 'vimfiles', 'autoload', 'voom')
 else:
     VOOM_DIR = os.path.join(os.path.expanduser('~'),     '.vim', 'autoload', 'voom')
+assert os.path.exists(os.path.join(VOOM_DIR, 'voom_vimplugin2657', 'voom_vim.py'))
 if not VOOM_DIR in sys.path:
     sys.path.append(VOOM_DIR)
 #print(VOOM_DIR)
@@ -19,20 +22,19 @@ INP = 'test_outline.txt'
 #---------------------------------------------------------------------
 import re
 MARKER = '{{{'                         # }}}
-MARKER_RE = re.compile(r'{{{(\d+)')    # }}}
+MARKER_RE = re.compile(r'{{{(\d*[1-9]\d*)')    # }}}
 
 
 def convert(inpFile, make_head, ext, modeName, note='', maxLevel=None): #{{{1
     lines = []
-    f = open(inpFile)
-    for line in f:
-        m = MARKER_RE.search(line)
-        if not m:
-            lines.append(line)
-            continue
-        new_lines = make_head(line, m)
-        lines.extend(new_lines)
-    f.close()
+    with open(inpFile, 'rt', encoding='utf-8', newline='\n') as f:
+        for line in f:
+            m = MARKER_RE.search(line)
+            if not m:
+                lines.append(line)
+                continue
+            new_lines = make_head(line, m)
+            lines.extend(new_lines)
 
     # replace first two lines
     lines[0] = '  :Voom %s\n' %modeName
@@ -43,7 +45,7 @@ def convert(inpFile, make_head, ext, modeName, note='', maxLevel=None): #{{{1
     # edit line with VO.levels = [...] -- set levels exceeding maxLevel to maxLevel
     if maxLevel:
         idx = None
-        for i in xrange(len(lines)):
+        for i in range(len(lines)):
             if "ID_LEVELS VO.levels=[1" in lines[i]:
                 idx = i
                 break
@@ -61,9 +63,8 @@ def convert(inpFile, make_head, ext, modeName, note='', maxLevel=None): #{{{1
             lines[idx] = part1 + 'ID_LEVELS VO.levels=[' + ', '.join(new_levs) + ']\n'
 
 
-    fOut = open(inpFile[:-3] + ext, 'wb')
-    fOut.write(''.join(lines))
-    fOut.close()
+    with open(inpFile[:-3] + ext, 'wt', encoding='utf-8', newline='\n') as fOut:
+        fOut.write(''.join(lines))
 
 
 def make_head_fmr2(line,m): #{{{1
@@ -172,7 +173,8 @@ def make_head_markdown(line,m): #{{{1
     lev = int(m.group(1))
     head = line[:m.start()].strip().strip('-=~').strip()
     head = 'h' + head.replace('<', '&lt;').replace('>', '&gt;')
-    z = len(unicode(head, 'utf-8', 'replace'))
+    #z = len(unicode(head, 'utf-8', 'replace'))
+    z = len(head)
     if lev==1:
         return ['%s\n' %head,
                 '%s\n' %('='*z)]
@@ -188,7 +190,8 @@ def make_head_pandoc(line,m): #{{{1
     lev = int(m.group(1))
     head = line[:m.start()].strip().strip('-=~').strip()
     head = 'h' + head.replace('<', '&lt;').replace('>', '&gt;')
-    z = len(unicode(head, 'utf-8', 'replace'))
+    #z = len(unicode(head, 'utf-8', 'replace'))
+    z = len(head)
     if lev==1:
         return ['\n%s\n' %head,
                 '%s\n' %('='*z)]
@@ -205,7 +208,8 @@ def make_head_asciidoc(line,m): #{{{1
     head = line[:m.start()].strip().strip('-=~').strip()
     head = 'h %s' %head
     #head = 'h' + head.replace('<', '&lt;').replace('>', '&gt;')
-    z = len(unicode(head, 'utf-8', 'replace'))
+    #z = len(unicode(head, 'utf-8', 'replace'))
+    z = len(head)
     if lev==1:
         return [ '\n%s\n' %head,
                 '%s\n' %('='*z)]
@@ -234,7 +238,8 @@ def make_head_asciidoc1(line,m): #{{{1
     head = line[:m.start()].strip().strip('-=~').strip()
     head = '%s h %s %s' %('='*lev, head, '='*lev)
     #head = 'h' + head.replace('<', '&lt;').replace('>', '&gt;')
-    z = len(unicode(head, 'utf-8', 'replace'))
+    #z = len(unicode(head, 'utf-8', 'replace'))
+    z = len(head)
     if lev==2:
         return ['[[X2]]\n',
                 '%s\n' %head]
@@ -253,7 +258,8 @@ def make_head_asciidoc3(line,m): #{{{1
     head = line[:m.start()].strip().strip('-=~').strip()
     head = 'h %s' %head
     #head = 'h' + head.replace('<', '&lt;').replace('>', '&gt;')
-    z = len(unicode(head, 'utf-8', 'replace'))
+    #z = len(unicode(head, 'utf-8', 'replace'))
+    z = len(head)
     if lev==1:
         return ['\n%s\n' %head,
                 '%s\n' %('='*z)]
@@ -283,8 +289,8 @@ for ad in AD_STYLES:
 def make_head_rest(line,m): #{{{2
     lev = int(m.group(1))
     head = line[:m.start()].strip().strip('-=~').strip()
-    #z = len(head)
-    z = len(unicode(head, 'utf-8', 'replace'))
+    #z = len(unicode(head, 'utf-8', 'replace'))
+    z = len(head)
     ad = level_ads[lev]
     # don't inset headlines--screws up test suite
     # don't add trailing whitespace to overlines--screws up Right/Left test
@@ -317,62 +323,58 @@ def make_head_latexDtx(line,m): #{{{2
 def convert_to_otl(inpFile, ext, modeName): #{{{1
     lines = []
     lev = 1
-    f = open(inpFile)
-    for line in f:
-        m = MARKER_RE.search(line)
-        if not m:
-            line = line.strip()
-            if not line:
-                lines.append('\n')
+    with open(inpFile, 'rt', encoding='utf-8', newline='\n') as f:
+        for line in f:
+            m = MARKER_RE.search(line)
+            if not m:
+                line = line.strip()
+                if not line:
+                    lines.append('\n')
+                    continue
+                lines.append('%s| %s\n' %('\t'*(lev-1), line))
                 continue
-            lines.append('%s| %s\n' %('\t'*(lev-1), line))
-            continue
-        lev = int(m.group(1))
-        head = line[:m.start()].strip().strip('-=~').strip()
-        # VimOutliner interprets leading < as body text
-        head = head.replace('<', '\\<')
-        lines.append('%s%s\n' %('\t'*(lev-1), head))
-    f.close()
+            lev = int(m.group(1))
+            head = line[:m.start()].strip().strip('-=~').strip()
+            # VimOutliner interprets leading < as body text
+            head = head.replace('<', '\\<')
+            lines.append('%s%s\n' %('\t'*(lev-1), head))
 
     # replace first two lines
     lines[0] = '|  :Voom %s\n' %modeName
     lines[1] = '|  This is VOoM markup mode test file. Converted from "%s".\n' %inpFile
 
-    fOut = open(inpFile[:-3] + ext, 'wb')
-    fOut.write(''.join(lines))
-    fOut.close()
+    with open(inpFile[:-3] + ext, 'wt', encoding='utf-8', newline='\n') as fOut:
+        fOut.write(''.join(lines))
 
 
 def convert_to_taskpaper(inpFile, ext, modeName): #{{{1
     lines = []
     lev = 1
-    f = open(inpFile)
-    for line in f:
-        m = MARKER_RE.search(line)
-        if not m:
-            line = line.strip()
-            if not line:
-                lines.append('\n')
+    with open(inpFile, 'rt', encoding='utf-8', newline='\n') as f:
+        for line in f:
+            m = MARKER_RE.search(line)
+            if not m:
+                line = line.strip()
+                if not line:
+                    lines.append('\n')
+                    continue
+                lines.append('%s%s\n' %('\t'*lev, line))
                 continue
-            lines.append('%s%s\n' %('\t'*lev, line))
-            continue
-        lev = int(m.group(1))
-        head = line[:m.start()].strip().strip('-=~').strip()
-        #head = head.replace('<', '\\<')
-        if lev==1:
-            head = '%sProject %s:\n' %('\t'*(lev-1), head)
-        else:
-            head = '%s- %s\n' %('\t'*(lev-1), head)
-        lines.append(head)
-    f.close()
+            lev = int(m.group(1))
+            head = line[:m.start()].strip().strip('-=~').strip()
+            #head = head.replace('<', '\\<')
+            if lev==1:
+                head = '%sProject %s:\n' %('\t'*(lev-1), head)
+            else:
+                head = '%s- %s\n' %('\t'*(lev-1), head)
+            lines.append(head)
 
     # replace first two lines
     lines[0] = '  :Voom %s\n' %modeName
     lines[1] = '  This is VOoM markup mode test file. Converted from "%s".\n' %inpFile
 
-    fOut = open(inpFile[:-3] + ext, 'wb')
-    fOut.write(''.join(lines))
-    fOut.close()
+    with open(inpFile[:-3] + ext, 'wt', encoding='utf-8', newline='\n') as fOut:
+        fOut.write(''.join(lines))
 
 
 #--- _main_ --- {{{1

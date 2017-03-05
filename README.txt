@@ -49,14 +49,13 @@ test_outlines
 This folder contains small dummy outlines for testing and illustrative
 purposes.
 
+Files `test_outline.*` and some other are used by the test suite.
+Files such as `asciidoc.asciidoc` are for manual testing of various
+markup-specific gotchas and idiosyncrasies.
+
 The main file is `test_outline.txt`. It has start fold markers with levels.
 Files `test_outline.*` in other markups formats are created from
-`test_outline.txt` by running Python 2 script `test_outline.txt_CONVERT.PY`.
-
-Files such as `asciidoc.asciidoc` are for manual testing of
-various markup-specific gotchas and idiosyncrasies.
-
-Files `test_outline.*` and some other are used by the test suite.
+`test_outline.txt` by running Python 3 script `test_outline.txt_CONVERT.PY`.
 
 
 big_outlines

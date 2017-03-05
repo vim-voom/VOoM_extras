@@ -392,9 +392,9 @@ VOoM (sort): already sorted
     TEST: VoomTest_CutPaste()
     TEST: VoomTest_CopyPasteCut()
     TEST: VoomTest_NewHeadline()
-VOoM: headlines with level >1 are not possible in this markup mode
-VOoM: headlines with level >1 are not possible in this markup mode
-VOoM: headlines with level >1 are not possible in this markup mode
+VOoM: operation 'Add New Headline As Child' is not available in this markup mode
+VOoM: operation 'Add New Headline As Child' is not available in this markup mode
+VOoM: operation 'Add New Headline As Child' is not available in this markup mode
 
 
   TEST FILE: "paragraphIndent.txt", MARKUP MODE: "paragraphIndent"
@@ -408,9 +408,9 @@ VOoM (sort): already sorted
     TEST: VoomTest_CutPaste()
     TEST: VoomTest_CopyPasteCut()
     TEST: VoomTest_NewHeadline()
-VOoM: headlines with level >1 are not possible in this markup mode
-VOoM: headlines with level >1 are not possible in this markup mode
-VOoM: headlines with level >1 are not possible in this markup mode
+VOoM: operation 'Add New Headline As Child' is not available in this markup mode
+VOoM: operation 'Add New Headline As Child' is not available in this markup mode
+VOoM: operation 'Add New Headline As Child' is not available in this markup mode
 
 
   TEST FILE: "paragraphNoIndent.txt", MARKUP MODE: "paragraphNoIndent"
@@ -424,9 +424,9 @@ VOoM (sort): already sorted
     TEST: VoomTest_CutPaste()
     TEST: VoomTest_CopyPasteCut()
     TEST: VoomTest_NewHeadline()
-VOoM: headlines with level >1 are not possible in this markup mode
-VOoM: headlines with level >1 are not possible in this markup mode
-VOoM: headlines with level >1 are not possible in this markup mode
+VOoM: operation 'Add New Headline As Child' is not available in this markup mode
+VOoM: operation 'Add New Headline As Child' is not available in this markup mode
+VOoM: operation 'Add New Headline As Child' is not available in this markup mode
 
 
   TEST FILE: "python_test_outline.py", MARKUP MODE: "python"

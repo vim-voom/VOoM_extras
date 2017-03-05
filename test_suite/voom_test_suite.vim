@@ -732,7 +732,7 @@ func! VoomTest_RightLeftRight(...) abort "{{{1
 " Move right all the way.
 " Move left all the way.
 " Move right to restore indent. Ouline must not change.
-" g:voom_always_allow_move_left (_VOoM2657.AAMLEFT) is set to False, otherwise the test fails.
+" _VOoM2657.ALWAYS_ALLOW_MOVE_LEFT (g:voom_always_allow_move_left) must be False, otherwise the test fails.
 " NOTE: The test cannot handle markups that have a maximum possible level and
 " it is exceeded after Move Right: ass-backward formats (dokuwiki, inverseAtx), latex.
     exe s:PYCMD "print('    TEST: VoomTest_RightLeftRight()')"
@@ -767,8 +767,8 @@ nodes_count = nodesCount(body) # number of nodes, also Z
 body_len = len(VO.Body) # number of Body lines
 ENDPYTHON
 
-    exe s:PYCMD "AAMLEFT_ = _VOoM2657.AAMLEFT"
-    exe s:PYCMD "_VOoM2657.AAMLEFT = False"
+    exe s:PYCMD "ALWAYS_ALLOW_MOVE_LEFT_ = _VOoM2657.ALWAYS_ALLOW_MOVE_LEFT"
+    exe s:PYCMD "_VOoM2657.ALWAYS_ALLOW_MOVE_LEFT = False"
     let fdm_ = getbufvar(body, '&fdm')
     let tlnums_tested = []
     let lnum = 0
@@ -805,7 +805,7 @@ ENDPYTHON
         if fdm_!=getbufvar(body,'&fdm') | echoerr 'Right/Left fdm error' | endif
         normal! j
     endwhile
-    exe s:PYCMD "_VOoM2657.AAMLEFT = AAMLEFT_"
+    exe s:PYCMD "_VOoM2657.ALWAYS_ALLOW_MOVE_LEFT = ALWAYS_ALLOW_MOVE_LEFT_"
 
     exe s:PYCMD "if not didRight: print('ERROR: Move Right was not tested')"
     exe s:PYCMD "if not didLeft:  print('ERROR: Move Left was not tested')"
@@ -815,7 +815,7 @@ endfunc
 
 
 func! VoomTest_LeftRight(...) abort "{{{1
-" g:voom_always_allow_move_left (_VOoM2657.AAMLEFT) is set to True
+" _VOoM2657.ALWAYS_ALLOW_MOVE_LEFT (g:voom_always_allow_move_left) is True.
 " For each top level node: go to first child, move left and move right.
 " If Body changed: assume it is because siblings below became children afer the
 " first move left. Correct by restoring siblings by moving them left.
@@ -853,8 +853,8 @@ nodes_count = nodesCount(body) # number of nodes, also Z
 body_len = len(VO.Body) # number of Body lines
 ENDPYTHON
 
-    exe s:PYCMD "AAMLEFT_ = _VOoM2657.AAMLEFT"
-    exe s:PYCMD "_VOoM2657.AAMLEFT = True"
+    exe s:PYCMD "ALWAYS_ALLOW_MOVE_LEFT_ = _VOoM2657.ALWAYS_ALLOW_MOVE_LEFT"
+    exe s:PYCMD "_VOoM2657.ALWAYS_ALLOW_MOVE_LEFT = True"
     let fdm_ = getbufvar(body, '&fdm')
     let tlnums_tested = []
     let lnum = 0
@@ -909,7 +909,7 @@ ENDPYTHON
         endif
         normal! j
     endwhile
-    exe s:PYCMD "_VOoM2657.AAMLEFT = AAMLEFT_"
+    exe s:PYCMD "_VOoM2657.ALWAYS_ALLOW_MOVE_LEFT = ALWAYS_ALLOW_MOVE_LEFT_"
 
     exe s:PYCMD "if not didRight: print('ERROR: Move Right was not tested')"
     exe s:PYCMD "if not didLeft:  print('ERROR: Move Left was not tested')"
