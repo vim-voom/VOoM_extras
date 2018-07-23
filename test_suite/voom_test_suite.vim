@@ -41,10 +41,12 @@ let s:temp_redir = ''
 
 exe s:PYCMD . ' << ENDPYTHON'
 import time
-_time = time.perf_counter
 import sys
 if sys.version_info[0] > 2:
     xrange = range
+    _time = time.perf_counter
+else:
+    _time = time.clock
 ENDPYTHON
 
 
