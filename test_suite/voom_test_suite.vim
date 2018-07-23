@@ -41,6 +41,7 @@ let s:temp_redir = ''
 
 exe s:PYCMD . ' << ENDPYTHON'
 import time
+_time = time.perf_counter
 import sys
 if sys.version_info[0] > 2:
     xrange = range
@@ -109,7 +110,7 @@ ENDPYTHON
     exe winnr('#').'wincmd w'
 
 exe s:PYCMD . ' << ENDPYTHON'
-TestAllModes_time_start = time.clock()
+TestAllModes_time_start = _time()
 print('++++++++++ STARTED: VoomTest_TestAllModes() ++++++++++')
 print('# s:PYCMD = %s' % repr(vim.eval('s:PYCMD')))
 ENDPYTHON
@@ -183,7 +184,7 @@ ENDPYTHON
     unlet! g:voom_inverseAtx_max  g:voom_inverseAtx_char
 
 exe s:PYCMD . ' << ENDPYTHON'
-print('++++++++++ FINISHED: VoomTest_TestAllModes() ++++++++++ # %s sec' %(time.clock()-TestAllModes_time_start))
+print('++++++++++ FINISHED: VoomTest_TestAllModes() ++++++++++ # %.6f sec' %(_time()-TestAllModes_time_start))
 ENDPYTHON
 
     exec 'cd' s:script_dir
@@ -303,7 +304,7 @@ endfunc
 func! VoomTest_OutlineMetrics(...) abort "{{{1
 " Compare VO.levels to the reference list in the first node (Tree lnum 2).
     exe s:PYCMD "print('    TEST: VoomTest_OutlineMetrics()')"
-    exe s:PYCMD "time_start = time.clock()"
+    exe s:PYCMD "time_start = _time()"
     let [bufType,body,tree] = voom#GetTypeBodyTree()
     if bufType=='None' | return | endif
     if bufType!='Tree'
@@ -339,14 +340,14 @@ else:
     print('ERROR: did not find line with levels')
 ENDPYTHON
 
-    exe s:PYCMD "print('             DONE # %s sec' % (time.clock()-time_start))"
+    exe s:PYCMD "print('             DONE # %.6f sec' % (_time()-time_start))"
 endfunc
 
 
 func! VoomTest_OutlineTraversal(...) abort "{{{1
 " Test voom_vim.py outline traversal functions.
     exe s:PYCMD "print('    TEST: VoomTest_OutlineTraversal()')"
-    exe s:PYCMD "time_start = time.clock()"
+    exe s:PYCMD "time_start = _time()"
     let [bufType,body,tree] = voom#GetTypeBodyTree()
     if bufType=='None' | return | endif
     if bufType!='Tree'
@@ -392,13 +393,13 @@ ENDPYTHON
         redir =>> s:VOOM_REDIR
     endif
 
-    exe s:PYCMD "print('             DONE # %s sec' % (time.clock()-time_start))"
+    exe s:PYCMD "print('             DONE # %.6f sec' % (_time()-time_start))"
 endfunc
 
 
 func! VoomTest_Sort(...) abort "{{{1
     exe s:PYCMD "print('    TEST: VoomTest_Sort()')"
-    exe s:PYCMD "time_start = time.clock()"
+    exe s:PYCMD "time_start = _time()"
     let [bufType,body,tree] = voom#GetTypeBodyTree()
     if bufType=='None' | return | endif
     if bufType!='Tree'
@@ -523,7 +524,7 @@ if not len(VO.Body) == body_len: print('ERROR: 19')
 ENDPYTHON
 
     if Z!=line('$') | echoerr 'VoomSort error' | endif
-    exe s:PYCMD "print('             DONE # %s sec' % (time.clock()-time_start))"
+    exe s:PYCMD "print('             DONE # %.6f sec' % (_time()-time_start))"
 endfunc
 
 
@@ -531,7 +532,7 @@ func! VoomTest_DownUp(...) abort "{{{1
 " Move first node all the way Down. Then move it all the way Up. Check that
 " Body has not changed.
     exe s:PYCMD "print('    TEST: VoomTest_DownUp()')"
-    exe s:PYCMD "time_start = time.clock()"
+    exe s:PYCMD "time_start = _time()"
     let [bufType,body,tree] = voom#GetTypeBodyTree()
     if bufType=='None' | return | endif
     if bufType!='Tree'
@@ -587,13 +588,13 @@ if VO.Body[:] != blines_: print('ERROR: blines_ %s' %lnum)
 if VO.Tree[:] != tlines_: print('ERROR: tlines_ %s' %lnum)
 ENDPYTHON
 
-    exe s:PYCMD "print('             DONE # %s sec' % (time.clock()-time_start))"
+    exe s:PYCMD "print('             DONE # %.6f sec' % (_time()-time_start))"
 endfunc
 
 
 func! VoomTest_CutAllPasteAll(...) abort "{{{1
     exe s:PYCMD "print('    TEST: VoomTest_CutAllPasteAll()')"
-    exe s:PYCMD "time_start = time.clock()"
+    exe s:PYCMD "time_start = _time()"
     let [bufType,body,tree] = voom#GetTypeBodyTree()
     if bufType=='None' | return | endif
     if bufType!='Tree'
@@ -627,13 +628,13 @@ ENDPYTHON
     normal pp
     exec "normal! \<Esc>"
     exe s:PYCMD "if VO.Body[:] != blines_: print('ERROR: Body changed after CutAll/PasteAll')"
-    exe s:PYCMD "print('             DONE # %s sec' % (time.clock()-time_start))"
+    exe s:PYCMD "print('             DONE # %.6f sec' % (_time()-time_start))"
 endfunc
 
 
 func! VoomTest_CutPaste(...) abort "{{{1
     exe s:PYCMD "print('    TEST: VoomTest_CutPaste()')"
-    exe s:PYCMD "time_start = time.clock()"
+    exe s:PYCMD "time_start = _time()"
     let [bufType,body,tree] = voom#GetTypeBodyTree()
     if bufType=='None' | return | endif
     if bufType!='Tree'
@@ -678,13 +679,13 @@ ENDPYTHON
         normal! j
     endwhile
     exec "normal! \<Esc>"
-    exe s:PYCMD "print('             DONE # %s sec' % (time.clock()-time_start))"
+    exe s:PYCMD "print('             DONE # %.6f sec' % (_time()-time_start))"
 endfunc
 
 
 func! VoomTest_CopyPasteCut(...) abort "{{{1
     exe s:PYCMD "print('    TEST: VoomTest_CopyPasteCut()')"
-    exe s:PYCMD "time_start = time.clock()"
+    exe s:PYCMD "time_start = _time()"
     let [bufType,body,tree] = voom#GetTypeBodyTree()
     if bufType=='None' | return | endif
     if bufType!='Tree'
@@ -724,7 +725,7 @@ ENDPYTHON
         normal! j
     endwhile
 
-    exe s:PYCMD "print('             DONE # %s sec' % (time.clock()-time_start))"
+    exe s:PYCMD "print('             DONE # %.6f sec' % (_time()-time_start))"
 endfunc
 
 
@@ -736,7 +737,7 @@ func! VoomTest_RightLeftRight(...) abort "{{{1
 " NOTE: The test cannot handle markups that have a maximum possible level and
 " it is exceeded after Move Right: ass-backward formats (dokuwiki, inverseAtx), latex.
     exe s:PYCMD "print('    TEST: VoomTest_RightLeftRight()')"
-    exe s:PYCMD "time_start = time.clock()"
+    exe s:PYCMD "time_start = _time()"
     let [bufType,body,tree] = voom#GetTypeBodyTree()
     if bufType=='None' | return | endif
     if bufType!='Tree'
@@ -809,7 +810,7 @@ ENDPYTHON
 
     exe s:PYCMD "if not didRight: print('ERROR: Move Right was not tested')"
     exe s:PYCMD "if not didLeft:  print('ERROR: Move Left was not tested')"
-    exe s:PYCMD "print('             DONE # %s sec' % (time.clock()-time_start))"
+    exe s:PYCMD "print('             DONE # %.6f sec' % (_time()-time_start))"
     exe s:PYCMD "print('              %s' %vim.eval('l:tlnums_tested'))"
 endfunc
 
@@ -821,7 +822,7 @@ func! VoomTest_LeftRight(...) abort "{{{1
 " first move left. Correct by restoring siblings by moving them left.
 " This also tests o J D U c.
     exe s:PYCMD "print('    TEST: VoomTest_LeftRight()')"
-    exe s:PYCMD "time_start = time.clock()"
+    exe s:PYCMD "time_start = _time()"
     let [bufType,body,tree] = voom#GetTypeBodyTree()
     if bufType=='None' | return | endif
     if bufType!='Tree'
@@ -913,14 +914,14 @@ ENDPYTHON
 
     exe s:PYCMD "if not didRight: print('ERROR: Move Right was not tested')"
     exe s:PYCMD "if not didLeft:  print('ERROR: Move Left was not tested')"
-    exe s:PYCMD "print('             DONE # %s sec' % (time.clock()-time_start))"
+    exe s:PYCMD "print('             DONE # %.6f sec' % (_time()-time_start))"
     exe s:PYCMD "print('              %s' %vim.eval('l:tlnums_tested'))"
 endfunc
 
 
 func! VoomTest_NewHeadline(...) abort "{{{1
     exe s:PYCMD "print('    TEST: VoomTest_NewHeadline()')"
-    exe s:PYCMD "time_start = time.clock()"
+    exe s:PYCMD "time_start = _time()"
     let [bufType,body,tree] = voom#GetTypeBodyTree()
     if bufType=='None' | return | endif
     if bufType!='Tree'
@@ -978,7 +979,7 @@ ENDPYTHON
         exe s:PYCMD "assert nodes_count + 3 == nodesCount(body)"
     endif
 
-    exe s:PYCMD "print('             DONE # %s sec' % (time.clock()-time_start))"
+    exe s:PYCMD "print('             DONE # %.6f sec' % (_time()-time_start))"
 endfunc
 
 
@@ -989,7 +990,7 @@ func! VoomTest_SpecialMarks(...) abort "{{{1
     "if MTYPE != 0 | return | endif
 
     exe s:PYCMD "print('    TEST: VoomTest_SpecialMarks()')"
-    exe s:PYCMD "time_start = time.clock()"
+    exe s:PYCMD "time_start = _time()"
     let [bufType,body,tree] = voom#GetTypeBodyTree()
     if bufType=='None' | return | endif
     if bufType!='Tree'
@@ -1115,7 +1116,7 @@ if VO.Body[:] != blines_: print('ERROR: Body changed after Mark/Unmark all')
 if VO.Tree[:] != tlines_: print('ERROR: Tree changed after Mark/Unmark all')
 ENDPYTHON
 
-    exe s:PYCMD "print('             DONE # %s sec' % (time.clock()-time_start))"
+    exe s:PYCMD "print('             DONE # %.6f sec' % (_time()-time_start))"
 endfunc
 
 
