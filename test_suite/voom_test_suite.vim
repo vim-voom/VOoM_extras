@@ -1,4 +1,5 @@
 " VOoM test suite.
+
 " WARNING: ALWAYS RUN THIS IN A SEPARATE, DISPOSABLE INSTANCE OF VIM.
 " Enable PyLog (:Voomlog) to retain progress and error messages.
 " Use small test outlines:   ../voom_samples/test_outline.txt
@@ -8,28 +9,27 @@
 
 
 " Test all modes. This can be executed in blank Vim.
-" For each test outline in ../test_outlines/:
+" This command does the following for each test outline in ../test_outlines/:
 "   - open the file
 "   - execute the command :Voom {markup}
 "   - run all tests
 "   - wipe out Tree buffer
 com! VoomTestTestAllModes call VoomTest_TestAllModes()
 
-
 " Run all tests for the current outline. The current buffer must be VOoM Tree.
 com! VoomTestRunAllTests call VoomTest_RunAllTests()
 
 
-
-"----- s:PYCMD, ENDPYTHON ----
-" To make this script work with both Python 2 and 3, Python code regions are written as follows:
+" NOTE: To make this script work with both Python 2 and 3, Python code regions are written as
 "       exe s:PYCMD . ' << ENDPYTHON'
 "       python-code-here
 "       ENDPYTHON
-" Instead of usual 'python << EOF ... EOF'.
+" instead of the usual 'python << EOF ... EOF'.
 " To get Python syntax hi for such regions, add to after/syntax/vim.vim:
-" :syntax region vimPythonRegion matchgroup=vimScriptDelim start=/^\s*exe.\+ << ENDPYTHON/ end=/^ENDPYTHON/ contains=@vimPythonScript
-"
+"       syntax region vimPythonRegion matchgroup=vimScriptDelim start=/^\s*exe.\+<< ENDPYTHON'/ end=/^ENDPYTHON/ contains=@vimPythonScript
+"       hi! def link vimScriptDelim Underlined
+
+"=====================================================================
 let s:PYCMD = voom#GetVar('s:PYCMD')
 "let s:PYCMD = 'python'
 "let s:PYCMD = 'python3'
@@ -45,8 +45,10 @@ import sys
 if sys.version_info[0] > 2:
     xrange = range
     _time = time.perf_counter
+    _timeFuncDesc = 'time.perf_counter()'
 else:
     _time = time.clock
+    _timeFuncDesc = 'time.clock()'
 ENDPYTHON
 
 
@@ -112,7 +114,7 @@ ENDPYTHON
     exe winnr('#').'wincmd w'
 
 exe s:PYCMD . ' << ENDPYTHON'
-TestAllModes_time_start = _time()
+TestAllModes_time_start, TestAllModes_time_start_t = _time(), time.time()
 print('++++++++++ STARTED: VoomTest_TestAllModes() ++++++++++')
 print('# s:PYCMD = %s' % repr(vim.eval('s:PYCMD')))
 ENDPYTHON
@@ -186,7 +188,7 @@ ENDPYTHON
     unlet! g:voom_inverseAtx_max  g:voom_inverseAtx_char
 
 exe s:PYCMD . ' << ENDPYTHON'
-print('++++++++++ FINISHED: VoomTest_TestAllModes() ++++++++++ # %.6f sec' %(_time()-TestAllModes_time_start))
+print('++++++++++ FINISHED: VoomTest_TestAllModes() ++++++++++ # %.6f sec (%s), %.6f sec (time.time())' %(_time()-TestAllModes_time_start, _timeFuncDesc, time.time()-TestAllModes_time_start_t))
 ENDPYTHON
 
     exec 'cd' s:script_dir
